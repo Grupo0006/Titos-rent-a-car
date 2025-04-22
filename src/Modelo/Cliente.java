@@ -9,6 +9,7 @@ package Modelo;
  * @author Estudiante
  */
 public class Cliente {
+    public String IdCliente;
     public String Cedula;
     public String Nombre;
     public String Apellido;
@@ -17,7 +18,11 @@ public class Cliente {
     public String Email;
     public String Licencia;
 
-    public Cliente(String Cedula, String Nombre, String Apellido, String Telefono, String Direccion, String Email, String Licencia) {
+    public Cliente() {
+    }
+
+    public Cliente(String IdCliente, String Cedula, String Nombre, String Apellido, String Telefono, String Direccion, String Email, String Licencia) {
+        this.IdCliente = IdCliente;
         this.Cedula = Cedula;
         this.Nombre = Nombre;
         this.Apellido = Apellido;
@@ -27,7 +32,12 @@ public class Cliente {
         this.Licencia = Licencia;
     }
 
-    public Cliente() {
+    public String getIdCliente() {
+        return IdCliente;
+    }
+
+    public void setIdCliente(String IdCliente) {
+        this.IdCliente = IdCliente;
     }
 
     public String getCedula() {
@@ -85,5 +95,6 @@ public class Cliente {
     public void setLicencia(String Licencia) {
         this.Licencia = Licencia;
     }
-    
+
+   
 }
