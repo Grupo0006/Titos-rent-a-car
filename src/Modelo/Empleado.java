@@ -9,15 +9,18 @@ package Modelo;
  * @author Estudiante
  */
 public class Empleado {
-    private int Id_eMpleado;
-     private String Cedula;
+    private int Id_Empleado;
+    private String Cedula;
     private String Nombre;
     private String Apellido;
     private String Direccion;
     private String Email;
+    
+    public Empleado() {
+    }
 
-    public Empleado(int Id_eMpleado, String Cedula, String Nombre, String Apellido, String Direccion, String Email) {
-        this.Id_eMpleado = Id_eMpleado;
+    public Empleado(int Id_Empleado, String Cedula, String Nombre, String Apellido, String Direccion, String Email) {
+        this.Id_Empleado = Id_Empleado;
         this.Cedula = Cedula;
         this.Nombre = Nombre;
         this.Apellido = Apellido;
@@ -25,15 +28,13 @@ public class Empleado {
         this.Email = Email;
     }
 
-    public Empleado() {
+
+    public int getId_Empleado() {
+        return Id_Empleado;
     }
 
-    public int getId_eMpleado() {
-        return Id_eMpleado;
-    }
-
-    public void setId_eMpleado(int Id_eMpleado) {
-        this.Id_eMpleado = Id_eMpleado;
+    public void setId_Empleado(int Id_Empleado) {
+        this.Id_Empleado = Id_Empleado;
     }
 
     public String getCedula() {
@@ -75,5 +76,5 @@ public class Empleado {
     public void setEmail(String Email) {
         this.Email = Email;
     }
-   
+
 }
