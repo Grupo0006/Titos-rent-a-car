@@ -1,13 +1,109 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package DAO;
 
-/**
- *
- * @author Estudiantes
- */
+import Modelo.Mantenimiento;
+import Util.ConexionDB;
+import java.sql.SQLException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.util.ArrayList;
+import java.sql.ResultSet;
+import java.util.List;
+
 public class DAOMantenimiento {
-    
+
+    public void crearMantenimiento(Mantenimiento m) throws SQLException {
+        String sql = "INSERT INTO Mantenimientos (descripcion, justificacion, fecha_inicio, fecha_fin) VALUES (?, ?, ?, ?)";
+
+        try (Connection c = ConexionDB.getConnection(); PreparedStatement stmt = c.prepareStatement(sql)) {
+            stmt.setString(1, m.getDescripcion());
+            stmt.setString(2, m.getJustificacion());
+            stmt.setDate(3, new java.sql.Date(m.getFecha_Inicio().getTime()));
+            stmt.setDate(4, new java.sql.Date(m.getFecha_Fin().getTime()));
+            stmt.executeUpdate();
+        }
+    }
+
+    public List<Mantenimiento> leerTodosMantenimientos() throws SQLException {
+        List<Mantenimiento> lista = new ArrayList<>();
+        String sql = "SELECT * FROM Mantenimientos";
+
+        try (Connection c = ConexionDB.getConnection(); PreparedStatement stmt = c.prepareStatement(sql); ResultSet rs = stmt.executeQuery()) {
+            while (rs.next()) {
+                Mantenimiento m = new Mantenimiento();
+                m.setId_Mantenimiento(rs.getInt("id_mantenimiento"));
+                m.setDescripcion(rs.getString("descripcion"));
+                m.setJustificacion(rs.getString("justificacion"));
+                m.setFecha_Inicio(rs.getDate("fecha_inicio"));
+                m.setFecha_Fin(rs.getDate("fecha_fin"));
+                lista.add(m);
+            }
+        }
+        return lista;
+    }
+
+    public void actualizarMantenimiento(Mantenimiento m) throws SQLException {
+        String sql = "UPDATE Mantenimientos SET descripcion = ?, justificacion = ?, fecha_inicio = ?, fecha_fin = ? WHERE id_mantenimiento = ?";
+
+        try (Connection c = ConexionDB.getConnection(); PreparedStatement stmt = c.prepareStatement(sql)) {
+            stmt.setString(1, m.getDescripcion());
+            stmt.setString(2, m.getJustificacion());
+            stmt.setDate(3, new java.sql.Date(m.getFecha_Inicio().getTime()));
+            stmt.setDate(4, new java.sql.Date(m.getFecha_Fin().getTime()));
+            stmt.setInt(5, m.getId_Mantenimiento());
+            stmt.executeUpdate();
+        }
+    }
+
+    public void eliminarMantenimiento(int id) throws SQLException {
+        String sql = "DELETE FROM Mantenimientos WHERE id_mantenimiento = ?";
+
+        try (Connection c = ConexionDB.getConnection(); PreparedStatement stmt = c.prepareStatement(sql)) {
+            stmt.setInt(1, id);
+            stmt.executeUpdate();
+        }
+    }
+
+    public static void main(String[] args) {
+        try {
+            DAOMantenimiento dao = new DAOMantenimiento();
+
+            // Crear
+            Mantenimiento nuevo = new Mantenimiento();
+            nuevo.setDescripcion("Revisión del sistema eléctrico");
+            nuevo.setJustificacion("Prevención de fallos");
+            nuevo.setFecha_Inicio(new java.util.Date());
+            nuevo.setFecha_Fin(new java.util.Date());
+            dao.crearMantenimiento(nuevo);
+            System.out.println("Mantenimiento creado.");
+
+            // Actualizar
+            Mantenimiento actualizado = new Mantenimiento();
+            actualizado.setId_Mantenimiento(1); // Asegúrate de usar un ID existente
+            actualizado.setDescripcion("Mantenimiento de rutina");
+            actualizado.setJustificacion("Seguimiento mensual");
+            actualizado.setFecha_Inicio(new java.util.Date());
+            actualizado.setFecha_Fin(new java.util.Date());
+            dao.actualizarMantenimiento(actualizado);
+            System.out.println("Mantenimiento actualizado.");
+
+            // Eliminar
+            dao.eliminarMantenimiento(2); // Cambia según el ID
+            System.out.println("Mantenimiento eliminado.");
+
+            // Leer
+            List<Mantenimiento> lista = dao.leerTodosMantenimientos();
+            System.out.println("Lista de mantenimientos:");
+            for (Mantenimiento m : lista) {
+                System.out.println("ID: " + m.getId_Mantenimiento()
+                        + ", Descripción: " + m.getDescripcion()
+                        + ", Justificación: " + m.getJustificacion()
+                        + ", Inicio: " + m.getFecha_Inicio()
+                        + ", Fin: " + m.getFecha_Fin());
+            }
+
+        } catch (SQLException e) {
+            System.err.println("Error en DAO: " + e.getMessage());
+        }
+    }
 }
+

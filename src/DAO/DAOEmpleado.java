@@ -24,6 +24,26 @@ public class DAOEmpleado {
         }
     }
 
+       public List<Empleado> leerTodosEmpleados() throws SQLException {
+        List<Empleado> lista = new ArrayList<>();
+        String sql = "SELECT * FROM Empleados";
+
+        try (Connection c = ConexionDB.getConnection(); PreparedStatement stmt = c.prepareStatement(sql); ResultSet rs = stmt.executeQuery()) {
+            while (rs.next()) {
+                Empleado e = new Empleado();
+                e.setId_Empleado(rs.getInt("id_empleado"));
+                e.setCedula(rs.getString("cedula"));
+                e.setNombre(rs.getString("nombre"));
+                e.setApellido(rs.getString("apellido"));
+                e.setDireccion(rs.getString("direccion"));
+                e.setEmail(rs.getString("email"));
+                lista.add(e);
+            }
+        }
+
+        return lista;
+    }
+    
     public void actualizarEmpleado(Empleado empleado) throws SQLException {
         String sql = "UPDATE Empleados SET cedula = ?, nombre = ?, apellido = ?, direccion = ?, email = ? WHERE id_empleado = ?";
 
@@ -47,26 +67,7 @@ public class DAOEmpleado {
         }
     }
 
-    public List<Empleado> leerTodosEmpleados() throws SQLException {
-        List<Empleado> lista = new ArrayList<>();
-        String sql = "SELECT * FROM Empleados";
-
-        try (Connection c = ConexionDB.getConnection(); PreparedStatement stmt = c.prepareStatement(sql); ResultSet rs = stmt.executeQuery()) {
-            while (rs.next()) {
-                Empleado e = new Empleado();
-                e.setId_Empleado(rs.getInt("id_empleado"));
-                e.setCedula(rs.getString("cedula"));
-                e.setNombre(rs.getString("nombre"));
-                e.setApellido(rs.getString("apellido"));
-                e.setDireccion(rs.getString("direccion"));
-                e.setEmail(rs.getString("email"));
-                lista.add(e);
-            }
-        }
-
-        return lista;
-    }
-
+    
     public static void main(String[] args) {
         try {
             DAOEmpleado dao = new DAOEmpleado();
