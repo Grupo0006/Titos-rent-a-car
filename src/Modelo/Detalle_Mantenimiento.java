@@ -1,90 +1,83 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package Modelo;
 
-/**
- *
- * @author Estudiante
- */
 public class Detalle_Mantenimiento {
-    private int DetalleMantenimiento;
-    private int Mantenimiento;
-     private int Id_Empleado;
-     private int Id_Coche;
-     private String Observaciones;
-     private String Recomentaciones;
-     private String PartesCambiadas;
+    private int idDetalleMantenimiento;
+    private int idMantenimiento;
+    private int idEmpleado;
+    private int idCoche;
+    private String observaciones;
+    private String recomendaciones;
+    private String partesCambiadas;
 
-    public Detalle_Mantenimiento(int DetalleMantenimiento, int Mantenimiento, int Id_Empleado, int Id_Coche, String Observaciones, String Recomentaciones, String PartesCambiadas) {
-        this.DetalleMantenimiento = DetalleMantenimiento;
-        this.Mantenimiento = Mantenimiento;
-        this.Id_Empleado = Id_Empleado;
-        this.Id_Coche = Id_Coche;
-        this.Observaciones = Observaciones;
-        this.Recomentaciones = Recomentaciones;
-        this.PartesCambiadas = PartesCambiadas;
-    }
-
-    public int getDetalleMantenimiento() {
-        return DetalleMantenimiento;
-    }
-
-    public void setDetalleMantenimiento(int DetalleMantenimiento) {
-        this.DetalleMantenimiento = DetalleMantenimiento;
-    }
-
-    public int getMantenimiento() {
-        return Mantenimiento;
-    }
-
-    public void setMantenimiento(int Mantenimiento) {
-        this.Mantenimiento = Mantenimiento;
-    }
-
-    public int getId_Empleado() {
-        return Id_Empleado;
-    }
-
-    public void setId_Empleado(int Id_Empleado) {
-        this.Id_Empleado = Id_Empleado;
-    }
-
-    public int getId_Coche() {
-        return Id_Coche;
-    }
-
-    public void setId_Coche(int Id_Coche) {
-        this.Id_Coche = Id_Coche;
-    }
-
-    public String getObservaciones() {
-        return Observaciones;
-    }
-
-    public void setObservaciones(String Observaciones) {
-        this.Observaciones = Observaciones;
-    }
-
-    public String getRecomentaciones() {
-        return Recomentaciones;
-    }
-
-    public void setRecomentaciones(String Recomentaciones) {
-        this.Recomentaciones = Recomentaciones;
-    }
-
-    public String getPartesCambiadas() {
-        return PartesCambiadas;
-    }
-
-    public void setPartesCambiadas(String PartesCambiadas) {
-        this.PartesCambiadas = PartesCambiadas;
+    
+    public Detalle_Mantenimiento(int idDetalleMantenimiento, int idMantenimiento, int idEmpleado, int idCoche, String observaciones, String recomendaciones, String partesCambiadas) {
+        this.idDetalleMantenimiento = idDetalleMantenimiento;
+        this.idMantenimiento = idMantenimiento;
+        this.idEmpleado = idEmpleado;
+        this.idCoche = idCoche;
+        this.observaciones = observaciones;
+        this.recomendaciones = recomendaciones;
+        this.partesCambiadas = partesCambiadas;
     }
 
     public Detalle_Mantenimiento() {
     }
-     
+
     
+    public int getIdDetalleMantenimiento() {
+        return idDetalleMantenimiento;
+    }
+
+    public void setIdDetalleMantenimiento(int idDetalleMantenimiento) {
+        this.idDetalleMantenimiento = idDetalleMantenimiento;
+    }
+
+    public int getIdMantenimiento() {
+        return idMantenimiento;
+    }
+
+    public void setIdMantenimiento(int idMantenimiento) {
+        this.idMantenimiento = idMantenimiento;
+    }
+
+    public int getIdEmpleado() {
+        return idEmpleado;
+    }
+
+    public void setIdEmpleado(int idEmpleado) {
+        this.idEmpleado = idEmpleado;
+    }
+
+    public int getIdCoche() {
+        return idCoche;
+    }
+
+    public void setIdCoche(int idCoche) {
+        this.idCoche = idCoche;
+    }
+
+    public String getObservaciones() {
+        return observaciones;
+    }
+
+    public void setObservaciones(String observaciones) {
+        this.observaciones = observaciones;
+    }
+
+    public String getRecomendaciones() {
+        return recomendaciones;
+    }
+
+    public void setRecomendaciones(String recomendaciones) {
+        this.recomendaciones = recomendaciones;
+    }
+
+    public String getPartesCambiadas() {
+        return partesCambiadas;
+    }
+
+    public void setPartesCambiadas(String partesCambiadas) {
+        this.partesCambiadas = partesCambiadas;
+    }
 }
