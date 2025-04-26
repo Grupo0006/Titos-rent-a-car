@@ -19,6 +19,7 @@ public class DAOMantenimiento {
             stmt.setString(2, m.getJustificacion());
             stmt.setDate(3, new java.sql.Date(m.getFecha_Inicio().getTime()));
             stmt.setDate(4, new java.sql.Date(m.getFecha_Fin().getTime()));
+            stmt.setInt(4, m.getCosto());
             stmt.executeUpdate();
         }
     }
@@ -35,6 +36,7 @@ public class DAOMantenimiento {
                 m.setJustificacion(rs.getString("justificacion"));
                 m.setFecha_Inicio(rs.getDate("fecha_inicio"));
                 m.setFecha_Fin(rs.getDate("fecha_fin"));
+                m.setCosto(rs.getInt("Costo"));
                 lista.add(m);
             }
         }
@@ -49,7 +51,8 @@ public class DAOMantenimiento {
             stmt.setString(2, m.getJustificacion());
             stmt.setDate(3, new java.sql.Date(m.getFecha_Inicio().getTime()));
             stmt.setDate(4, new java.sql.Date(m.getFecha_Fin().getTime()));
-            stmt.setInt(5, m.getId_Mantenimiento());
+            stmt.setInt(5, m.getCosto());
+            stmt.setInt(6, m.getId_Mantenimiento());
             stmt.executeUpdate();
         }
     }
@@ -73,6 +76,7 @@ public class DAOMantenimiento {
             nuevo.setJustificacion("Prevención de fallos");
             nuevo.setFecha_Inicio(new java.util.Date());
             nuevo.setFecha_Fin(new java.util.Date());
+            nuevo.setCosto(2000);
             dao.crearMantenimiento(nuevo);
             System.out.println("Mantenimiento creado.");
 
@@ -83,6 +87,7 @@ public class DAOMantenimiento {
             actualizado.setJustificacion("Seguimiento mensual");
             actualizado.setFecha_Inicio(new java.util.Date());
             actualizado.setFecha_Fin(new java.util.Date());
+            actualizado.setCosto(1000);
             dao.actualizarMantenimiento(actualizado);
             System.out.println("Mantenimiento actualizado.");
 
@@ -98,7 +103,8 @@ public class DAOMantenimiento {
                         + ", Descripción: " + m.getDescripcion()
                         + ", Justificación: " + m.getJustificacion()
                         + ", Inicio: " + m.getFecha_Inicio()
-                        + ", Fin: " + m.getFecha_Fin());
+                        + ", Fin: " + m.getFecha_Fin()
+                        + ", Costo: " + m.getCosto());
             }
 
         } catch (SQLException e) {
