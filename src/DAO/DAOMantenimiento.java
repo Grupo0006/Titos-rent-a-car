@@ -12,21 +12,21 @@ import java.util.List;
 public class DAOMantenimiento {
 
     public void crearMantenimiento(Mantenimiento m) throws SQLException {
-        String sql = "INSERT INTO Mantenimientos (descripcion, justificacion, fecha_inicio, fecha_fin) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO Mantenimiento (Descripcion, Justificacion, Fecha_Inicio, Fecha_Fin, Costo) VALUES (?, ?, ?, ?, ?)";
 
         try (Connection c = ConexionDB.getConnection(); PreparedStatement stmt = c.prepareStatement(sql)) {
             stmt.setString(1, m.getDescripcion());
             stmt.setString(2, m.getJustificacion());
             stmt.setDate(3, new java.sql.Date(m.getFecha_Inicio().getTime()));
             stmt.setDate(4, new java.sql.Date(m.getFecha_Fin().getTime()));
-            stmt.setInt(4, m.getCosto());
+            stmt.setInt(5, m.getCosto());
             stmt.executeUpdate();
         }
     }
 
     public List<Mantenimiento> leerTodosMantenimientos() throws SQLException {
         List<Mantenimiento> lista = new ArrayList<>();
-        String sql = "SELECT * FROM Mantenimientos";
+        String sql = "SELECT * FROM Mantenimiento";
 
         try (Connection c = ConexionDB.getConnection(); PreparedStatement stmt = c.prepareStatement(sql); ResultSet rs = stmt.executeQuery()) {
             while (rs.next()) {
@@ -44,7 +44,7 @@ public class DAOMantenimiento {
     }
 
     public void actualizarMantenimiento(Mantenimiento m) throws SQLException {
-        String sql = "UPDATE Mantenimientos SET descripcion = ?, justificacion = ?, fecha_inicio = ?, fecha_fin = ? WHERE id_mantenimiento = ?";
+        String sql = "UPDATE Mantenimiento SET Descripcion = ?, Justificacion = ?, Fecha_Inicio = ?, Fecha_Fin = ?, Costo=? WHERE Id_Mantenimiento = ?";
 
         try (Connection c = ConexionDB.getConnection(); PreparedStatement stmt = c.prepareStatement(sql)) {
             stmt.setString(1, m.getDescripcion());
@@ -58,7 +58,7 @@ public class DAOMantenimiento {
     }
 
     public void eliminarMantenimiento(int id) throws SQLException {
-        String sql = "DELETE FROM Mantenimientos WHERE id_mantenimiento = ?";
+        String sql = "DELETE FROM Mantenimiento WHERE Id_Mantenimiento = ?";
 
         try (Connection c = ConexionDB.getConnection(); PreparedStatement stmt = c.prepareStatement(sql)) {
             stmt.setInt(1, id);
@@ -97,7 +97,7 @@ public class DAOMantenimiento {
 
             // Leer
             List<Mantenimiento> lista = dao.leerTodosMantenimientos();
-            System.out.println("Lista de mantenimientos:");
+            System.out.println("Lista de mantenimiento:");
             for (Mantenimiento m : lista) {
                 System.out.println("ID: " + m.getId_Mantenimiento()
                         + ", Descripción: " + m.getDescripcion()
