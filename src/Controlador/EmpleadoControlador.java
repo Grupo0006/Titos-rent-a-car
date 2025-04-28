@@ -70,7 +70,7 @@ public class EmpleadoControlador {
 
     public static void main(String[] args) {
         EmpleadoControlador controlador = new EmpleadoControlador();
-
+        
         // Crear empleado
         controlador.crearEmpleado("0501198712345", "Luis", "González", "Colonia Centro", "luis@correo.com");
 

@@ -19,13 +19,14 @@ public class MantenimientoControlador {
         this.mantenimientoDAO = new DAOMantenimiento();
     }
 
-    public void crearMantenimiento(String descripcion, String justificacion, java.util.Date fechaInicio, java.util.Date fechaFin) {
+    public void crearMantenimiento(String descripcion, String justificacion, java.util.Date fechaInicio, java.util.Date fechaFin, double costo) {
         try {
             Mantenimiento m = new Mantenimiento();
             m.setDescripcion(descripcion);
             m.setJustificacion(justificacion);
             m.setFecha_Inicio(fechaInicio);
             m.setFecha_Fin(fechaFin);
+            m.setCosto(costo);
             mantenimientoDAO.crearMantenimiento(m);
             JOptionPane.showMessageDialog(null, "Mantenimiento creado exitosamente.");
         } catch (SQLException e) {
@@ -33,7 +34,7 @@ public class MantenimientoControlador {
         }
     }
 
-    public void actualizarMantenimiento(int id, String descripcion, String justificacion, java.util.Date fechaInicio, java.util.Date fechaFin) {
+    public void actualizarMantenimiento(int id, String descripcion, String justificacion, java.util.Date fechaInicio, java.util.Date fechaFin, Double costo) {
         try {
             Mantenimiento m = new Mantenimiento();
             m.setId_Mantenimiento(id);
@@ -41,6 +42,7 @@ public class MantenimientoControlador {
             m.setJustificacion(justificacion);
             m.setFecha_Inicio(fechaInicio);
             m.setFecha_Fin(fechaFin);
+            m.setCosto(costo);
             mantenimientoDAO.actualizarMantenimiento(m);
             JOptionPane.showMessageDialog(null, "Mantenimiento actualizado exitosamente.");
         } catch (SQLException e) {
@@ -70,10 +72,10 @@ public class MantenimientoControlador {
         MantenimientoControlador controlador = new MantenimientoControlador();
 
         // Crear
-        controlador.crearMantenimiento("Limpieza general", "Mantenimiento trimestral", new java.util.Date(), new java.util.Date());
+        controlador.crearMantenimiento("Limpieza general", "Mantenimiento trimestral", new java.util.Date(), new java.util.Date(), 70.00);
 
         // Actualizar
-        controlador.actualizarMantenimiento(1, "Revisión de aire acondicionado", "Por fallos de temperatura", new java.util.Date(), new java.util.Date());
+        controlador.actualizarMantenimiento(1, "Revisión de aire acondicionado", "Por fallos de temperatura", new java.util.Date(), new java.util.Date(), 70.00 );
 
         // Eliminar
         controlador.eliminarMantenimiento(3);
@@ -86,7 +88,8 @@ public class MantenimientoControlador {
                         + ", Descripción: " + m.getDescripcion()
                         + ", Justificación: " + m.getJustificacion()
                         + ", Fecha Inicio: " + m.getFecha_Inicio()
-                        + ", Fecha Fin: " + m.getFecha_Fin());
+                        + ", Fecha Fin: " + m.getFecha_Fin()
+                        + ", Costo: " + m.getCosto());
             }
         }
     }
