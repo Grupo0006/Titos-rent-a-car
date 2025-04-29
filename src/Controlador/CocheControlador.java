@@ -79,13 +79,13 @@ public class CocheControlador {
 
     public static void main(String[] args) {
         CocheControlador controlador = new CocheControlador();
+        
 
         // Crear coche
-        
-        controlador.crearCoche("Toyota", "Corolla", "M123456", "Blanco", "Disponible", 2020, );
-
+        controlador.crearCoche("Toyota", "Corolla", "M123456", "Blanco", "Disponible", 2020, Date.valueOf("2024-10-10"));
+/*
         // Actualizar coche
-        controlador.actualizarCoche(1, "Toyota", "Corolla SE", "M123456", "Negro", "Mantenimiento", 2020, fechaActual);
+        controlador.actualizarCoche(1, "Toyota", "Corolla SE", "M123456", "Negro", "Mantenimiento", 2020, Date.valueOf("2024-10-10"));
 
         // Eliminar coche
         controlador.eliminarCoche(3); // Asegúrate que exista el ID
@@ -104,6 +104,7 @@ public class CocheControlador {
                         + ", Fecha Registro: " + coche.getFecha_Registro());
             }
         }
+*/
     }
 }
 
