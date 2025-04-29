@@ -3,7 +3,6 @@ package Controlador;
 import DAO.DAOEmpleado;
 import Modelo.Empleado;
 import java.sql.SQLException;
-import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
 
