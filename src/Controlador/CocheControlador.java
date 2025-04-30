@@ -4,7 +4,6 @@
  */
 package Controlador;
 
-
 import DAO.DAOCoche;
 import Modelo.Coche;
 import java.sql.SQLException;
@@ -76,5 +75,31 @@ public class CocheControlador {
             JOptionPane.showMessageDialog(null, "Error al eliminar el coche: " + e.getMessage());
         }
     }
-}
 
+    /*
+    public static void main(String[] args) {
+        CocheControlador controlador = new CocheControlador();
+        /*
+        // Probar metodo de crear coche
+        controlador.crearCoche("Olpus", "Parlic", "1524ADMN", "Rojo", "Decente", 2000, Date.valueOf("2007-03-12"));
+     */
+ /*
+        // Probar metodo de actualizar coche
+        controlador.actualizarCoche(1, "Papaya", "Rum Rum", "452JKD", "Rojo", "Malo", 2023, Date.valueOf("2030-02-10"));
+     */
+ /*
+        //Probar Leer Coches
+        List<Coche> coches = controlador.obtenerTodosCoches();
+        for (Coche co : coches) {
+            System.out.println("ID: " + co.Id_Coche + "  Marca: " + co.getMarca()
+                    + " Modelo: " + co.getModelo() + " Placa: " + co.getPlaca()
+                    + " Color: " + co.getColor() + " Estado: " + co.getEstado()
+                    + " Año: " + co.getAnio() + " Fecha: " + co.Fecha_Registro);
+        }
+     */
+ /*
+        //Probar Eliminar Coche
+        controlador.eliminarCoche(1);
+    }
+     */
+}
