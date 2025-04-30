@@ -19,7 +19,7 @@ public class DAOMantenimiento {
             stmt.setString(2, m.getJustificacion());
             stmt.setDate(3, new java.sql.Date(m.getFecha_Inicio().getTime()));
             stmt.setDate(4, new java.sql.Date(m.getFecha_Fin().getTime()));
-            stmt.setInt(5, m.getCosto());
+            stmt.setDouble(5, m.getCosto());
             stmt.executeUpdate();
         }
     }
@@ -51,7 +51,7 @@ public class DAOMantenimiento {
             stmt.setString(2, m.getJustificacion());
             stmt.setDate(3, new java.sql.Date(m.getFecha_Inicio().getTime()));
             stmt.setDate(4, new java.sql.Date(m.getFecha_Fin().getTime()));
-            stmt.setInt(5, m.getCosto());
+            stmt.setDouble(5, m.getCosto());
             stmt.setInt(6, m.getId_Mantenimiento());
             stmt.executeUpdate();
         }

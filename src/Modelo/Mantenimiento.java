@@ -8,9 +8,12 @@ public class Mantenimiento {
     private String Justificacion;
     private Date Fecha_Inicio;
     private Date Fecha_Fin;
-    private int Costo;
+    private double Costo;
 
-    public Mantenimiento(int Id_Mantenimiento, String Descripcion, String Justificacion, Date Fecha_Inicio, Date Fecha_Fin, int Costo) {
+    public Mantenimiento() {
+    }
+
+    public Mantenimiento(int Id_Mantenimiento, String Descripcion, String Justificacion, Date Fecha_Inicio, Date Fecha_Fin, double Costo) {
         this.Id_Mantenimiento = Id_Mantenimiento;
         this.Descripcion = Descripcion;
         this.Justificacion = Justificacion;
@@ -19,9 +22,7 @@ public class Mantenimiento {
         this.Costo = Costo;
     }
 
-    public Mantenimiento() {
-    }
-
+    
     public int getId_Mantenimiento() {
         return Id_Mantenimiento;
     }
@@ -62,11 +63,11 @@ public class Mantenimiento {
         this.Fecha_Fin = Fecha_Fin;
     }
 
-    public int getCosto() {
+    public double getCosto() {
         return Costo;
     }
 
-    public void setCosto(int Costo) {
+    public void setCosto(double Costo) {
         this.Costo = Costo;
     }
 

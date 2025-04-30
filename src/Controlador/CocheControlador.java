@@ -76,35 +76,5 @@ public class CocheControlador {
             JOptionPane.showMessageDialog(null, "Error al eliminar el coche: " + e.getMessage());
         }
     }
-
-    public static void main(String[] args) {
-        CocheControlador controlador = new CocheControlador();
-        
-
-        // Crear coche
-        controlador.crearCoche("Toyota", "Corolla", "M123456", "Blanco", "Disponible", 2020, Date.valueOf("2024-10-10"));
-/*
-        // Actualizar coche
-        controlador.actualizarCoche(1, "Toyota", "Corolla SE", "M123456", "Negro", "Mantenimiento", 2020, Date.valueOf("2024-10-10"));
-
-        // Eliminar coche
-        controlador.eliminarCoche(3); // Asegúrate que exista el ID
-
-        // Leer todos los coches y mostrarlos en consola
-        List<Coche> lista = controlador.obtenerTodosCoches();
-        if (lista != null) {
-            for (Coche coche : lista) {
-                System.out.println("ID: " + coche.getId_Coche()
-                        + ", Marca: " + coche.getMarca()
-                        + ", Modelo: " + coche.getModelo()
-                        + ", Placa: " + coche.getPlaca()
-                        + ", Color: " + coche.getColor()
-                        + ", Estado: " + coche.getEstado()
-                        + ", Año: " + coche.getAnio()
-                        + ", Fecha Registro: " + coche.getFecha_Registro());
-            }
-        }
-*/
-    }
 }
 
