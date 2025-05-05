@@ -4,7 +4,9 @@ import Modelo.Cliente;
 import Util.ConexionDB;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class DAOCliente {
@@ -94,8 +96,28 @@ public class DAOCliente {
     }
 }
 
-    private List<Cliente> leerTodosClientes() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+       public List<Cliente> leerTodosClientes() throws SQLException {
+    List<Cliente> clientes = new ArrayList<>();
+    String sql = "SELECT id_cliente, cedula, nombre, apellido, telefono, direccion, email, licencia FROM Clientes";
+    
+    try (Connection c = ConexionDB.getConnection();
+         PreparedStatement stmt = c.prepareStatement(sql);
+         ResultSet rs = stmt.executeQuery()) {
+        
+        while (rs.next()) {
+            Cliente cliente = new Cliente();
+            cliente.setIdCliente(rs.getString("id_cliente"));
+            cliente.setCedula(rs.getString("cedula"));
+            cliente.setNombre(rs.getString("nombre"));
+            cliente.setApellido(rs.getString("apellido"));
+            cliente.setTelefono(rs.getString("telefono"));
+            cliente.setDireccion(rs.getString("direccion"));
+            cliente.setEmail(rs.getString("email"));
+            cliente.setLicencia(rs.getString("licencia"));
+            clientes.add(cliente);
+        }
     }
-
+    
+    return clientes;
+}
 }
