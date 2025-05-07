@@ -3,11 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Estudiantes/Videos/Titos-rent-a-car/src/Vista/Coche/VistaCoche.java</file>
-            <file>file:/C:/Users/Estudiantes/Videos/Titos-rent-a-car/src/Controlador/CocheControlador.java</file>
-            <file>file:/C:/Users/Estudiantes/Videos/Titos-rent-a-car/src/Modelo/Coche.java</file>
-            <file>file:/C:/Users/Estudiantes/Videos/Titos-rent-a-car/src/DAO/DAOCoche.java</file>
-            <file>file:/C:/Users/Estudiantes/Videos/Titos-rent-a-car/src/Vista/VistaPrincipal.java</file>
+            <file>file:/C:/Users/Estudiantes/Music/Titos-rent-a-car/src/Controlador/ClienteControlador.java</file>
+            <file>file:/C:/Users/Estudiantes/Music/Titos-rent-a-car/src/Modelo/Cliente.java</file>
+            <file>file:/C:/Users/Estudiantes/Music/Titos-rent-a-car/src/Vista/VistaEmpleados.java</file>
+            <file>file:/C:/Users/Estudiantes/Music/Titos-rent-a-car/src/Vista/Coche/VistaCoche.java</file>
+            <file>file:/C:/Users/Estudiantes/Music/Titos-rent-a-car/src/Util/ConexionDB.java</file>
+            <file>file:/C:/Users/Estudiantes/Music/Titos-rent-a-car/src/DAO/DAOCliente.java</file>
+            <file>file:/C:/Users/Estudiantes/Music/Titos-rent-a-car/src/Vista/VistaPrincipal.java</file>
+            <file>file:/C:/Users/Estudiantes/Music/Titos-rent-a-car/src/Vista/VistaCliente.java</file>
         </group>
     </open-files>
 </project-private>

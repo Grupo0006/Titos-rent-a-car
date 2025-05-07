@@ -12,6 +12,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class ClienteControlador {
+    
     private final DAOCliente DAOcliente;
 
     public ClienteControlador(DAOCliente DAOcliente) {
