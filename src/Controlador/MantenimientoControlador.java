@@ -3,7 +3,6 @@ package Controlador;
 import DAO.DAOMantenimiento;
 import Modelo.Mantenimiento;
 import java.sql.SQLException;
-import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -67,32 +66,5 @@ public class MantenimientoControlador {
             return null;
         }
     }
-
-    public static void main(String[] args) {
-        MantenimientoControlador controlador = new MantenimientoControlador();
-
-        // Crear
-        controlador.crearMantenimiento("Limpieza general", "Mantenimiento trimestral", new java.util.Date(), new java.util.Date(), 70.00);
-
-        // Actualizar
-        controlador.actualizarMantenimiento(1, "Revisión de aire acondicionado", "Por fallos de temperatura", new java.util.Date(), new java.util.Date(), 70.00 );
-
-        // Eliminar
-        controlador.eliminarMantenimiento(3);
-
-        // Leer
-        List<Mantenimiento> lista = controlador.obtenerTodosMantenimientos();
-        if (lista != null) {
-            for (Mantenimiento m : lista) {
-                System.out.println("ID: " + m.getId_Mantenimiento()
-                        + ", Descripción: " + m.getDescripcion()
-                        + ", Justificación: " + m.getJustificacion()
-                        + ", Fecha Inicio: " + m.getFecha_Inicio()
-                        + ", Fecha Fin: " + m.getFecha_Fin()
-                        + ", Costo: " + m.getCosto());
-            }
-        }
-    }
-
 }
 

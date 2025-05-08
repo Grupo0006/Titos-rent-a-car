@@ -18,12 +18,14 @@ public class EmpleadoControlador {
         this.empleadoDAO = new DAOEmpleado();
     }
 
-    public void crearEmpleado(String cedula, String nombre, String apellido, String direccion, String email) {
+    public void crearEmpleado(String cedula, String nombre1,String nombre2, String apellido1,String apellido2, String direccion, String email) {
         try {
             Empleado empleado = new Empleado();
             empleado.setCedula(cedula);
-            empleado.setNombre(nombre);
-            empleado.setApellido(apellido);
+            empleado.setNombre1(nombre1);
+            empleado.setNombre2(nombre2);
+            empleado.setApellido1(apellido1);
+            empleado.setApellido2(apellido2);
             empleado.setDireccion(direccion);
             empleado.setEmail(email);
             empleadoDAO.crearEmpleado(empleado);
@@ -42,13 +44,15 @@ public class EmpleadoControlador {
         }
     }
 
-    public void actualizarEmpleado(int id, String cedula, String nombre, String apellido, String direccion, String email) {
+    public void actualizarEmpleado(int id, String cedula, String nombre1,String nombre2, String apellido1,String apellido2, String direccion, String email) {
         try {
             Empleado empleado = new Empleado();
             empleado.setId_Empleado(id);
             empleado.setCedula(cedula);
-            empleado.setNombre(nombre);
-            empleado.setApellido(apellido);
+            empleado.setNombre1(nombre1);
+            empleado.setNombre2(nombre2);
+            empleado.setApellido1(apellido1);
+            empleado.setApellido2(apellido2);
             empleado.setDireccion(direccion);
             empleado.setEmail(email);
             empleadoDAO.actualizarEmpleado(empleado);
@@ -71,10 +75,10 @@ public class EmpleadoControlador {
         EmpleadoControlador controlador = new EmpleadoControlador();
         
         // Crear empleado
-        controlador.crearEmpleado("0501198712345", "Luis", "González", "Colonia Centro", "luis@correo.com");
+        controlador.crearEmpleado("0501198712345", "Luis","Fernando","Diaz", "González", "Colonia Centro", "luis@correo.com");
 
         // Actualizar empleado
-        controlador.actualizarEmpleado(1, "0501198712345", "Luis Alberto", "González Pérez", "Colonia Moderna", "luisalberto@correo.com");
+        controlador.actualizarEmpleado(1, "0501198712345", "Luis", "Alberto", "González", "Pérez", "Colonia Moderna", "luisalberto@correo.com");
 
         // Eliminar empleado
         controlador.eliminarEmpleado(3); // Asegúrate que exista el ID
@@ -85,8 +89,10 @@ public class EmpleadoControlador {
             for (Empleado emp : lista) {
                 System.out.println("ID: " + emp.getId_Empleado()
                         + ", Cedula: " + emp.getCedula()
-                        + ", Nombre: " + emp.getNombre()
-                        + ", Apellido: " + emp.getApellido()
+                        + ", Nombre1: " + emp.getNombre1()
+                        + ", Nombre2: " + emp.getNombre2()
+                        + ", Apellido1: " + emp.getApellido1()
+                        + ", Apellido2: " + emp.getApellido2()
                         + ", Dirección: " + emp.getDireccion()
                         + ", Email: " + emp.getEmail());
             }

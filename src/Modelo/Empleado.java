@@ -11,23 +11,26 @@ package Modelo;
 public class Empleado {
     private int Id_Empleado;
     private String Cedula;
-    private String Nombre;
-    private String Apellido;
+    private String Nombre1;
+    private String nombre2;
+    private String Apellido1;
+    private String Apellido2;
     private String Direccion;
     private String Email;
-    
-    public Empleado() {
-    }
 
-    public Empleado(int Id_Empleado, String Cedula, String Nombre, String Apellido, String Direccion, String Email) {
+    public Empleado(int Id_Empleado, String Cedula, String Nombre1, String nombre2, String Apellido1, String Apellido2, String Direccion, String Email) {
         this.Id_Empleado = Id_Empleado;
         this.Cedula = Cedula;
-        this.Nombre = Nombre;
-        this.Apellido = Apellido;
+        this.Nombre1 = Nombre1;
+        this.nombre2 = nombre2;
+        this.Apellido1 = Apellido1;
+        this.Apellido2 = Apellido2;
         this.Direccion = Direccion;
         this.Email = Email;
     }
 
+    public Empleado() {
+    }
 
     public int getId_Empleado() {
         return Id_Empleado;
@@ -45,20 +48,36 @@ public class Empleado {
         this.Cedula = Cedula;
     }
 
-    public String getNombre() {
-        return Nombre;
+    public String getNombre1() {
+        return Nombre1;
     }
 
-    public void setNombre(String Nombre) {
-        this.Nombre = Nombre;
+    public void setNombre1(String Nombre1) {
+        this.Nombre1 = Nombre1;
     }
 
-    public String getApellido() {
-        return Apellido;
+    public String getNombre2() {
+        return nombre2;
     }
 
-    public void setApellido(String Apellido) {
-        this.Apellido = Apellido;
+    public void setNombre2(String nombre2) {
+        this.nombre2 = nombre2;
+    }
+
+    public String getApellido1() {
+        return Apellido1;
+    }
+
+    public void setApellido1(String Apellido1) {
+        this.Apellido1 = Apellido1;
+    }
+
+    public String getApellido2() {
+        return Apellido2;
+    }
+
+    public void setApellido2(String Apellido2) {
+        this.Apellido2 = Apellido2;
     }
 
     public String getDireccion() {
@@ -76,5 +95,5 @@ public class Empleado {
     public void setEmail(String Email) {
         this.Email = Email;
     }
-
+    
 }

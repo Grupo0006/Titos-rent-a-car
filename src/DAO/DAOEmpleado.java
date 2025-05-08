@@ -12,14 +12,16 @@ import java.util.List;
 public class DAOEmpleado {
 
     public void crearEmpleado(Empleado empleado) throws SQLException {
-        String sql = "INSERT INTO Empleado (cedula, nombre, apellido, direccion, email) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Empleado (Cedula, Nombre1,Nombre2, Apellido1,Apellido2, Direccion, Email) VALUES (?, ?, ?, ?, ?,?,?)";
 
         try (Connection c = ConexionDB.getConnection(); PreparedStatement stmt = c.prepareStatement(sql)) {
             stmt.setString(1, empleado.getCedula());
-            stmt.setString(2, empleado.getNombre());
-            stmt.setString(3, empleado.getApellido());
-            stmt.setString(4, empleado.getDireccion());
-            stmt.setString(5, empleado.getEmail());
+            stmt.setString(2, empleado.getNombre1());
+            stmt.setString(3, empleado.getNombre2());
+            stmt.setString(4, empleado.getApellido1());
+             stmt.setString(5, empleado.getApellido2());
+            stmt.setString(6, empleado.getDireccion());
+            stmt.setString(7, empleado.getEmail());
             stmt.executeUpdate();
         }
     }
@@ -32,11 +34,13 @@ public class DAOEmpleado {
             while (rs.next()) {
                 Empleado e = new Empleado();
                 e.setId_Empleado(rs.getInt("id_empleado"));
-                e.setCedula(rs.getString("cedula"));
-                e.setNombre(rs.getString("nombre"));
-                e.setApellido(rs.getString("apellido"));
-                e.setDireccion(rs.getString("direccion"));
-                e.setEmail(rs.getString("email"));
+                e.setCedula(rs.getString("Cedula"));
+                e.setNombre1(rs.getString("Nombre1"));
+                e.setNombre2(rs.getString("Nombre2"));
+                e.setApellido1(rs.getString("Apellido1"));
+                e.setApellido2(rs.getString("Apellido2"));
+                e.setDireccion(rs.getString("Direccion"));
+                e.setEmail(rs.getString("Email"));
                 lista.add(e);
             }
         }
@@ -45,21 +49,23 @@ public class DAOEmpleado {
     }
     
     public void actualizarEmpleado(Empleado empleado) throws SQLException {
-        String sql = "UPDATE Empleado SET cedula = ?, nombre = ?, apellido = ?, direccion = ?, email = ? WHERE id_empleado = ?";
+        String sql = "UPDATE Empleado SET Cedula = ?, Nombre1 = ?,Nombre2 = ?, Apellido = ?,Apellido2 = ?, Direccion = ?, Email = ? WHERE Id_Empleado = ?";
 
         try (Connection c = ConexionDB.getConnection(); PreparedStatement stmt = c.prepareStatement(sql)) {
             stmt.setString(1, empleado.getCedula());
-            stmt.setString(2, empleado.getNombre());
-            stmt.setString(3, empleado.getApellido());
-            stmt.setString(4, empleado.getDireccion());
-            stmt.setString(5, empleado.getEmail());
-            stmt.setInt(6, empleado.getId_Empleado());
+            stmt.setString(2, empleado.getNombre1());
+             stmt.setString(3, empleado.getNombre2());
+            stmt.setString(4, empleado.getApellido1());
+            stmt.setString(5, empleado.getApellido2());
+            stmt.setString(6, empleado.getDireccion());
+            stmt.setString(7, empleado.getEmail());
+            stmt.setInt(8, empleado.getId_Empleado());
             stmt.executeUpdate();
         }
     }
 
     public void eliminarEmpleado(int idEmpleado) throws SQLException {
-        String sql = "DELETE FROM Empleado WHERE id_empleado = ?";
+        String sql = "DELETE FROM Empleado WHERE Id_Empleado = ?";
 
         try (Connection c = ConexionDB.getConnection(); PreparedStatement stmt = c.prepareStatement(sql)) {
             stmt.setInt(1, idEmpleado);
@@ -103,8 +109,10 @@ public class DAOEmpleado {
             for (Empleado emp : empleados) {
                 System.out.println("ID: " + emp.getId_Empleado()
                         + ", Cedula: " + emp.getCedula()
-                        + ", Nombre: " + emp.getNombre()
-                        + ", Apellido: " + emp.getApellido()
+                        + ", Nombre1: " + emp.getNombre1()
+                        + ", Nombre2: " + emp.getNombre2()
+                        + ", Apellido1: " + emp.getApellido1()
+                        + ", Apellido2: " + emp.getApellido2()
                         + ", Dirección: " + emp.getDireccion()
                         + ", Email: " + emp.getEmail());
             }

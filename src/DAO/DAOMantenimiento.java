@@ -65,51 +65,5 @@ public class DAOMantenimiento {
             stmt.executeUpdate();
         }
     }
-
-    public static void main(String[] args) {
-        try {
-            DAOMantenimiento dao = new DAOMantenimiento();
-
-            // Crear
-            Mantenimiento nuevo = new Mantenimiento();
-            nuevo.setDescripcion("Revisión del sistema eléctrico");
-            nuevo.setJustificacion("Prevención de fallos");
-            nuevo.setFecha_Inicio(new java.util.Date());
-            nuevo.setFecha_Fin(new java.util.Date());
-            nuevo.setCosto(2000);
-            dao.crearMantenimiento(nuevo);
-            System.out.println("Mantenimiento creado.");
-
-            // Actualizar
-            Mantenimiento actualizado = new Mantenimiento();
-            actualizado.setId_Mantenimiento(1); // Asegúrate de usar un ID existente
-            actualizado.setDescripcion("Mantenimiento de rutina");
-            actualizado.setJustificacion("Seguimiento mensual");
-            actualizado.setFecha_Inicio(new java.util.Date());
-            actualizado.setFecha_Fin(new java.util.Date());
-            actualizado.setCosto(1000);
-            dao.actualizarMantenimiento(actualizado);
-            System.out.println("Mantenimiento actualizado.");
-
-            // Eliminar
-            dao.eliminarMantenimiento(2); // Cambia según el ID
-            System.out.println("Mantenimiento eliminado.");
-
-            // Leer
-            List<Mantenimiento> lista = dao.leerTodosMantenimientos();
-            System.out.println("Lista de mantenimiento:");
-            for (Mantenimiento m : lista) {
-                System.out.println("ID: " + m.getId_Mantenimiento()
-                        + ", Descripción: " + m.getDescripcion()
-                        + ", Justificación: " + m.getJustificacion()
-                        + ", Inicio: " + m.getFecha_Inicio()
-                        + ", Fin: " + m.getFecha_Fin()
-                        + ", Costo: " + m.getCosto());
-            }
-
-        } catch (SQLException e) {
-            System.err.println("Error en DAO: " + e.getMessage());
-        }
-    }
 }
 
