@@ -18,6 +18,7 @@ import java.text.SimpleDateFormat;
  */
 public class VistaCocheFormulario extends javax.swing.JPanel {
 
+    private Integer idCoche = null;
     /**
      * Creates new form VistaCoche
      */
@@ -404,13 +405,13 @@ public class VistaCocheFormulario extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanelInferiorFormulario;
-    private javax.swing.JTextField jTextFieldAnio;
-    private javax.swing.JTextField jTextFieldColor;
-    private javax.swing.JTextField jTextFieldEstado;
-    private javax.swing.JTextField jTextFieldFecha;
-    private javax.swing.JTextField jTextFieldId;
-    private javax.swing.JTextField jTextFieldMarca;
-    private javax.swing.JTextField jTextFieldModelo;
-    private javax.swing.JTextField jTextFieldPlaca;
+    public javax.swing.JTextField jTextFieldAnio;
+    public javax.swing.JTextField jTextFieldColor;
+    public javax.swing.JTextField jTextFieldEstado;
+    public javax.swing.JTextField jTextFieldFecha;
+    public javax.swing.JTextField jTextFieldId;
+    public javax.swing.JTextField jTextFieldMarca;
+    public javax.swing.JTextField jTextFieldModelo;
+    public javax.swing.JTextField jTextFieldPlaca;
     // End of variables declaration//GEN-END:variables
 }

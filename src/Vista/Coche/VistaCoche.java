@@ -26,15 +26,18 @@ import javax.swing.table.DefaultTableModel;
  * @author Estudiante
  */
 public class VistaCoche extends javax.swing.JPanel {
-
+    
+    private VistaCocheFormulario vistaCocheFormulario; // Referencia al formulario con los JTextField
     private final CocheControlador cocheControlador;
     private Integer idCocheSeleccionada = null;
+    
     /**
      * Creates new form VistaCoche
      */
     public VistaCoche() {
         initComponents();
         this.cocheControlador = new CocheControlador();
+        this.vistaCocheFormulario = vistaCocheFormulario;
         cargarDatosTabla();
         
 
@@ -97,6 +100,19 @@ public class VistaCoche extends javax.swing.JPanel {
 
         }
     }
+    
+    public void Formulario (){
+    VistaCocheFormulario formulario = new VistaCocheFormulario(); // Crear instancia
+        
+        panelInferior.removeAll();
+        panelInferior.setLayout(new BorderLayout());
+        panelInferior.add(formulario, BorderLayout.CENTER);
+        panelInferior.revalidate();
+        panelInferior.repaint();
+    }
+    
+    
+    
     public Coche obtenerCocheSeleccionado() {
     int fila = jTableCoches.getSelectedRow();
     if (fila != -1) {
@@ -112,12 +128,7 @@ public class VistaCoche extends javax.swing.JPanel {
         
         SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
         Date FechaRegistro = null;
-        
-        try {
-            FechaRegistro = formato.parse(fechaTexto);
-        }catch (ParseException e){
-            e.printStackTrace();
-        }
+      
         
         coche.setFecha_Registro(FechaRegistro);
         return coche;
@@ -133,7 +144,7 @@ public class VistaCoche extends javax.swing.JPanel {
         DateTimeFormatter formatoFecha = DateTimeFormatter.ofPattern("dd/MM/yyyy");// Se le aplica formato
         String fechaFormateada = fechaActual.format(formatoFecha);//Se formatea la fecha a String para mostrar en tabla
 
-        DateTimeFormatter formatoHora = DateTimeFormatter.ofPattern("HH:mm:ss");
+        DateTimeFormatter formatoHora = DateTimeFormatter.ofPattern("HH:mm");
         String horaFormateada = fechaActual.format(formatoHora);
 
         campoFecha.setText(fechaFormateada);
@@ -228,9 +239,16 @@ public class VistaCoche extends javax.swing.JPanel {
             Class[] types = new Class [] {
                 java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false
+            };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
         jTableCoches.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -325,20 +343,44 @@ public class VistaCoche extends javax.swing.JPanel {
 
     private void jButtonAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgregarActionPerformed
         // TODO add your handling code here:
-        VistaCocheFormulario formulario = new VistaCocheFormulario(); // Crear instancia
-        
-        panelInferior.removeAll();
-        panelInferior.setLayout(new BorderLayout());
-        panelInferior.add(formulario, BorderLayout.CENTER);
-        panelInferior.revalidate();
-        panelInferior.repaint();
+        Formulario();
        
     }//GEN-LAST:event_jButtonAgregarActionPerformed
 
     private void jTableCochesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableCochesMouseClicked
         // TODO add your handling code here:
-         
+        if (evt.getClickCount() >= 2) {
+            int filaSeleccionada = jTableCoches.getSelectedRow();
+            if (filaSeleccionada != -1) {
+                // Obtener los valores de la fila seleccionada
+                int idCoche = (int) jTableCoches.getValueAt(filaSeleccionada, 0); // Id_Coche
+                String marca = (String) jTableCoches.getValueAt(filaSeleccionada, 1); // Marca
+                String modelo = (String) jTableCoches.getValueAt(filaSeleccionada, 2); // Modelo
+                String placa = (String) jTableCoches.getValueAt(filaSeleccionada, 3); // Placa
+                String color = (String) jTableCoches.getValueAt(filaSeleccionada, 4); // Color
+                String estado = (String) jTableCoches.getValueAt(filaSeleccionada, 5); // Estado
+                int anio = (int) jTableCoches.getValueAt(filaSeleccionada, 6); // Anio
+                java.util.Date fechaRegistro = (java.util.Date) jTableCoches.getValueAt(filaSeleccionada, 7); // Fecha_Registro
 
+                
+                // Actualizar los JTextField en el otro panel
+                vistaCocheFormulario.jTextFieldId.setText(String.valueOf(idCoche));
+                vistaCocheFormulario.jTextFieldMarca.setText(marca);
+                vistaCocheFormulario.jTextFieldModelo.setText(modelo);
+                vistaCocheFormulario.jTextFieldPlaca.setText(placa);
+                vistaCocheFormulario.jTextFieldColor.setText(color);
+                vistaCocheFormulario.jTextFieldEstado.setText(estado);
+                vistaCocheFormulario.jTextFieldAnio.setText(String.valueOf(anio));
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                vistaCocheFormulario.jTextFieldFecha.setText(fechaRegistro != null ? sdf.format(fechaRegistro) : "");
+                Formulario();
+                
+
+                // Deshabilitar botones
+               /* vistaCocheFormulario.jButtonGuardar.setEnabled(false);
+                vistaCocheFormulario.jButtonEliminar.setEnabled(false);*/
+            }
+        }
     }//GEN-LAST:event_jTableCochesMouseClicked
 
 
