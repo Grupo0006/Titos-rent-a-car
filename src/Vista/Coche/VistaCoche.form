@@ -140,7 +140,7 @@
                     <Column editable="false" title="A&#xf1;o" type="java.lang.Integer"/>
                     <Column editable="false" title="Placa" type="java.lang.String"/>
                     <Column editable="false" title="Color" type="java.lang.String"/>
-                    <Column editable="false" title="Fecha Registro" type="java.lang.String"/>
+                    <Column editable="false" title="Registro" type="java.lang.String"/>
                     <Column editable="false" title="Estado" type="java.lang.String"/>
                   </Table>
                 </Property>
@@ -148,6 +148,9 @@
               <Events>
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jTableCochesMouseClicked"/>
               </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
             </Component>
           </SubComponents>
         </Container>

@@ -235,6 +235,7 @@ public class VistaMantenimiento extends javax.swing.JPanel {
 
     private void accionBotonGuardar(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accionBotonGuardar
         // TODO add your handling code here:
+        /*
         String Descripcion = TextDescripcion.getText();
         String Justificacion = TextJustificacion.getText();
         String Fecha_Inicio = TextFecha_Inicio.getText();
@@ -252,6 +253,7 @@ public class VistaMantenimiento extends javax.swing.JPanel {
         }else {
             javax.swing.JOptionPane.showMessageDialog(this, "Por favor, llene todos los campos.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
         }
+*/
     }//GEN-LAST:event_accionBotonGuardar
 
     private void accionBotonEliminar(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accionBotonEliminar

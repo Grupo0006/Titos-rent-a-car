@@ -19,14 +19,17 @@ import java.text.SimpleDateFormat;
 public class VistaCocheFormulario extends javax.swing.JPanel {
 
     private Integer idCoche = null;
+
     /**
      * Creates new form VistaCoche
      */
     public VistaCocheFormulario() {
         initComponents();
+
+        jTextFieldId.setEnabled(false);
     }
 
-    public void vista() {
+    public void aparecerVista() {
         VistaCoche Vista = new VistaCoche();
         jPanelInferiorFormulario.removeAll();
         jPanelInferiorFormulario.setLayout(new BorderLayout());
@@ -34,7 +37,23 @@ public class VistaCocheFormulario extends javax.swing.JPanel {
         jPanelInferiorFormulario.revalidate();
         jPanelInferiorFormulario.repaint();
     }
-    
+
+    // Metodo para cargar datos en los JtextField
+    public void cargarDatos(int idCoche, String marca, String modelo, int anio, String placa, String color, String estado, Date fechaRegistro) {
+        jTextFieldId.setText(String.valueOf(idCoche));
+        jTextFieldMarca.setText(marca);
+        jTextFieldModelo.setText(modelo);
+        jTextFieldPlaca.setText(placa);
+        jTextFieldColor.setText(color);
+        jTextFieldEstado.setText(estado);
+        jTextFieldAnio.setText(String.valueOf(anio));
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        jTextFieldFecha.setText(fechaRegistro != null ? sdf.format(fechaRegistro) : "");
+
+        // Puedes desactivar botones si es necesario
+        jButtonGuardar.setEnabled(false);
+        jButtonEliminar.setEnabled(false);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -68,8 +87,9 @@ public class VistaCocheFormulario extends javax.swing.JPanel {
         jTextFieldColor = new javax.swing.JTextField();
         jTextFieldFecha = new javax.swing.JTextField();
         jTextFieldPlaca = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
+        jButtonGuardar = new javax.swing.JButton();
         jButtonActualizar = new javax.swing.JButton();
+        jButtonEliminar = new javax.swing.JButton();
 
         jPanelInferiorFormulario.setBackground(new java.awt.Color(255, 57, 54));
         jPanelInferiorFormulario.setPreferredSize(new java.awt.Dimension(1440, 1024));
@@ -185,13 +205,13 @@ public class VistaCocheFormulario extends javax.swing.JPanel {
         jTextFieldPlaca.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         jTextFieldPlaca.setPreferredSize(new java.awt.Dimension(632, 51));
 
-        jButton2.setFont(new java.awt.Font("Segoe UI", 0, 37)); // NOI18N
-        jButton2.setText("Guardar");
-        jButton2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
-        jButton2.setPreferredSize(new java.awt.Dimension(240, 69));
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jButtonGuardar.setFont(new java.awt.Font("Segoe UI", 0, 37)); // NOI18N
+        jButtonGuardar.setText("Guardar");
+        jButtonGuardar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        jButtonGuardar.setPreferredSize(new java.awt.Dimension(240, 69));
+        jButtonGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jButtonGuardarActionPerformed(evt);
             }
         });
 
@@ -202,6 +222,16 @@ public class VistaCocheFormulario extends javax.swing.JPanel {
         jButtonActualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonActualizarActionPerformed(evt);
+            }
+        });
+
+        jButtonEliminar.setFont(new java.awt.Font("Segoe UI", 0, 37)); // NOI18N
+        jButtonEliminar.setText("Eliminar");
+        jButtonEliminar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        jButtonEliminar.setPreferredSize(new java.awt.Dimension(240, 69));
+        jButtonEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonEliminarActionPerformed(evt);
             }
         });
 
@@ -221,35 +251,36 @@ public class VistaCocheFormulario extends javax.swing.JPanel {
                             .addComponent(jLabel4)
                             .addGap(265, 265, 265)
                             .addComponent(jTextFieldMarca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jPanel3Layout.createSequentialGroup()
-                            .addComponent(jLabel10)
-                            .addGap(255, 255, 255)
-                            .addComponent(jTextFieldEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jLabel10)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jTextFieldEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(jLabel9)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jTextFieldPlaca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
+                            .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(jLabel5)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jTextFieldModelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
+                            .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(jLabel6)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jTextFieldAnio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
+                            .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(jLabel7)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jTextFieldColor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
+                            .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(jLabel8)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 126, Short.MAX_VALUE)
                                 .addComponent(jTextFieldFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonActualizar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButtonGuardar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonActualizar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonEliminar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(15, 15, 15))
         );
         jPanel3Layout.setVerticalGroup(
@@ -259,7 +290,7 @@ public class VistaCocheFormulario extends javax.swing.JPanel {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jTextFieldId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButtonGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(20, 20, 20)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
@@ -277,23 +308,28 @@ public class VistaCocheFormulario extends javax.swing.JPanel {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(45, 45, 45)
                         .addComponent(jButtonActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(19, 19, 19)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(jTextFieldColor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(17, 17, 17)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
-                    .addComponent(jTextFieldFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(58, 58, 58)
+                        .addComponent(jButtonEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel7)
+                            .addComponent(jTextFieldColor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel8)
+                            .addComponent(jTextFieldFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel9)
                     .addComponent(jTextFieldPlaca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel10)
                     .addComponent(jTextFieldEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(148, Short.MAX_VALUE))
+                .addContainerGap(147, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanelInferiorFormularioLayout = new javax.swing.GroupLayout(jPanelInferiorFormulario);
@@ -325,7 +361,7 @@ public class VistaCocheFormulario extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanelInferiorFormulario, javax.swing.GroupLayout.DEFAULT_SIZE, 1428, Short.MAX_VALUE)
+                .addComponent(jPanelInferiorFormulario, javax.swing.GroupLayout.DEFAULT_SIZE, 1441, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -339,10 +375,10 @@ public class VistaCocheFormulario extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        vista();
+        aparecerVista();
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void jButtonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGuardarActionPerformed
         // TODO add your handling code here:
         String Marca = jTextFieldMarca.getText();
         String Modelo = jTextFieldModelo.getText();
@@ -373,24 +409,35 @@ public class VistaCocheFormulario extends javax.swing.JPanel {
             jTextFieldFecha.setText("");
             jTextFieldPlaca.setText("");
             jTextFieldEstado.setText("");
-            vista();
+            aparecerVista();
         } else {
             javax.swing.JOptionPane.showMessageDialog(this,
                     "Por favor, llene todos los campos.", "Error",
                     javax.swing.JOptionPane.ERROR_MESSAGE);
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_jButtonGuardarActionPerformed
 
     private void jButtonActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonActualizarActionPerformed
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_jButtonActualizarActionPerformed
+
+    private void jButtonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEliminarActionPerformed
+        // TODO add your handling code here:
+        int IdCoche = (int) Integer.valueOf(jTextFieldId.getText());
+        CocheControlador controlador = new CocheControlador();
+        controlador.eliminarCoche(IdCoche);
+        VistaCoche vista = new VistaCoche();
+        aparecerVista();
+        vista.cargarDatosTabla();
+    }//GEN-LAST:event_jButtonEliminarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButtonActualizar;
+    protected javax.swing.JButton jButtonActualizar;
+    protected javax.swing.JButton jButtonEliminar;
+    protected javax.swing.JButton jButtonGuardar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
@@ -405,13 +452,13 @@ public class VistaCocheFormulario extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanelInferiorFormulario;
-    public javax.swing.JTextField jTextFieldAnio;
-    public javax.swing.JTextField jTextFieldColor;
-    public javax.swing.JTextField jTextFieldEstado;
-    public javax.swing.JTextField jTextFieldFecha;
-    public javax.swing.JTextField jTextFieldId;
-    public javax.swing.JTextField jTextFieldMarca;
-    public javax.swing.JTextField jTextFieldModelo;
-    public javax.swing.JTextField jTextFieldPlaca;
+    protected javax.swing.JTextField jTextFieldAnio;
+    protected javax.swing.JTextField jTextFieldColor;
+    protected javax.swing.JTextField jTextFieldEstado;
+    protected javax.swing.JTextField jTextFieldFecha;
+    protected javax.swing.JTextField jTextFieldId;
+    protected javax.swing.JTextField jTextFieldMarca;
+    protected javax.swing.JTextField jTextFieldModelo;
+    protected javax.swing.JTextField jTextFieldPlaca;
     // End of variables declaration//GEN-END:variables
 }

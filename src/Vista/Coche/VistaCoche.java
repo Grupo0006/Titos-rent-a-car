@@ -233,7 +233,7 @@ public class VistaCoche extends javax.swing.JPanel {
                 {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "ID", "Marca", "Modelo", "Año", "Placa", "Color", "Fecha Registro", "Estado"
+                "ID", "Marca", "Modelo", "Año", "Placa", "Color", "Registro", "Estado"
             }
         ) {
             Class[] types = new Class [] {
@@ -352,18 +352,25 @@ public class VistaCoche extends javax.swing.JPanel {
         if (evt.getClickCount() >= 2) {
             int filaSeleccionada = jTableCoches.getSelectedRow();
             if (filaSeleccionada != -1) {
+                
+                
                 // Obtener los valores de la fila seleccionada
                 int idCoche = (int) jTableCoches.getValueAt(filaSeleccionada, 0); // Id_Coche
                 String marca = (String) jTableCoches.getValueAt(filaSeleccionada, 1); // Marca
                 String modelo = (String) jTableCoches.getValueAt(filaSeleccionada, 2); // Modelo
-                String placa = (String) jTableCoches.getValueAt(filaSeleccionada, 3); // Placa
-                String color = (String) jTableCoches.getValueAt(filaSeleccionada, 4); // Color
-                String estado = (String) jTableCoches.getValueAt(filaSeleccionada, 5); // Estado
-                int anio = (int) jTableCoches.getValueAt(filaSeleccionada, 6); // Anio
-                java.util.Date fechaRegistro = (java.util.Date) jTableCoches.getValueAt(filaSeleccionada, 7); // Fecha_Registro
-
+                int anio = (int) jTableCoches.getValueAt(filaSeleccionada, 3); // Anio
+                String placa = (String) jTableCoches.getValueAt(filaSeleccionada, 4); // Placa
+                String color = (String) jTableCoches.getValueAt(filaSeleccionada, 5); // Color
+                java.util.Date fechaRegistro = (java.util.Date) jTableCoches.getValueAt(filaSeleccionada, 6); // Fecha_Registro
+                String estado = (String) jTableCoches.getValueAt(filaSeleccionada, 7); // Estado
                 
+                
+                VistaCocheFormulario formulario = new VistaCocheFormulario();
+                formulario.cargarDatos(idCoche, marca, modelo, anio, placa, color, estado, fechaRegistro);
+                Formulario();
                 // Actualizar los JTextField en el otro panel
+                /*
+                Formulario();
                 vistaCocheFormulario.jTextFieldId.setText(String.valueOf(idCoche));
                 vistaCocheFormulario.jTextFieldMarca.setText(marca);
                 vistaCocheFormulario.jTextFieldModelo.setText(modelo);
@@ -373,12 +380,15 @@ public class VistaCoche extends javax.swing.JPanel {
                 vistaCocheFormulario.jTextFieldAnio.setText(String.valueOf(anio));
                 SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
                 vistaCocheFormulario.jTextFieldFecha.setText(fechaRegistro != null ? sdf.format(fechaRegistro) : "");
-                Formulario();
                 
-
+                vistaCocheFormulario.jButtonGuardar.setEnabled(false);
+                vistaCocheFormulario.jButtonEliminar.setEnabled(false);
+                
+                
                 // Deshabilitar botones
                /* vistaCocheFormulario.jButtonGuardar.setEnabled(false);
                 vistaCocheFormulario.jButtonEliminar.setEnabled(false);*/
+                
             }
         }
     }//GEN-LAST:event_jTableCochesMouseClicked
@@ -394,7 +404,7 @@ public class VistaCoche extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTableCoches;
+    public javax.swing.JTable jTableCoches;
     private javax.swing.JPanel panelInferior;
     // End of variables declaration//GEN-END:variables
 }
