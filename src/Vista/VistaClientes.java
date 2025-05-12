@@ -11,13 +11,13 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Maryi Lazo
  */
-public class VistaEmpleados extends javax.swing.JPanel {
+public class VistaClientes extends javax.swing.JPanel {
 private final EmpleadoControlador empleadoControlador;
 private Integer Id_EmpleadoSeleccionada = null;
     /**
      * Creates new form VistaEmpleados
      */
-    public VistaEmpleados() {
+    public VistaClientes() {
         initComponents();
         this.empleadoControlador = new EmpleadoControlador();
 cargarDatosTabla();
@@ -154,7 +154,7 @@ cargarDatosTabla();
         jLabel8.setText("Buscar");
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel9.setText("Registro de Empleados");
+        jLabel9.setText("Registro de Clientes");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
