@@ -4,9 +4,11 @@
  */
 package Vista;
 
+import javax.swing.UIManager;
+
 /**
  *
- * @author Maryi 
+ * @author Maryi
  */
 public class VistaPrincipal extends javax.swing.JFrame {
 
@@ -17,7 +19,8 @@ public class VistaPrincipal extends javax.swing.JFrame {
         initComponents();
         // opciones.addTab("Empleados", new VistaEmpleados());
         opciones.addTab("Coches", new Vista.Coche.VistaCoche());
-        
+
+
     }
 
     /**
@@ -32,18 +35,17 @@ public class VistaPrincipal extends javax.swing.JFrame {
         opciones = new javax.swing.JTabbedPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(800, 500));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(opciones, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE)
+            .addComponent(opciones, javax.swing.GroupLayout.DEFAULT_SIZE, 1450, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(opciones, javax.swing.GroupLayout.DEFAULT_SIZE, 494, Short.MAX_VALUE)
+                .addComponent(opciones, javax.swing.GroupLayout.DEFAULT_SIZE, 1006, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
