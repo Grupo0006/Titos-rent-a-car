@@ -19,6 +19,13 @@ import java.text.SimpleDateFormat;
 public class VistaCocheFormulario extends javax.swing.JPanel {
 
     private Integer idCoche = null;
+    private String marca;
+    private String modelo;
+    private Integer anio;
+    private String placa;
+    private String color;
+    private String estado;
+    private Date fechaRegistro;
 
     /**
      * Creates new form VistaCoche
@@ -38,8 +45,36 @@ public class VistaCocheFormulario extends javax.swing.JPanel {
         jPanelInferiorFormulario.repaint();
     }
 
+    // Metodo para cargar datos en los JtextField 2
+    // Creamos metodo para declarar variable que almacenen datos
+    public void cargarDatosJTextField(int idCoche, String marca, String modelo, int anio, String placa, String color, String estado, Date fechaRegistro) {
+        this.idCoche = idCoche;
+        this.marca = marca;
+        this.modelo = modelo;
+        this.anio = anio;
+        this.placa = placa;
+        this.color = color;
+        this.estado = estado;
+        this.fechaRegistro = fechaRegistro;
+
+        // Creamos codigo para mandar los datos almacenados a los JtextField
+        jTextFieldId.setText(String.valueOf(idCoche));
+        jTextFieldMarca.setText(marca);
+        jTextFieldModelo.setText(modelo);
+        jTextFieldPlaca.setText(placa);
+        jTextFieldColor.setText(color);
+        jTextFieldEstado.setText(estado);
+        jTextFieldAnio.setText(String.valueOf(anio));
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        jTextFieldFecha.setText(fechaRegistro != null ? sdf.format(fechaRegistro) : "");
+
+        // Desactiva botones de eliminar
+        jButtonGuardar.setEnabled(false);
+    }
+
+    /*
     // Metodo para cargar datos en los JtextField
-    public void cargarDatos(int idCoche, String marca, String modelo, int anio, String placa, String color, String estado, Date fechaRegistro) {
+    public void cargarDatosJTextField(int idCoche, String marca, String modelo, int anio, String placa, String color, String estado, Date fechaRegistro) {
         jTextFieldId.setText(String.valueOf(idCoche));
         jTextFieldMarca.setText(marca);
         jTextFieldModelo.setText(modelo);
@@ -53,8 +88,7 @@ public class VistaCocheFormulario extends javax.swing.JPanel {
         // Puedes desactivar botones si es necesario
         jButtonGuardar.setEnabled(false);
         jButtonEliminar.setEnabled(false);
-    }
-
+    }*/
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -419,6 +453,35 @@ public class VistaCocheFormulario extends javax.swing.JPanel {
 
     private void jButtonActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonActualizarActionPerformed
         // TODO add your handling code here:
+        int idCoche = Integer.parseInt(jTextFieldId.getText());
+        String marca = jTextFieldMarca.getText();
+        String modelo = jTextFieldModelo.getText();
+        int anio = Integer.parseInt(jTextFieldAnio.getText());
+        String color = jTextFieldColor.getText();
+        String textoFecha = jTextFieldFecha.getText().trim();
+        String placa = jTextFieldPlaca.getText();
+        String estado = jTextFieldEstado.getText();
+        
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+       Date fecha = null;
+       
+       try {
+            fecha = sdf.parse(textoFecha);
+        } catch (ParseException e) {
+            System.out.println("Formato de fecha inválido: " + textoFecha);
+        }
+
+        if (jTextFieldId != null && !marca.isEmpty() && !modelo.isEmpty()
+                && anio != 0 && !color.isEmpty() && !textoFecha.isEmpty()
+                && !estado.isEmpty()) {
+            
+            java.sql.Date fechaSQL = new java.sql.Date(fecha.getTime());
+            CocheControlador controlador = new CocheControlador();
+            controlador.actualizarCoche(idCoche, marca, modelo, placa, color, estado, anio, fechaSQL);
+            aparecerVista();
+        } else {
+            System.out.println("Campos obligatorios vacíos.");
+        }
 
     }//GEN-LAST:event_jButtonActualizarActionPerformed
 
