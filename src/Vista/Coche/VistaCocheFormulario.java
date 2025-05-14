@@ -47,8 +47,10 @@ public class VistaCocheFormulario extends javax.swing.JPanel {
         jTextFieldPlaca.setText("");
         jTextFieldColor.setText("");
         jTextFieldAnio.setText("");
-        jTextFieldFecha.setText("");
+        jDateChooserFecha.setDate(new Date());
         jComboBoxEstado.setSelectedIndex(0);
+        
+        jButtonGuardar.setEnabled(true);
     }
 
     // Metodo para hacer parecer el JPanel de formulario vacio
@@ -81,8 +83,7 @@ public class VistaCocheFormulario extends javax.swing.JPanel {
         jTextFieldColor.setText(color);
         jComboBoxEstado.setSelectedItem(estado); // Por si no obtiene los atos qcorrecto puede que esta linea de codigo sea la responsable
         jTextFieldAnio.setText(String.valueOf(anio));
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        jTextFieldFecha.setText(fechaRegistro != null ? sdf.format(fechaRegistro) : "");
+        jDateChooserFecha.setDate(fechaRegistro);
 
         // Desactiva botones de eliminar
         jButtonGuardar.setEnabled(false);
@@ -213,32 +214,32 @@ public class VistaCocheFormulario extends javax.swing.JPanel {
         jLabel10.setText("Estado");
 
         jTextFieldId.setBackground(new java.awt.Color(244, 233, 205));
-        jTextFieldId.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        jTextFieldId.setFont(new java.awt.Font("Segoe UI", 0, 26)); // NOI18N
         jTextFieldId.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
         jTextFieldId.setPreferredSize(new java.awt.Dimension(632, 51));
 
         jTextFieldMarca.setBackground(new java.awt.Color(244, 233, 205));
-        jTextFieldMarca.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        jTextFieldMarca.setFont(new java.awt.Font("Segoe UI", 0, 26)); // NOI18N
         jTextFieldMarca.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
         jTextFieldMarca.setPreferredSize(new java.awt.Dimension(632, 51));
 
         jTextFieldModelo.setBackground(new java.awt.Color(244, 233, 205));
-        jTextFieldModelo.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        jTextFieldModelo.setFont(new java.awt.Font("Segoe UI", 0, 26)); // NOI18N
         jTextFieldModelo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
         jTextFieldModelo.setPreferredSize(new java.awt.Dimension(632, 51));
 
         jTextFieldAnio.setBackground(new java.awt.Color(244, 233, 205));
-        jTextFieldAnio.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        jTextFieldAnio.setFont(new java.awt.Font("Segoe UI", 0, 26)); // NOI18N
         jTextFieldAnio.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
         jTextFieldAnio.setPreferredSize(new java.awt.Dimension(632, 51));
 
         jTextFieldColor.setBackground(new java.awt.Color(244, 233, 205));
-        jTextFieldColor.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        jTextFieldColor.setFont(new java.awt.Font("Segoe UI", 0, 26)); // NOI18N
         jTextFieldColor.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
         jTextFieldColor.setPreferredSize(new java.awt.Dimension(632, 51));
 
         jTextFieldPlaca.setBackground(new java.awt.Color(244, 233, 205));
-        jTextFieldPlaca.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        jTextFieldPlaca.setFont(new java.awt.Font("Segoe UI", 0, 26)); // NOI18N
         jTextFieldPlaca.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
         jTextFieldPlaca.setPreferredSize(new java.awt.Dimension(632, 51));
 
@@ -276,7 +277,7 @@ public class VistaCocheFormulario extends javax.swing.JPanel {
         });
 
         jComboBoxEstado.setBackground(new java.awt.Color(244, 233, 205));
-        jComboBoxEstado.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        jComboBoxEstado.setFont(new java.awt.Font("Segoe UI", 0, 26)); // NOI18N
         jComboBoxEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar...", "Disponible", "En Mantenimiento", "En Alquiler" }));
         jComboBoxEstado.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
 
@@ -292,6 +293,8 @@ public class VistaCocheFormulario extends javax.swing.JPanel {
         });
 
         jDateChooserFecha.setBackground(new java.awt.Color(244, 233, 205));
+        jDateChooserFecha.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        jDateChooserFecha.setFont(new java.awt.Font("Segoe UI", 0, 26)); // NOI18N
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -391,7 +394,7 @@ public class VistaCocheFormulario extends javax.swing.JPanel {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel10)
                     .addComponent(jComboBoxEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(226, Short.MAX_VALUE))
+                .addContainerGap(220, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanelInferiorFormularioLayout = new javax.swing.GroupLayout(jPanelInferiorFormulario);
@@ -446,29 +449,22 @@ public class VistaCocheFormulario extends javax.swing.JPanel {
         String Modelo = jTextFieldModelo.getText();
         int Anio = Integer.parseInt(jTextFieldAnio.getText());
         String Color = jTextFieldColor.getText();
-        String fecha = jTextFieldFecha.getText();
-        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-        Date fechaUtil = null;
-        try {
-            fechaUtil = formato.parse(fecha);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        java.sql.Date fechaRegistro = new java.sql.Date(fechaUtil.getTime());
+        Date Fecha = jDateChooserFecha.getDate();
         String Placa = jTextFieldPlaca.getText();
         String Estado = jComboBoxEstado.getSelectedItem().toString();
 
         if (!Marca.isEmpty() && !Modelo.isEmpty() && Anio != 0 && !Color.isEmpty()
-                && !fecha.isEmpty() && !Placa.isEmpty() && !Estado.isEmpty()) {
+                && !Placa.isEmpty() && !Estado.isEmpty()) {
+            java.sql.Date fechaSQL = new java.sql.Date(Fecha.getTime());
             CocheControlador controlador = new CocheControlador();
-            controlador.crearCoche(Marca, Modelo, Placa, Color, Estado, Anio, fechaRegistro);
+            controlador.crearCoche(Marca, Modelo, Placa, Color, Estado, Anio, fechaSQL);
             VistaCoche Vista = new VistaCoche();
             Vista.cargarDatosTabla();
             jTextFieldMarca.setText("");
             jTextFieldModelo.setText("");
             jTextFieldAnio.setText("");
             jTextFieldColor.setText("");
-            jTextFieldFecha.setText("");
+            jDateChooserFecha.setDate(new Date());
             jTextFieldPlaca.setText("");
             jComboBoxEstado.setSelectedIndex(0);
             aparecerVista();
@@ -486,22 +482,12 @@ public class VistaCocheFormulario extends javax.swing.JPanel {
         String modelo = jTextFieldModelo.getText();
         int anio = Integer.parseInt(jTextFieldAnio.getText());
         String color = jTextFieldColor.getText();
-        String textoFecha = jTextFieldFecha.getText().trim();
+        Date fecha = jDateChooserFecha.getDate();
         String placa = jTextFieldPlaca.getText();
         String estado = jComboBoxEstado.getSelectedItem().toString();
-        
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-       Date fecha = null;
-       
-       try {
-            fecha = sdf.parse(textoFecha);
-        } catch (ParseException e) {
-            System.out.println("Formato de fecha inválido: " + textoFecha);
-        }
 
         if (jTextFieldId != null && !marca.isEmpty() && !modelo.isEmpty()
-                && anio != 0 && !color.isEmpty() && !textoFecha.isEmpty()
-                && !estado.isEmpty()) {
+                && anio != 0 && !color.isEmpty() && !estado.isEmpty()) {
             
             java.sql.Date fechaSQL = new java.sql.Date(fecha.getTime());
             CocheControlador controlador = new CocheControlador();
