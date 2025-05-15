@@ -18,7 +18,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jPanelInferiorFormulario" pref="1516" max="32767" attributes="0"/>
+              <Component id="jPanelInferiorFormulario" pref="1428" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -27,7 +27,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jPanelInferiorFormulario" pref="1196" max="32767" attributes="0"/>
+              <Component id="jPanelInferiorFormulario" pref="1012" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -235,7 +235,7 @@
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace pref="95" max="32767" attributes="0"/>
+                      <EmptySpace pref="7" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="103" alignment="1" groupAlignment="0" attributes="0">
                               <Component id="jButtonActualizar" alignment="1" min="-2" max="-2" attributes="0"/>
@@ -323,7 +323,7 @@
                           <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
                           <Component id="jComboBoxEstado" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="220" max="32767" attributes="0"/>
+                      <EmptySpace pref="36" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>

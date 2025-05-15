@@ -5,7 +5,8 @@
         <group>
             <file>file:/C:/Users/Estudiantes/Videos/Titos-rent-a-car/src/Vista/Coche/VistaCoche.java</file>
             <file>file:/C:/Users/Estudiantes/Videos/Titos-rent-a-car/src/Vista/Coche/VistaCocheFormulario.java</file>
-            <file>file:/C:/Users/Estudiantes/Videos/Titos-rent-a-car/src/Vista/VistaPrincipal.java</file>
+            <file>file:/C:/Users/Estudiantes/Videos/Titos-rent-a-car/src/Controlador/CocheControlador.java</file>
+            <file>file:/C:/Users/Estudiantes/Videos/Titos-rent-a-car/src/DAO/DAOCoche.java</file>
         </group>
     </open-files>
 </project-private>

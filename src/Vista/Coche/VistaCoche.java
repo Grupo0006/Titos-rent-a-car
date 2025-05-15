@@ -117,6 +117,8 @@ public class VistaCoche extends javax.swing.JPanel {
         panelInferior.add(formulario, BorderLayout.CENTER);
         panelInferior.revalidate();
         panelInferior.repaint();
+        formulario.jButtonActualizar.setEnabled(false);
+        formulario.jButtonEliminar.setEnabled(false);
     }
 
     public Coche obtenerCocheSeleccionado() {
@@ -365,7 +367,6 @@ public class VistaCoche extends javax.swing.JPanel {
     private void jButtonAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgregarActionPerformed
         // TODO add your handling code here:
         mostrarFormularioLimpio();
-
     }//GEN-LAST:event_jButtonAgregarActionPerformed
 
     private void jTableCochesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableCochesMouseClicked

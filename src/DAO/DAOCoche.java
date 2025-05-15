@@ -89,6 +89,33 @@ public class DAOCoche {
             stmt.executeUpdate();
         }
     }
+    
+    public Coche leerCochePorId(int idCoche) throws SQLException {
+    Coche coche = null;
+    String sql = "SELECT * FROM Coche WHERE Id_Coche = ?";
+    
+    try (Connection c = ConexionDB.getConnection();
+         PreparedStatement stmt = c.prepareStatement(sql)) {
+        
+        stmt.setInt(1, idCoche);
+        ResultSet rs = stmt.executeQuery();
+        
+        if (rs.next()) {
+            coche = new Coche();
+            coche.setId_Coche(rs.getInt("Id_Coche"));
+            coche.setMarca(rs.getString("Marca"));
+            coche.setModelo(rs.getString("Modelo"));
+            coche.setPlaca(rs.getString("Placa"));
+            coche.setColor(rs.getString("Color"));
+            coche.setEstado(rs.getString("Estado"));
+            coche.setAnio(rs.getInt("Anio"));
+            coche.setFecha_Registro(rs.getDate("Fecha_Registro"));
+        }
+    }
+    
+    return coche;
+}
+
 
     //Metodo Main para probar crear coche
     /*public static void main(String[] args) {

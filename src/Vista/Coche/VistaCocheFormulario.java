@@ -10,8 +10,11 @@ import Modelo.Coche;
 import DAO.DAOCoche;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -36,11 +39,13 @@ public class VistaCocheFormulario extends javax.swing.JPanel {
 
         jTextFieldId.setEnabled(false);
         jComboBoxEstado.setForeground(Color.GRAY);
-        jComboBoxEstado.setBackground(new Color(244,233,205));
+        jComboBoxEstado.setBackground(new Color(244, 233, 205));
+        setPreferredSize(new Dimension(1440, 1024)); // o el tamaño que necesites
+
     }
-    
+
     // Metodo para limpiar campos
-    private void limpiarCampos(){
+    private void limpiarCampos() {
         jTextFieldId.setText("");
         jTextFieldMarca.setText("");
         jTextFieldModelo.setText("");
@@ -49,8 +54,11 @@ public class VistaCocheFormulario extends javax.swing.JPanel {
         jTextFieldAnio.setText("");
         jDateChooserFecha.setDate(new Date());
         jComboBoxEstado.setSelectedIndex(0);
-        
+
         jButtonGuardar.setEnabled(true);
+        jButtonEliminar.setEnabled(false);
+        jButtonActualizar.setEnabled(false);
+        
     }
 
     // Metodo para hacer parecer el JPanel de formulario vacio
@@ -88,7 +96,22 @@ public class VistaCocheFormulario extends javax.swing.JPanel {
         // Desactiva botones de eliminar
         jButtonGuardar.setEnabled(false);
     }
+
+    private boolean hayCambios(String marca, String modelo, int anio, String placa, String color, String estado, Date fecha, Coche original) {
+        return !marca.equals(original.getMarca())
+                || !modelo.equals(original.getModelo())
+                || anio != original.getAnio()
+                || !placa.equals(original.getPlaca())
+                || !color.equals(original.getColor())
+                || !estado.equals(original.getEstado())
+                || !fecha.equals(original.getFecha_Registro());
+    }
     
+    public void desactivarBotonActualizar() {
+    jButtonActualizar.setEnabled(false);
+}
+
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -330,7 +353,7 @@ public class VistaCocheFormulario extends javax.swing.JPanel {
                                 .addComponent(jTextFieldColor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jComboBoxEstado, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jDateChooserFecha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 95, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jButtonActualizar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -394,7 +417,7 @@ public class VistaCocheFormulario extends javax.swing.JPanel {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel10)
                     .addComponent(jComboBoxEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(220, Short.MAX_VALUE))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanelInferiorFormularioLayout = new javax.swing.GroupLayout(jPanelInferiorFormulario);
@@ -426,14 +449,14 @@ public class VistaCocheFormulario extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanelInferiorFormulario, javax.swing.GroupLayout.DEFAULT_SIZE, 1516, Short.MAX_VALUE)
+                .addComponent(jPanelInferiorFormulario, javax.swing.GroupLayout.DEFAULT_SIZE, 1428, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanelInferiorFormulario, javax.swing.GroupLayout.DEFAULT_SIZE, 1196, Short.MAX_VALUE)
+                .addComponent(jPanelInferiorFormulario, javax.swing.GroupLayout.DEFAULT_SIZE, 1012, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -445,57 +468,90 @@ public class VistaCocheFormulario extends javax.swing.JPanel {
 
     private void jButtonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGuardarActionPerformed
         // TODO add your handling code here:
-        String Marca = jTextFieldMarca.getText();
-        String Modelo = jTextFieldModelo.getText();
-        int Anio = Integer.parseInt(jTextFieldAnio.getText());
-        String Color = jTextFieldColor.getText();
+        String Marca = jTextFieldMarca.getText().trim();
+        String Modelo = jTextFieldModelo.getText().trim();
+        String AnioTexto = jTextFieldAnio.getText().trim();
+        String Color = jTextFieldColor.getText().trim();
         Date Fecha = jDateChooserFecha.getDate();
-        String Placa = jTextFieldPlaca.getText();
-        String Estado = jComboBoxEstado.getSelectedItem().toString();
+        String Placa = jTextFieldPlaca.getText().trim();
+        String Estado = (String) jComboBoxEstado.getSelectedItem();
 
-        if (!Marca.isEmpty() && !Modelo.isEmpty() && Anio != 0 && !Color.isEmpty()
-                && !Placa.isEmpty() && !Estado.isEmpty()) {
+        // Validación previa
+        if (Marca.isEmpty() || Modelo.isEmpty() || AnioTexto.isEmpty() || Color.isEmpty()
+                || Fecha == null || Placa.isEmpty() || Estado.equals("Seleccionar...")) {
+            JOptionPane.showMessageDialog(
+                    SwingUtilities.getWindowAncestor(this),
+                    "Llene todos los campos correctamente.",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE
+            );
+            return;
+        }
+
+        // Si pasa validación, entonces convierte a int
+        int Anio = 0;
+        try {
+            Anio = Integer.parseInt(AnioTexto);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(
+                    SwingUtilities.getWindowAncestor(this),
+                    "El campo Año debe ser un número válido.",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE
+            );
+            return;
+        }
+
+        try {
             java.sql.Date fechaSQL = new java.sql.Date(Fecha.getTime());
             CocheControlador controlador = new CocheControlador();
             controlador.crearCoche(Marca, Modelo, Placa, Color, Estado, Anio, fechaSQL);
             VistaCoche Vista = new VistaCoche();
             Vista.cargarDatosTabla();
-            jTextFieldMarca.setText("");
-            jTextFieldModelo.setText("");
-            jTextFieldAnio.setText("");
-            jTextFieldColor.setText("");
-            jDateChooserFecha.setDate(new Date());
-            jTextFieldPlaca.setText("");
-            jComboBoxEstado.setSelectedIndex(0);
+            limpiarCampos();
             aparecerVista();
-        } else {
-            javax.swing.JOptionPane.showMessageDialog(this,
-                    "Por favor, llene todos los campos.", "Error",
-                    javax.swing.JOptionPane.ERROR_MESSAGE);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(
+                    SwingUtilities.getWindowAncestor(this),
+                    "Error al guardar: " + e.getMessage(),
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE
+            );
         }
     }//GEN-LAST:event_jButtonGuardarActionPerformed
 
     private void jButtonActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonActualizarActionPerformed
         // TODO add your handling code here:
         int idCoche = Integer.parseInt(jTextFieldId.getText());
-        String marca = jTextFieldMarca.getText();
-        String modelo = jTextFieldModelo.getText();
-        int anio = Integer.parseInt(jTextFieldAnio.getText());
-        String color = jTextFieldColor.getText();
+        String marca = jTextFieldMarca.getText().trim();
+        String modelo = jTextFieldModelo.getText().trim();
+        int anio = Integer.parseInt(jTextFieldAnio.getText().trim());
+        String color = jTextFieldColor.getText().trim();
         Date fecha = jDateChooserFecha.getDate();
-        String placa = jTextFieldPlaca.getText();
+        String placa = jTextFieldPlaca.getText().trim();
         String estado = jComboBoxEstado.getSelectedItem().toString();
 
-        if (jTextFieldId != null && !marca.isEmpty() && !modelo.isEmpty()
-                && anio != 0 && !color.isEmpty() && !estado.isEmpty()) {
-            
-            java.sql.Date fechaSQL = new java.sql.Date(fecha.getTime());
-            CocheControlador controlador = new CocheControlador();
-            controlador.actualizarCoche(idCoche, marca, modelo, placa, color, estado, anio, fechaSQL);
-            aparecerVista();
+        if (!marca.isEmpty() && !modelo.isEmpty() && anio != 0 && !color.isEmpty() && !estado.isEmpty() && !placa.isEmpty()) {
+            try {
+                // Obtienes el coche original desde la base de datos
+                CocheControlador controlador = new CocheControlador();
+                Coche original = controlador.obtenerCochePorId(idCoche); // Debes tener esta función
+
+                if (!hayCambios(marca, modelo, anio, placa, color, estado, fecha, original)) {
+                    JOptionPane.showMessageDialog(this, "No se detectaron cambios.", "Información", JOptionPane.INFORMATION_MESSAGE);
+                    return;
+                }
+
+                java.sql.Date fechaSQL = new java.sql.Date(fecha.getTime());
+                controlador.actualizarCoche(idCoche, marca, modelo, placa, color, estado, anio, fechaSQL);
+                aparecerVista();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
         } else {
-            System.out.println("Campos obligatorios vacíos.");
+            JOptionPane.showMessageDialog(this, "Llene los campos obligatorios.", "Error", JOptionPane.ERROR_MESSAGE);
         }
+
 
     }//GEN-LAST:event_jButtonActualizarActionPerformed
 
