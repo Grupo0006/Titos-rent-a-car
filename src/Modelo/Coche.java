@@ -6,8 +6,9 @@ package Modelo;
 import java.sql.Date;
 /**
  *
- * @author Estudiante
+ * @author Ernesto José Sevilla Inglés
  */
+// Declaramos Variables
 public class Coche {
     public String Marca;
     public String Modelo;
@@ -18,6 +19,7 @@ public class Coche {
     public int Id_Coche;
     public Date Fecha_Registro;
 
+    // Creamos constructor
     public Coche(String Marca, String Modelo, String placa, String color, String Estado, int Anio, int Id_Coche, Date Fecha_Registro) {
         this.Marca = Marca;
         this.Modelo = Modelo;
@@ -28,10 +30,11 @@ public class Coche {
         this.Id_Coche = Id_Coche;
         this.Fecha_Registro = Fecha_Registro;
     }
-
+    // Creamos constructor vacio
     public Coche() {
     }
 
+    // Cremos get y set para las variables
     public String getMarca() {
         return Marca;
     }

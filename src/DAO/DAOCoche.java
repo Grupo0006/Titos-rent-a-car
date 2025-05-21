@@ -15,7 +15,7 @@ import java.util.List;
 
 /**
  *
- * @author Estudiantes Ernesto
+ * @author Ernesto José Sevilla Inglés
  */
 public class DAOCoche {
 
@@ -114,99 +114,5 @@ public class DAOCoche {
     }
     
     return coche;
-}
-
-
-    //Metodo Main para probar crear coche
-    /*public static void main(String[] args) {
-        try {
-            DAOCoche dao = new DAOCoche();
-            Coche co = new Coche();
-            co.setMarca("Rum Rum");
-            co.setModelo("Pupupupupu");
-            co.setAnio(2024);
-            co.setPlaca("JSDH252");
-            co.setColor("Rojo");
-            
-            String fechaTexto = "2024-12-15";
-            Date fechaSQL = Date.valueOf(fechaTexto);
-            co.setFecha_Registro(fechaSQL);
-            co.setFecha_Registro(fechaSQL);
-            
-            dao.crearCoche(co);
-            System.out.println("Coche creado con éxito!");
-        } catch (SQLException e) {
-            System.err.println("Error: " + e.getMessage());
-        }
-    }*/
-    // Metodo Main para mostrar lista de coches
-    /*
-    public static void main(String[] args) {
-        try {
-            DAOCoche dao = new DAOCoche();
-            List<Coche> coches = dao.leerTodosCoches();
-            System.out.println("Lista de coches:");
-            for (Coche co : coches) {
-                System.out.println("Id_Coche: " + co.getId_Coche() + 
-                                 ", Marca: " + co.getMarca() + 
-                                 ", Modelo: " + co.getModelo() + 
-                                 ", Anio: " + co.getAnio() +
-                                 ", Placa: " + co.getPlaca() + 
-                                 ", Color: " + co.getColor() + 
-                                 ", Fecha_Registro: " + co.getFecha_Registro());
-            }
-        } catch (SQLException e) {
-            System.err.println("Error: " + e.getMessage());
-        }
-    }*/
-    //Metodo Main para Actualizar, eliminar Coche
-    /*
-        public static void main(String[] args) {
-            
-            
-            try {
-                DAOCoche dao = new DAOCoche();
-                
-
-                // Actualizar un coche
-                Coche coche = new Coche();
-                coche.setId_Coche(1); // ID existente
-                coche.setMarca("Toyota");
-                coche.setModelo("Corolla X");
-                coche.setPlaca("XYZ123");
-                coche.setColor("Negro");
-                coche.setEstado("Disponible");
-                coche.setAnio(2022);
-                coche.setFecha_Registro(Date.valueOf("2023-05-10")); // Fecha manual
-
-                dao.actualizarCoche(coche);
-                System.out.println("Coche actualizado correctamente.");
-            
-
-                
-                
-                // ️Eliminar un coche
-                dao.eliminarCoche(2); // Id de la base de datos
-                System.out.println("Coche eliminado correctamente.");
-
-                /*
-                // Leer todos los coches
-                List<Coche> coches = dao.leerTodosCoches();
-                System.out.println("\n🚘 Lista de coches:");
-                for (Coche c : coches) {
-                    System.out.println("ID: " + c.getIdCoche()
-                            + ", Marca: " + c.getMarca()
-                            + ", Modelo: " + c.getModelo()
-                            + ", Placa: " + c.getPlaca()
-                            + ", Color: " + c.getColor()
-                            + ", Estado: " + c.getEstado()
-                            + ", Año: " + c.getAnio()
-                            + ", Fecha Registro: " + c.getFecha_Registro());
-                }
-
-            } catch (SQLException e) {
-                System.err.println("Error SQL: " + e.getMessage());
-            }
-        }
-     */
+    }
 }

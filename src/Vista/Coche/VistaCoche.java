@@ -1,77 +1,84 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package Vista.Coche;
 
-import Controlador.CocheControlador;
-import Modelo.Coche;
-import java.sql.Date;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.util.List;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import javax.swing.table.TableColumn;
-import javax.swing.table.TableCellRenderer;
-import java.awt.Component;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import javax.swing.JPanel;
-import javax.swing.SwingConstants;
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.DefaultTableModel;
+// Creamos importaciones necesarios para el codigo
+// Importaciones necesarias para el funcionamiento de la clase
+import Controlador.cocheControlador;          // Importa la clase del controlador que maneja la lógica de los coches
+import Modelo.Coche;                          // Importa la clase del modelo que representa a un coche
+import java.sql.Date;                         // Importa la clase Date del paquete SQL para trabajar con fechas compatibles con bases de datos
+import java.awt.Color;                        // Importa la clase Color para definir y manipular colores
+import java.util.List;                        // Importa la interfaz List para trabajar con listas de objetos
+import java.time.LocalDateTime;               // Importa la clase para obtener la fecha y hora actual del sistema
+import java.time.format.DateTimeFormatter;    // Importa la clase para formatear objetos de tipo fecha y hora
+import javax.swing.table.TableColumn;         // Importa la clase para manipular columnas de tablas en interfaces gráficas
+import javax.swing.table.TableCellRenderer;   // Importa la interfaz para personalizar la renderización de celdas en tablas
+import java.awt.Component;                    // Importa la clase base de todos los componentes gráficos
+import java.awt.Frame;                        // Importa la clase Frame
+import java.text.ParseException;               // Importa la clase ParseException
+import java.text.SimpleDateFormat;            // Importa la clase para convertir fechas a cadenas de texto con formato
+import javax.swing.JOptionPane;               // Importa la clase JOptionPane
+import javax.swing.SwingConstants;            // Importa constantes para alinear contenido en componentes Swing
+import javax.swing.table.DefaultTableCellRenderer; // Importa clase para personalizar celdas en tablas Swing
+import javax.swing.table.DefaultTableModel;   // Importa el modelo de tabla por defecto para manejar datos en tablas
+
 
 /**
  *
- * @author Estudiante
+ * @author Ernesto José Sevilla Inglés
  */
-public class VistaCoche extends javax.swing.JPanel {
+public class vistaCoche extends javax.swing.JPanel {
 
-    private VistaCocheFormulario vistaCocheFormulario; // Referencia al formulario con los JTextField
-    private final CocheControlador cocheControlador;
-    private Integer idCocheSeleccionada = null;
+    // inicializa vaiable del cocheControlador
+    private final cocheControlador cocheControlador;
 
     /**
      * Creates new form VistaCoche
      */
-    public VistaCoche() {
+    public vistaCoche() {
+
         initComponents();
-        this.cocheControlador = new CocheControlador();
-        this.vistaCocheFormulario = vistaCocheFormulario;
+        this.cocheControlador = new cocheControlador();
+
+        // Llama al metodo cargar datos de tabla
         cargarDatosTabla();
 
+        // carga metodo para mostrar la fecha actual
         mostrarFechaActual();
 
+        // Define formato de la tabla
         jTableCoches.getTableHeader().setFont(
-                new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 36));
+                new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 30));
 
+        // Llama al metodo para ajustar las columnas
         ajustarAnchoColumnas(jTableCoches);
 
-        jTableCoches.setRowHeight(46);
+        // Manda tamaño de las filas
+        jTableCoches.setRowHeight(40);
 
         // Crear un renderizador para centrar los encabezados
         DefaultTableCellRenderer headerRenderer = (DefaultTableCellRenderer) jTableCoches.getTableHeader().getDefaultRenderer();
         headerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
 
+        // Crear un renderizado para centrar los contenidos de la tabla
         DefaultTableCellRenderer centrado = new DefaultTableCellRenderer();
         centrado.setHorizontalAlignment(SwingConstants.CENTER);
 
         // Aplicar a todas las columnas
         for (int i = 0; i < jTableCoches.getColumnCount(); i++) {
+            // obtiene cada columna y aplica el formato de centrado
             jTableCoches.getColumnModel().getColumn(i).setCellRenderer(centrado);
         }
 
+        // muestra las lineas divisoras de la tabla
         jTableCoches.setShowGrid(true);
-        jTableCoches.setGridColor(Color.gray); // Puedes elegir otro color si prefieres
+        // Les asigna un color a las lineas divisoras
+        jTableCoches.setGridColor(Color.gray);
 
-        // TODO add your handling code here
     }
 
     public void cargarDatosTabla() {
         // Obtener todas las categorias del controlador
         //Creamos objeto de clase Coche controlador
-        CocheControlador cocheControlador = new CocheControlador();
+        cocheControlador cocheControlador = new cocheControlador();
         List<Coche> coches = cocheControlador.obtenerTodosCoches();
 
         if (coches != null) {
@@ -93,6 +100,7 @@ public class VistaCoche extends javax.swing.JPanel {
                     coc.getFecha_Registro(),
                     coc.getEstado()
                 };
+                // Añade la fila
                 model.addRow(row);
             }
 
@@ -100,30 +108,37 @@ public class VistaCoche extends javax.swing.JPanel {
     }
 
     // Metodo para mostrar formulario cargado de datos
-    public void mostrarFormulario(JPanel formulario) {
-        panelInferior.removeAll();
-        panelInferior.setLayout(new BorderLayout());
-        panelInferior.add(formulario, BorderLayout.CENTER);
-        panelInferior.revalidate();
-        panelInferior.repaint();
-    }
+    public void mostrarFormulario() {
+        // Obtener el JFrame contenedor más cercano
+        Frame parentFrame = JOptionPane.getFrameForComponent(this);
 
-    // Metodo para cargar formulario Limpio
-    public void mostrarFormularioLimpio() {
-        VistaCocheFormulario formulario = new VistaCocheFormulario(); // Crear instancia
+        // Crear el JDialog 
+        cocheFormulario formulario = new cocheFormulario(parentFrame, true, this); // Da error si agrego el this
 
-        panelInferior.removeAll();
-        panelInferior.setLayout(new BorderLayout());
-        panelInferior.add(formulario, BorderLayout.CENTER);
-        panelInferior.revalidate();
-        panelInferior.repaint();
-        formulario.jButtonActualizar.setEnabled(false);
+        // Evitar error de IllegalComponentStateException
+        if (!formulario.isDisplayable()) {
+            formulario.setUndecorated(true); // Esto solo si quieres sin botones
+        }
+
+        // Desavilitamos los botones
         formulario.jButtonEliminar.setEnabled(false);
+        formulario.jButtonActualizar.setEnabled(false);
+
+        //Mostramos y centramos el formulario
+        formulario.setLocationRelativeTo(parentFrame); // Centrado respecto al padre
+        formulario.setVisible(true); // Mostrar
+
     }
 
+    // Creamos meodo para obtener datos de la tabla selecionando una fila
     public Coche obtenerCocheSeleccionado() {
+        // Declaramos variable para definir la condicion
         int fila = jTableCoches.getSelectedRow();
+        // la codicion se ejecuta si la fila no es null es decir que hallan datos validos
         if (fila != -1) {
+            /*
+            Crea un nuevo objecto para proceder a obtener los valores de cada fila
+             */
             Coche coche = new Coche();
             coche.setId_Coche((int) jTableCoches.getValueAt(fila, 0));
             coche.setMarca((String) jTableCoches.getValueAt(fila, 1));
@@ -134,12 +149,21 @@ public class VistaCoche extends javax.swing.JPanel {
             coche.setAnio((int) jTableCoches.getValueAt(fila, 6));
             String fechaTexto = (String) jTableCoches.getValueAt(fila, 7);
 
+            // Se define elformato de la fecha
             SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
-            Date FechaRegistro = null;
 
-            coche.setFecha_Registro(FechaRegistro);
+            // Creamos try catch para comvertir la fechaTexto a fecha sql
+            try {
+                Date FechaRegistro = new Date(formato.parse(fechaTexto).getTime());
+                coche.setFecha_Registro(FechaRegistro);
+            } catch (ParseException e) {
+                e.printStackTrace();
+                coche.setFecha_Registro(null);
+            }
+            // Retorna un coche creado
             return coche;
         }
+        // retorna null si no se selecciono ninguna fila
         return null;
     }
 
@@ -147,31 +171,34 @@ public class VistaCoche extends javax.swing.JPanel {
     public void mostrarFechaActual() {
         LocalDateTime fechaActual = LocalDateTime.now(); //Extrae la fecha del dispositivo
         DateTimeFormatter formatoFecha = DateTimeFormatter.ofPattern("dd/MM/yyyy");// Se le aplica formato
-        String fechaFormateada = fechaActual.format(formatoFecha);//Se formatea la fecha a String para mostrar en tabla
+        String fechaFormateada = fechaActual.format(formatoFecha);//Se formatea la fecha a String para mostrar en la interfaz
 
-        DateTimeFormatter formatoHora = DateTimeFormatter.ofPattern("HH:mm");
-        String horaFormateada = fechaActual.format(formatoHora);
-
+        // Se manda la hora a los jLabel de la interfaz
         campoFecha.setText(fechaFormateada);
-        campoHora.setText(horaFormateada);
-
-        campoFecha.setOpaque(false);
-        campoFecha.setBackground(new java.awt.Color(0, 0, 0, 0));
-        campoFecha.setBackground(null);
     }
 
     //Creamos metodo para ajustar el ancho de la tabla automaticamente
     public void ajustarAnchoColumnas(javax.swing.JTable tabla) {
+        // Recorre todas las columnas de la tabla
         for (int col = 0; col < tabla.getColumnCount(); col++) {
+            // Obtiene la columna actual del modelo de columnas de la tabla tomando como refencia a col
             TableColumn columna = tabla.getColumnModel().getColumn(col);
-            int ancho = 15; // Mínimo ancho base
 
+            // Mínimo ancho base
+            int ancho = 15;
+
+            // Recorre todas las filas de la tabla para esta columna
             for (int fila = 0; fila < tabla.getRowCount(); fila++) {
+                // Obtiene el renderizado qie muestra el contenido de esta celda 
                 TableCellRenderer renderizador = tabla.getCellRenderer(fila, col);
+                // Prepara el componente que se usara para mostra la celda
                 Component comp = tabla.prepareRenderer(renderizador, fila, col);
-                ancho = Math.max(comp.getPreferredSize().width + 1, ancho);
-            }
 
+                // Calcula el ancho máximo entre el tamaño preferido del componente y el ancho actual
+                // Se suma 1 para añadir un poco de espacio para un margen
+                ancho = Math.max(comp.getPreferredSize().width + 1, ancho); // Aqui
+            }
+            // Establece el ancho preferido de la columna según el valor calculado
             columna.setPreferredWidth(ancho);
         }
     }
@@ -188,7 +215,6 @@ public class VistaCoche extends javax.swing.JPanel {
         panelInferior = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         campoFecha = new javax.swing.JLabel();
-        campoHora = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableCoches = new javax.swing.JTable();
@@ -205,9 +231,6 @@ public class VistaCoche extends javax.swing.JPanel {
         campoFecha.setFont(new java.awt.Font("Segoe UI", 1, 32)); // NOI18N
         campoFecha.setText("Fecha");
 
-        campoHora.setFont(new java.awt.Font("Segoe UI", 1, 32)); // NOI18N
-        campoHora.setText("Hora");
-
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 50)); // NOI18N
         jLabel1.setText("Coches");
 
@@ -218,27 +241,23 @@ public class VistaCoche extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(campoFecha, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(campoHora, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1139, Short.MAX_VALUE)
+                .addComponent(campoFecha)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(campoFecha)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(campoHora)
-                .addGap(0, 8, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(7, Short.MAX_VALUE))
         );
 
         jTableCoches.setBackground(new java.awt.Color(244, 233, 205));
-        jTableCoches.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        jTableCoches.setFont(new java.awt.Font("Segoe UI", 0, 30)); // NOI18N
         jTableCoches.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null},
@@ -312,7 +331,7 @@ public class VistaCoche extends javax.swing.JPanel {
                 .addComponent(jLabel2)
                 .addGap(28, 28, 28)
                 .addComponent(jTextFieldBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 510, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 593, Short.MAX_VALUE)
                 .addComponent(jButtonAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -335,7 +354,7 @@ public class VistaCoche extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelInferiorLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelInferiorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1428, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1456, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
@@ -348,8 +367,8 @@ public class VistaCoche extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 796, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 514, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -365,30 +384,18 @@ public class VistaCoche extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgregarActionPerformed
-        // TODO add your handling code here:
-        mostrarFormularioLimpio();
+        // Llamamos metodo
+        mostrarFormulario();
     }//GEN-LAST:event_jButtonAgregarActionPerformed
 
     private void jTableCochesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableCochesMouseClicked
-        // TODO add your handling code here:
+        // Define una condicion de 2 clics para ejecutar
         if (evt.getClickCount() >= 2) {
+            // Declara una vaiable de tipo entero como referencia
             int filaSeleccionada = jTableCoches.getSelectedRow();
+            // Define condicion para verificar si la fila seleccionada es positivo
             if (filaSeleccionada != -1) {
 
-                /*
-                // Creamos objeto del formulario 
-                 VistaCocheFormulario formulario = new VistaCocheFormulario();
-                 // Mandamos a llamar el metodo cargarDatosJTextField
-                 formulario.cargarDatosJTextField(jTableCoches.getValueAt(filaSeleccionada, 0),
-                         jTableCoches.getValueAt(filaSeleccionada, 1),
-                         jTableCoches.getValueAt(filaSeleccionada, 2),
-                         jTableCoches.getValueAt(filaSeleccionada, 3),
-                         jTableCoches.getValueAt(filaSeleccionada, 4),
-                         jTableCoches.getValueAt(filaSeleccionada, 5),
-                         jTableCoches.getValueAt(filaSeleccionada, 6),
-                         jTableCoches.getValueAt(filaSeleccionada, 7)); 
-                         
-                 */
                 // Obtener los valores de la fila seleccionada
                 int idCoche = (int) jTableCoches.getValueAt(filaSeleccionada, 0); // Id_Coche
                 String marca = (String) jTableCoches.getValueAt(filaSeleccionada, 1); // Marca
@@ -399,50 +406,44 @@ public class VistaCoche extends javax.swing.JPanel {
                 java.util.Date fechaRegistro = (java.util.Date) jTableCoches.getValueAt(filaSeleccionada, 6); // Fecha_Registro
                 String estado = (String) jTableCoches.getValueAt(filaSeleccionada, 7); // Estado
 
-                VistaCocheFormulario formulario = new VistaCocheFormulario();
-                formulario.cargarDatosJTextField(idCoche, marca, modelo, anio, placa, color, estado, fechaRegistro);
-                mostrarFormulario(formulario);
-                // Actualizar los JTextField en el otro panel
-                /*
-                Formulario();
-                vistaCocheFormulario.jTextFieldId.setText(String.valueOf(idCoche));
-                vistaCocheFormulario.jTextFieldMarca.setText(marca);
-                vistaCocheFormulario.jTextFieldModelo.setText(modelo);
-                vistaCocheFormulario.jTextFieldPlaca.setText(placa);
-                vistaCocheFormulario.jTextFieldColor.setText(color);
-                vistaCocheFormulario.jTextFieldEstado.setText(estado);
-                vistaCocheFormulario.jTextFieldAnio.setText(String.valueOf(anio));
-                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-                vistaCocheFormulario.jTextFieldFecha.setText(fechaRegistro != null ? sdf.format(fechaRegistro) : "");
-                
-                vistaCocheFormulario.jButtonGuardar.setEnabled(false);
-                vistaCocheFormulario.jButtonEliminar.setEnabled(false);
-                
-                
-                // Deshabilitar botones
-               /* vistaCocheFormulario.jButtonGuardar.setEnabled(false);
-                vistaCocheFormulario.jButtonEliminar.setEnabled(false);*/
+                //Creamos objecto para mandar a llamar metodo de cargar datos en los jTextField
+                Frame parentFrame = JOptionPane.getFrameForComponent(this);
+                cocheFormulario formulario = new cocheFormulario(parentFrame, true, this);
 
+                // Solo si no está visible aún, aplicar undecorated (evita error) en ejecución
+                if (!formulario.isDisplayable()) {
+                    formulario.setUndecorated(true);
+                }
+                //Llamamos metodo cargarDatosJTextFIeld
+                formulario.cargarDatosJTextField(idCoche, marca, modelo, anio, placa, color, estado, fechaRegistro);
+
+                formulario.setLocationRelativeTo(parentFrame); //Centramos la ventana
+                formulario.setVisible(true); // Mostramos formulario
             }
         }
     }//GEN-LAST:event_jTableCochesMouseClicked
 
     private void jTextFieldBuscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldBuscarKeyTyped
-        // TODO add your handling code here:
+        // Declara variable y crea una lista de coches de la base de datos
+        // Nota: trim elimina los espacios al inicio y al final y toLowerCase comverte todo a minusculas
         String textoBusqueda = jTextFieldBuscar.getText().trim().toLowerCase();
-        CocheControlador controlador = new CocheControlador();
+        cocheControlador controlador = new cocheControlador();
         List<Coche> coches = controlador.obtenerTodosCoches();
-
+        // Obtiene los modelos de datos de la tabla coches
         DefaultTableModel modelo = (DefaultTableModel) jTableCoches.getModel();
+        // Elimina las filas que no coinciden
         modelo.setRowCount(0);
 
+        // Creamos condicion para verificar si coches no es null
         if (coches != null) {
             for (Coche coc : coches) {
+                // Define la condicion para realizar busquedas verificando que la barra de busqyeda no quede vacia 
                 if (textoBusqueda.isEmpty() || coc.getMarca().toLowerCase().contains(textoBusqueda)
                         || coc.getModelo().toLowerCase().contains(textoBusqueda)
                         || coc.getColor().toLowerCase().contains(textoBusqueda)
                         || coc.getEstado().toLowerCase().contains(textoBusqueda)
                         || coc.getPlaca().toLowerCase().contains(textoBusqueda)) {
+                    // Creamos arreglos si la condicion de cumple para mostrar las filas que coinciden
                     Object[] fila = {
                         coc.getId_Coche(),
                         coc.getMarca(),
@@ -453,6 +454,7 @@ public class VistaCoche extends javax.swing.JPanel {
                         coc.getFecha_Registro(),
                         coc.getEstado()
                     };
+                    // Agrega la fila con los valores
                     modelo.addRow(fila);
                 }
             }
@@ -466,7 +468,6 @@ public class VistaCoche extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel campoFecha;
-    private javax.swing.JLabel campoHora;
     private javax.swing.JButton jButtonAgregar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -474,7 +475,7 @@ public class VistaCoche extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     public javax.swing.JTable jTableCoches;
-    private javax.swing.JTextField jTextFieldBuscar;
+    protected javax.swing.JTextField jTextFieldBuscar;
     private javax.swing.JPanel panelInferior;
     // End of variables declaration//GEN-END:variables
 }
