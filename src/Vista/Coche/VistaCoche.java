@@ -298,6 +298,7 @@ public class vistaCoche extends javax.swing.JPanel {
         jButtonAgregar.setFont(new java.awt.Font("Segoe UI", 1, 28)); // NOI18N
         jButtonAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Añadir.png"))); // NOI18N
         jButtonAgregar.setText("  Coche");
+        jButtonAgregar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButtonAgregar.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jButtonAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -311,6 +312,7 @@ public class vistaCoche extends javax.swing.JPanel {
         jTextFieldBuscar.setBackground(new java.awt.Color(244, 233, 205));
         jTextFieldBuscar.setFont(new java.awt.Font("Segoe UI", 0, 26)); // NOI18N
         jTextFieldBuscar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        jTextFieldBuscar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jTextFieldBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldBuscarActionPerformed(evt);
