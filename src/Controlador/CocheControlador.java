@@ -15,11 +15,11 @@ import javax.swing.JOptionPane;
  *
  * @author Ernesto José Sevilla Inglés
  */
-public class cocheControlador {
+public class CocheControlador {
 
     private final DAOCoche cocheDAO;
 
-    public cocheControlador() {
+    public CocheControlador() {
         this.cocheDAO = new DAOCoche();
     }
 
@@ -85,4 +85,5 @@ public class cocheControlador {
             JOptionPane.showMessageDialog(null, "Error al eliminar el coche: " + e.getMessage());
         }
     }
+    
 }

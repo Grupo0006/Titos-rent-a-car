@@ -99,6 +99,16 @@ public class EmpleadoControlador {
         }
     }
     
+    public Empleado obtenerEmpleadoPorId(int Id_Empleado) {
+        try {
+            DAOEmpleado DAO = new DAOEmpleado();
+            return DAO.obtenerEmpleadoPorId(Id_Empleado);
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al obtener el Empleado: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            return null;
+        }
+    }
+    
 }
 
 

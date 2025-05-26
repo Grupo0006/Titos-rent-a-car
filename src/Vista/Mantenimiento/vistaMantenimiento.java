@@ -1,9 +1,13 @@
-package Vista.Coche;
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
+ */
+package Vista.Mantenimiento;
 
-// Creamos importaciones necesarios para el codigo
-// Importaciones necesarias para el funcionamiento de la clase
-import Controlador.CocheControlador;          // Importa la clase del controlador que maneja la lógica de los coches
-import Modelo.Coche;                          // Importa la clase del modelo que representa a un coche
+import Controlador.MantenimientoControlador;          // Importa la clase del controlador que maneja la lógica de los coches
+import Controlador.Detalle_MantenimientoControlador;
+import Modelo.Mantenimiento;                          // Importa la clase del modelo que representa a un coche
+import Modelo.Detalle_Mantenimiento;    
 import java.sql.Date;                         // Importa la clase Date del paquete SQL para trabajar con fechas compatibles con bases de datos
 import java.awt.Color;                        // Importa la clase Color para definir y manipular colores
 import java.util.List;                        // Importa la interfaz List para trabajar con listas de objetos
@@ -19,24 +23,24 @@ import javax.swing.JOptionPane;               // Importa la clase JOptionPane
 import javax.swing.SwingConstants;            // Importa constantes para alinear contenido en componentes Swing
 import javax.swing.table.DefaultTableCellRenderer; // Importa clase para personalizar celdas en tablas Swing
 import javax.swing.table.DefaultTableModel;   // Importa el modelo de tabla por defecto para manejar datos en tablas
-
-
 /**
  *
- * @author Ernesto José Sevilla Inglés
+ * @author Estudiantes
  */
-public class VistaCoche extends javax.swing.JPanel {
+public class vistaMantenimiento extends javax.swing.JPanel {
+    
+        private final MantenimientoControlador MantenimientoControlador;
+        private final Detalle_MantenimientoControlador Detalle_MantenimientoControlador;
 
-    // inicializa vaiable del cocheControlador
-    private final CocheControlador cocheControlador;
 
     /**
-     * Creates new form VistaCoche
+     * Creates new form vistaMantenimiento
      */
     public VistaCoche() {
 
         initComponents();
-        this.cocheControlador = new CocheControlador();
+        this.MantenimientoControlador = new MantenimientoControlador();
+        this.Detalle_MantenimientoControlador = new Detalle_MantenimientoControlador();
 
         // Llama al metodo cargar datos de tabla
         cargarDatosTabla();
@@ -241,7 +245,7 @@ public class VistaCoche extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1139, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 552, Short.MAX_VALUE)
                 .addComponent(campoFecha)
                 .addContainerGap())
         );
@@ -333,7 +337,7 @@ public class VistaCoche extends javax.swing.JPanel {
                 .addComponent(jLabel2)
                 .addGap(28, 28, 28)
                 .addComponent(jTextFieldBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 510, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 593, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButtonAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -356,7 +360,7 @@ public class VistaCoche extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelInferiorLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelInferiorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1456, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 869, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
@@ -384,11 +388,6 @@ public class VistaCoche extends javax.swing.JPanel {
             .addComponent(panelInferior, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButtonAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgregarActionPerformed
-        // Llamamos metodo
-        mostrarFormulario();
-    }//GEN-LAST:event_jButtonAgregarActionPerformed
 
     private void jTableCochesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableCochesMouseClicked
         // Define una condicion de 2 clics para ejecutar
@@ -425,11 +424,20 @@ public class VistaCoche extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jTableCochesMouseClicked
 
+    private void jButtonAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgregarActionPerformed
+        // Llamamos metodo
+        mostrarFormulario();
+    }//GEN-LAST:event_jButtonAgregarActionPerformed
+
+    private void jTextFieldBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldBuscarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldBuscarActionPerformed
+
     private void jTextFieldBuscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldBuscarKeyTyped
         // Declara variable y crea una lista de coches de la base de datos
         // Nota: trim elimina los espacios al inicio y al final y toLowerCase comverte todo a minusculas
         String textoBusqueda = jTextFieldBuscar.getText().trim().toLowerCase();
-        CocheControlador controlador = new CocheControlador();
+        cocheControlador controlador = new cocheControlador();
         List<Coche> coches = controlador.obtenerTodosCoches();
         // Obtiene los modelos de datos de la tabla coches
         DefaultTableModel modelo = (DefaultTableModel) jTableCoches.getModel();
@@ -439,12 +447,12 @@ public class VistaCoche extends javax.swing.JPanel {
         // Creamos condicion para verificar si coches no es null
         if (coches != null) {
             for (Coche coc : coches) {
-                // Define la condicion para realizar busquedas verificando que la barra de busqyeda no quede vacia 
+                // Define la condicion para realizar busquedas verificando que la barra de busqyeda no quede vacia
                 if (textoBusqueda.isEmpty() || coc.getMarca().toLowerCase().contains(textoBusqueda)
-                        || coc.getModelo().toLowerCase().contains(textoBusqueda)
-                        || coc.getColor().toLowerCase().contains(textoBusqueda)
-                        || coc.getEstado().toLowerCase().contains(textoBusqueda)
-                        || coc.getPlaca().toLowerCase().contains(textoBusqueda)) {
+                    || coc.getModelo().toLowerCase().contains(textoBusqueda)
+                    || coc.getColor().toLowerCase().contains(textoBusqueda)
+                    || coc.getEstado().toLowerCase().contains(textoBusqueda)
+                    || coc.getPlaca().toLowerCase().contains(textoBusqueda)) {
                     // Creamos arreglos si la condicion de cumple para mostrar las filas que coinciden
                     Object[] fila = {
                         coc.getId_Coche(),
@@ -462,10 +470,6 @@ public class VistaCoche extends javax.swing.JPanel {
             }
         }
     }//GEN-LAST:event_jTextFieldBuscarKeyTyped
-
-    private void jTextFieldBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldBuscarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldBuscarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

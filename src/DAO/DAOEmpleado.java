@@ -19,14 +19,14 @@ public class DAOEmpleado {
             stmt.setString(2, empleado.getNombre1());
             stmt.setString(3, empleado.getNombre2());
             stmt.setString(4, empleado.getApellido1());
-             stmt.setString(5, empleado.getApellido2());
+            stmt.setString(5, empleado.getApellido2());
             stmt.setString(6, empleado.getDireccion());
             stmt.setString(7, empleado.getEmail());
             stmt.executeUpdate();
         }
     }
 
-       public List<Empleado> leerTodosEmpleados() throws SQLException {
+    public List<Empleado> leerTodosEmpleados() throws SQLException {
         List<Empleado> lista = new ArrayList<>();
         String sql = "SELECT * FROM Empleado";
 
@@ -47,14 +47,14 @@ public class DAOEmpleado {
 
         return lista;
     }
-    
+
     public void actualizarEmpleado(Empleado empleado) throws SQLException {
         String sql = "UPDATE Empleado SET Cedula = ?, Nombre1 = ?,Nombre2 = ?, Apellido = ?,Apellido2 = ?, Direccion = ?, Email = ? WHERE Id_Empleado = ?";
 
         try (Connection c = ConexionDB.getConnection(); PreparedStatement stmt = c.prepareStatement(sql)) {
             stmt.setString(1, empleado.getCedula());
             stmt.setString(2, empleado.getNombre1());
-             stmt.setString(3, empleado.getNombre2());
+            stmt.setString(3, empleado.getNombre2());
             stmt.setString(4, empleado.getApellido1());
             stmt.setString(5, empleado.getApellido2());
             stmt.setString(6, empleado.getDireccion());
@@ -73,11 +73,35 @@ public class DAOEmpleado {
         }
     }
 
-    
+    //Obtener Empleados por Id
+    public Empleado obtenerEmpleadoPorId(int idEmpleado) throws SQLException {
+        String sql = "SELECT * FROM Empleados WHERE Id_Empleado = ?";
+        Empleado empleado = null;
+
+        try (Connection c = ConexionDB.getConnection(); PreparedStatement stmt = c.prepareStatement(sql)) {
+            stmt.setInt(1, idEmpleado);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    empleado = new Empleado();
+                    empleado.setId_Empleado(rs.getInt("Id_Empleado"));
+                    empleado.setCedula(rs.getString("Cedula"));
+                    empleado.setNombre1(rs.getString("Nombre1"));
+                    empleado.setNombre2(rs.getString("Nombre2"));
+                    empleado.setApellido1(rs.getString("Apellido1"));
+                    empleado.setApellido2(rs.getString("Apellido2"));
+                    empleado.setDireccion(rs.getString("Direccion"));
+                    empleado.setEmail(rs.getString("Email"));
+                }
+            }
+        }
+
+        return empleado;
+    }
+
     public static void main(String[] args) {
         try {
             DAOEmpleado dao = new DAOEmpleado();
- /*
+            /*
             // Crear un nuevo empleado
             Empleado nuevoEmpleado = new Empleado();
             nuevoEmpleado.setCedula("0801199912345");
@@ -102,7 +126,7 @@ public class DAOEmpleado {
             // Eliminar un empleado
             dao.eliminarEmpleado(2); // Cambia el ID si es necesario
             System.out.println("Empleado eliminado exitosamente.");
-*/
+             */
             // Leer todos los empleados
             List<Empleado> empleados = dao.leerTodosEmpleados();
             System.out.println("Lista de empleados:");
@@ -116,12 +140,9 @@ public class DAOEmpleado {
                         + ", Dirección: " + emp.getDireccion()
                         + ", Email: " + emp.getEmail());
             }
-           
+
         } catch (SQLException e) {
             System.err.println("Error en operación DAO: " + e.getMessage());
         }
     }
 }
-
-
-

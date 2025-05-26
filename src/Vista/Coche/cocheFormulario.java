@@ -4,7 +4,7 @@
  */
 package Vista.Coche;
 
-import Controlador.cocheControlador;
+import Controlador.CocheControlador;
 import java.util.Date;
 import Modelo.Coche;
 import javax.swing.JOptionPane;
@@ -26,12 +26,12 @@ public class cocheFormulario extends javax.swing.JDialog {
     private String estado;
     private Date fechaRegistro;
 
-    private vistaCoche vista;
+    private VistaCoche vista;
 
     /**
      * Creates new form cocheFormulario1
      */
-    public cocheFormulario(java.awt.Frame parent, boolean modal, vistaCoche vista) {
+    public cocheFormulario(java.awt.Frame parent, boolean modal, VistaCoche vista) {
         super(parent, modal);
         this.vista = vista;
         initComponents();
@@ -494,7 +494,7 @@ public class cocheFormulario extends javax.swing.JDialog {
          */
         try {
             java.sql.Date fechaSQL = new java.sql.Date(Fecha.getTime());
-            cocheControlador controlador = new cocheControlador();
+            CocheControlador controlador = new CocheControlador();
             controlador.crearCoche(Marca, Modelo, Placa, Color, Estado, Anio, fechaSQL);
             // Mandamos a llamar el metodo cargar datos en la tabla
             vista.cargarDatosTabla();
@@ -530,7 +530,7 @@ public class cocheFormulario extends javax.swing.JDialog {
 
         try {
             // Obtenemos el registro de coches original desde la base de datos creando un objecto
-            cocheControlador controlador = new cocheControlador();
+            CocheControlador controlador = new CocheControlador();
             // Mandamos a llamar el metodo obtener datos por Id
             Coche original = controlador.obtenerCochePorId(idCoche);
 
@@ -572,7 +572,7 @@ public class cocheFormulario extends javax.swing.JDialog {
         if (confirmacion == JOptionPane.YES_OPTION) {
             try {
                 // Creamos objecto del cotrolador
-                cocheControlador controlador = new cocheControlador();
+                CocheControlador controlador = new CocheControlador();
                 // Mandamos a llamar el metodo de eliminar coche del controlador
                 controlador.eliminarCoche(IdCoche);
                 // Cargamos dato de la tabla
