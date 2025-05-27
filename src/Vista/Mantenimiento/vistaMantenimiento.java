@@ -8,6 +8,7 @@ import Controlador.MantenimientoControlador;          // Importa la clase del co
 import Controlador.Detalle_MantenimientoControlador;
 import Modelo.Mantenimiento;                          // Importa la clase del modelo que representa a un coche
 import Modelo.Detalle_Mantenimiento;    
+import Vista.Coche.cocheFormulario;
 import java.sql.Date;                         // Importa la clase Date del paquete SQL para trabajar con fechas compatibles con bases de datos
 import java.awt.Color;                        // Importa la clase Color para definir y manipular colores
 import java.util.List;                        // Importa la interfaz List para trabajar con listas de objetos
@@ -36,7 +37,7 @@ public class vistaMantenimiento extends javax.swing.JPanel {
     /**
      * Creates new form vistaMantenimiento
      */
-    public VistaCoche() {
+    public vistaMantenimiento() {
 
         initComponents();
         this.MantenimientoControlador = new MantenimientoControlador();
@@ -82,10 +83,10 @@ public class vistaMantenimiento extends javax.swing.JPanel {
     public void cargarDatosTabla() {
         // Obtener todas las categorias del controlador
         //Creamos objeto de clase Coche controlador
-        CocheControlador cocheControlador = new CocheControlador();
-        List<Coche> coches = cocheControlador.obtenerTodosCoches();
+        MantenimientoControlador mantenimientoControlador = new MantenimientoControlador();
+        List<Mantenimiento> mantenimientos = mantenimientoControlador.obtenerTodosMantenimientos();
 
-        if (coches != null) {
+        if (mantenimientos != null) {
             //Obtener el modelo existentes de la tabla
             DefaultTableModel model = (DefaultTableModel) jTableCoches.getModel();
 
@@ -93,16 +94,14 @@ public class vistaMantenimiento extends javax.swing.JPanel {
             model.setRowCount(0);
 
             //Llenar las filas con los datos de coche
-            for (Coche coc : coches) {
+            for (Mantenimiento man : mantenimientos) {
                 Object[] row = {
-                    coc.getId_Coche(),
-                    coc.getMarca(),
-                    coc.getModelo(),
-                    coc.getAnio(),
-                    coc.getPlaca(),
-                    coc.getColor(),
-                    coc.getFecha_Registro(),
-                    coc.getEstado()
+                    man.getId_Mantenimiento(),
+                    man.getDescripcion(),
+                    man.getJustificacion(),
+                    man.getFecha_Inicio(),
+                    man.getFecha_Fin(),
+                    man.getCosto()
                 };
                 // Añade la fila
                 model.addRow(row);
@@ -117,7 +116,7 @@ public class vistaMantenimiento extends javax.swing.JPanel {
         Frame parentFrame = JOptionPane.getFrameForComponent(this);
 
         // Crear el JDialog 
-        cocheFormulario formulario = new cocheFormulario(parentFrame, true, this); // Da error si agrego el this
+        mantenimientoFormulario formulario = new mantenimientoFormulario(parentFrame, true, this); // Da error si agrego el this
 
         // Evitar error de IllegalComponentStateException
         if (!formulario.isDisplayable()) {
@@ -245,7 +244,7 @@ public class vistaMantenimiento extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 552, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(campoFecha)
                 .addContainerGap())
         );
@@ -264,20 +263,20 @@ public class vistaMantenimiento extends javax.swing.JPanel {
         jTableCoches.setFont(new java.awt.Font("Segoe UI", 0, 30)); // NOI18N
         jTableCoches.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "ID", "Marca", "Modelo", "Año", "Placa", "Color", "Registro", "Estado"
+                "ID", "Descripción", "Justificación", "Inicio", "Fin", "Costo"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -360,7 +359,7 @@ public class vistaMantenimiento extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelInferiorLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelInferiorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 869, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1)
                     .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())

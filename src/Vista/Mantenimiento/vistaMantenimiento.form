@@ -39,7 +39,7 @@
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
-                      <Component id="jScrollPane1" alignment="1" pref="869" max="32767" attributes="0"/>
+                      <Component id="jScrollPane1" alignment="1" max="32767" attributes="0"/>
                       <Component id="jPanel2" alignment="0" max="32767" attributes="0"/>
                       <Component id="jPanel1" alignment="1" max="32767" attributes="0"/>
                   </Group>
@@ -80,7 +80,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLabel1" min="-2" pref="218" max="-2" attributes="0"/>
-                      <EmptySpace pref="552" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                       <Component id="campoFecha" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -135,15 +135,13 @@
                   <Font name="Segoe UI" size="30" style="0"/>
                 </Property>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                  <Table columnCount="8" rowCount="4">
+                  <Table columnCount="6" rowCount="4">
                     <Column editable="false" title="ID" type="java.lang.Integer"/>
-                    <Column editable="false" title="Marca" type="java.lang.String"/>
-                    <Column editable="false" title="Modelo" type="java.lang.String"/>
-                    <Column editable="false" title="A&#xf1;o" type="java.lang.Integer"/>
-                    <Column editable="false" title="Placa" type="java.lang.String"/>
-                    <Column editable="false" title="Color" type="java.lang.String"/>
-                    <Column editable="false" title="Registro" type="java.lang.String"/>
-                    <Column editable="false" title="Estado" type="java.lang.String"/>
+                    <Column editable="false" title="Descripci&#xf3;n" type="java.lang.String"/>
+                    <Column editable="false" title="Justificaci&#xf3;n" type="java.lang.String"/>
+                    <Column editable="false" title="Inicio" type="java.lang.String"/>
+                    <Column editable="false" title="Fin" type="java.lang.String"/>
+                    <Column editable="false" title="Costo" type="java.lang.Double"/>
                   </Table>
                 </Property>
               </Properties>
