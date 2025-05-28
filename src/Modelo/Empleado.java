@@ -12,7 +12,7 @@ public class Empleado {
     private int Id_Empleado;
     private String Cedula;
     private String Nombre1;
-    private String nombre2;
+    private String Nombre2;
     private String Apellido1;
     private String Apellido2;
     private String Direccion;
@@ -22,7 +22,7 @@ public class Empleado {
         this.Id_Empleado = Id_Empleado;
         this.Cedula = Cedula;
         this.Nombre1 = Nombre1;
-        this.nombre2 = nombre2;
+        this.Nombre2 = nombre2;
         this.Apellido1 = Apellido1;
         this.Apellido2 = Apellido2;
         this.Direccion = Direccion;
@@ -57,11 +57,11 @@ public class Empleado {
     }
 
     public String getNombre2() {
-        return nombre2;
+        return Nombre2;
     }
 
     public void setNombre2(String nombre2) {
-        this.nombre2 = nombre2;
+        this.Nombre2 = nombre2;
     }
 
     public String getApellido1() {
