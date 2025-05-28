@@ -4,7 +4,7 @@
  */
 package DAO;
 
-import Modelo.Empleados;
+import Modelo.Coche;
 import Util.ConexionDB;
 import java.sql.SQLException;
 import java.sql.Connection;
@@ -19,7 +19,7 @@ import java.util.List;
  */
 public class DAOCoche {
 
-    public void crearCoche(Empleados coche) throws SQLException {
+    public void crearCoche(Coche coche) throws SQLException {
         String sql = """
         INSERT INTO Coche (
             marca, modelo, placa, color, estado, anio, fecha_registro
@@ -38,14 +38,14 @@ public class DAOCoche {
         }
     }
 
-    public List<Empleados> leerTodosCoches() throws SQLException {
+    public List<Coche> leerTodosCoches() throws SQLException {
         String sql = "SELECT * FROM Coche";
-        List<Empleados> coches = new ArrayList<>();
+        List<Coche> coches = new ArrayList<>();
 
         try (Connection c = ConexionDB.getConnection(); PreparedStatement stmt = c.prepareStatement(sql); ResultSet rs = stmt.executeQuery()) {
 
             while (rs.next()) {
-                Empleados coche = new Empleados();
+                Coche coche = new Coche();
                 coche.setId_Coche(rs.getInt("id_coche"));
                 coche.setMarca(rs.getString("marca"));
                 coche.setModelo(rs.getString("modelo"));
@@ -60,7 +60,7 @@ public class DAOCoche {
         return coches;
     }
 
-    public void actualizarCoche(Empleados coche) throws SQLException {
+    public void actualizarCoche(Coche coche) throws SQLException {
         String sql = """
         UPDATE Coche SET 
             Marca = ?, Modelo = ?, Placa = ?, Color = ?, 
@@ -90,8 +90,8 @@ public class DAOCoche {
         }
     }
     
-    public Empleados leerCochePorId(int idCoche) throws SQLException {
-    Empleados coche = null;
+    public Coche leerCochePorId(int idCoche) throws SQLException {
+    Coche coche = null;
     String sql = "SELECT * FROM Coche WHERE Id_Coche = ?";
     
     try (Connection c = ConexionDB.getConnection();
@@ -101,7 +101,7 @@ public class DAOCoche {
         ResultSet rs = stmt.executeQuery();
         
         if (rs.next()) {
-            coche = new Empleados();
+            coche = new Coche();
             coche.setId_Coche(rs.getInt("Id_Coche"));
             coche.setMarca(rs.getString("Marca"));
             coche.setModelo(rs.getString("Modelo"));

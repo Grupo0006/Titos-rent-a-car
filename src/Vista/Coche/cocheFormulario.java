@@ -6,7 +6,7 @@ package Vista.Coche;
 
 import Controlador.CocheControlador;
 import java.util.Date;
-import Modelo.Empleados;
+import Modelo.Coche;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
@@ -87,7 +87,7 @@ public class cocheFormulario extends javax.swing.JDialog {
 
     // Metodo para comprovar si hay cambios en los jtextfield
     // Nota al final de la comparacion asignamos
-    private boolean hayCambios(String marca, String modelo, int anio, String placa, String color, String estado, Date fecha, Empleados original) {
+    private boolean hayCambios(String marca, String modelo, int anio, String placa, String color, String estado, Date fecha, Coche original) {
         // Devuelve datos de originales de la base de datos y compara con los campos de los jtextField
         return !marca.equals(original.getMarca())
                 || !modelo.equals(original.getModelo())
@@ -530,7 +530,7 @@ public class cocheFormulario extends javax.swing.JDialog {
             // Obtenemos el registro de coches original desde la base de datos creando un objecto
             CocheControlador controlador = new CocheControlador();
             // Mandamos a llamar el metodo obtener datos por Id
-            Empleados original = controlador.obtenerCochePorId(idCoche);
+            Coche original = controlador.obtenerCochePorId(idCoche);
 
             // Creamos condicion que compara los datos de los jTextField con los datos de la base de datos
             if (!hayCambios(marca, modelo, anio, placa, color, estado, fecha, original)) {
