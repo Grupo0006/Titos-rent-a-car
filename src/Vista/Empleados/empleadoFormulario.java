@@ -4,7 +4,7 @@ package Vista.Empleados;
 import Vista.Empleados.*;
 import Controlador.EmpleadoControlador;
 import java.util.Date;
-import Modelo.Empleados;
+import Modelo.Empleado;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
@@ -46,7 +46,7 @@ public class empleadoFormulario extends javax.swing.JDialog {
         jTextFieldNombre1.setText("");
         jTextFieldNombre2.setText("");
         jTextFieldApellido1.setText("");
-        jTextFieldNombre2.setText("");
+        jTextFieldApellido2.setText("");
         jTextFieldDireccion.setText("");
         jTextFieldEmail.setText("");
 
@@ -86,7 +86,7 @@ public class empleadoFormulario extends javax.swing.JDialog {
 
     // Metodo para comprovar si hay cambios en los jtextfield
     // Nota al final de la comparacion asignamos
-    private boolean hayCambios(String Cedula, String Nombre1, String Nombre2, String Apellido1, String Apellido2, String Direccion, String Email, Empleados original) {
+    private boolean hayCambios(String Cedula, String Nombre1, String Nombre2, String Apellido1, String Apellido2, String Direccion, String Email, Empleado original) {
         // Devuelve datos de originales de la base de datos y compara con los campos de los jtextField
         return !Cedula.equals(Cedula)
                 || !Nombre1.equals(Nombre1)
@@ -97,6 +97,7 @@ public class empleadoFormulario extends javax.swing.JDialog {
                 || !Email.equals(Email);
     }
 
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -133,6 +134,7 @@ public class empleadoFormulario extends javax.swing.JDialog {
         jButtonSalir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setUndecorated(true);
 
         jPanelInferiorFormulario.setBackground(new java.awt.Color(255, 57, 54));
         jPanelInferiorFormulario.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -233,6 +235,11 @@ public class empleadoFormulario extends javax.swing.JDialog {
         jButtonActualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonActualizarActionPerformed(evt);
+            }
+        });
+        jButtonActualizar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                AccionBotonActualizar(evt);
             }
         });
 
@@ -353,10 +360,8 @@ public class empleadoFormulario extends javax.swing.JDialog {
                     .addComponent(jLabel10))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jButtonActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButtonGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jButtonActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jButtonEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jButtonLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -449,25 +454,8 @@ public class empleadoFormulario extends javax.swing.JDialog {
             );
             return; // Detiene el codigo en caso de que los campos si esten vacios
         }
-/*
-        // Si pasa validación, entonces convierte a int
-        int Anio = 0;
-        
-        // creamos try - catch para intentar comvertir el texto del jtextField a entero
-        try {
-            Anio = Integer.parseInt(Nombre2);
 
-            // En caso de no comvertirse manda un mensaje confirmando el error
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(
-                    SwingUtilities.getWindowAncestor(this),
-                    "El campo Año debe ser un número válido.",
-                    "Error",
-                    JOptionPane.ERROR_MESSAGE
-            );
-            return; // Detiene codigo en caso de fracaso en la comvercion
-        }
- */
+ 
         /*
         Hacemos try - catch para guardar un nuevo registro de coche
          */
@@ -511,7 +499,7 @@ public class empleadoFormulario extends javax.swing.JDialog {
             // Obtenemos el registro de coches original desde la base de datos creando un objecto
             EmpleadoControlador controlador = new EmpleadoControlador();
             // Mandamos a llamar el metodo obtener datos por Id
-            Empleados original = controlador.obtenerCochePorId(idEmpleado);
+            Empleado original = controlador.obtenerEmpleadoPorId(idEmpleado);
 
             // Creamos condicion que compara los datos de los jTextField con los datos de la base de datos
             if (!hayCambios(Cedula, Nombre1, Nombre2, Direccion, Apellido1, Email, Apellido2, original)) {
@@ -519,9 +507,8 @@ public class empleadoFormulario extends javax.swing.JDialog {
                 return; // Detiene el codigo en caso de que la condicion no se cumpla
             }
 
-            // Si los datos son diferentes se actualizan datos en la base de datos
-            java.sql.Date fechaSQL = new java.sql.Date(Apellido2.getTime());
-            controlador.actualizarCoche(idEmpleado, Cedula, Nombre1, Direccion, Apellido1, Email, Nombre2, fechaSQL);
+           
+            controlador.actualizarEmpleado(idEmpleado, Cedula, Nombre1, Nombre2, Apellido1, Apellido2, Direccion, Email);
             // Mandamos a llamar el metodo cargar datos en la tabla
             vista.cargarDatosTabla();
             // Quitar formulario
@@ -551,9 +538,9 @@ public class empleadoFormulario extends javax.swing.JDialog {
         if (confirmacion == JOptionPane.YES_OPTION) {
             try {
                 // Creamos objecto del cotrolador
-                cocheControlador controlador = new cocheControlador();
+                EmpleadoControlador controlador = new EmpleadoControlador();
                 // Mandamos a llamar el metodo de eliminar coche del controlador
-                controlador.eliminarCoche(IdCoche);
+                controlador.eliminarEmpleado(IdCoche);
                 // Cargamos dato de la tabla
                 vista.cargarDatosTabla();
                 // Cerramos formulario
@@ -587,6 +574,10 @@ public class empleadoFormulario extends javax.swing.JDialog {
     private void jTextFieldApellido2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldApellido2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldApellido2ActionPerformed
+
+    private void AccionBotonActualizar(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_AccionBotonActualizar
+        // TODO add your handling code here:
+    }//GEN-LAST:event_AccionBotonActualizar
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

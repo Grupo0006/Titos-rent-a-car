@@ -75,7 +75,7 @@ public class DAOEmpleado {
 
     //Obtener Empleados por Id
     public Empleado obtenerEmpleadoPorId(int idEmpleado) throws SQLException {
-        String sql = "SELECT * FROM Empleados WHERE Id_Empleado = ?";
+        String sql = "SELECT * FROM Empleado WHERE Id_Empleado = ?";
         Empleado empleado = null;
 
         try (Connection c = ConexionDB.getConnection(); PreparedStatement stmt = c.prepareStatement(sql)) {

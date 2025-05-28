@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package Vista;
 
 import javax.swing.UIManager;
@@ -19,6 +16,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
         initComponents();
         // opciones.addTab("Empleados", new VistaEmpleados());
         opciones.addTab("Coches", new Vista.Coche.VistaCoche());
+        opciones.addTab("Empleados", new Vista.Empleados.vistaEmpleados());
         
     }
 
