@@ -49,7 +49,7 @@ public class DAOEmpleado {
     }
 
     public void actualizarEmpleado(Empleado empleado) throws SQLException {
-        String sql = "UPDATE Empleado SET Cedula = ?, Nombre1 = ?,Nombre2 = ?, Apellido = ?,Apellido2 = ?, Direccion = ?, Email = ? WHERE Id_Empleado = ?";
+        String sql = "UPDATE Empleado SET Cedula = ?, Nombre1 = ?, Nombre2 = ?, Apellido1 = ?, Apellido2 = ?, Direccion = ?, Email = ? WHERE Id_Empleado = ?";
 
         try (Connection c = ConexionDB.getConnection(); PreparedStatement stmt = c.prepareStatement(sql)) {
             stmt.setString(1, empleado.getCedula());

@@ -88,13 +88,13 @@ public class empleadoFormulario extends javax.swing.JDialog {
     // Nota al final de la comparacion asignamos
     private boolean hayCambios(String Cedula, String Nombre1, String Nombre2, String Apellido1, String Apellido2, String Direccion, String Email, Empleado original) {
         // Devuelve datos de originales de la base de datos y compara con los campos de los jtextField
-        return !Cedula.equals(Cedula)
-                || !Nombre1.equals(Nombre1)
-                || !Nombre2.equals(Nombre2)
-                || !Apellido1.equals(Apellido1)
-                || !Apellido2.equals(Apellido2)
-                || !Direccion.equals(Direccion)
-                || !Email.equals(Email);
+        return !Cedula.equals(original.getCedula())
+                || !Nombre1.equals(original.getNombre1())
+                || !Nombre2.equals(original.getNombre2())
+                || !Apellido1.equals(original.getApellido1())
+                || !Apellido2.equals(original.getApellido2())
+                || !Direccion.equals(original.getDireccion())
+                || !Email.equals(original.getEmail());
     }
 
     
