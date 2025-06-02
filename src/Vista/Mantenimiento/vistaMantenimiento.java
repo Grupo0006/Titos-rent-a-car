@@ -7,7 +7,8 @@ package Vista.Mantenimiento;
 import Controlador.MantenimientoControlador;          // Importa la clase del controlador que maneja la lógica de los coches
 import Controlador.Detalle_MantenimientoControlador;
 import Modelo.Mantenimiento;                          // Importa la clase del modelo que representa a un coche
-import Modelo.Detalle_Mantenimiento;    
+import Modelo.Detalle_Mantenimiento; 
+import Vista.VistaMantenimiento.*;
 import Vista.Coche.cocheFormulario;
 import java.sql.Date;                         // Importa la clase Date del paquete SQL para trabajar con fechas compatibles con bases de datos
 import java.awt.Color;                        // Importa la clase Color para definir y manipular colores
@@ -24,25 +25,35 @@ import javax.swing.JOptionPane;               // Importa la clase JOptionPane
 import javax.swing.SwingConstants;            // Importa constantes para alinear contenido en componentes Swing
 import javax.swing.table.DefaultTableCellRenderer; // Importa clase para personalizar celdas en tablas Swing
 import javax.swing.table.DefaultTableModel;   // Importa el modelo de tabla por defecto para manejar datos en tablas
+import Controlador.CocheControlador;
+import Controlador.EmpleadoControlador;
+import javax.swing.Timer;
+
 /**
  *
  * @author Estudiantes
  */
 public class vistaMantenimiento extends javax.swing.JPanel {
     
-        private final MantenimientoControlador MantenimientoControlador;
-        private final Detalle_MantenimientoControlador Detalle_MantenimientoControlador;
-
+        private final MantenimientoControlador MantenimientoControlador; //
+        private final Detalle_MantenimientoControlador Detalle_MantenimientoControlador; //
+        private final CocheControlador cocheControlador; //
+        private final EmpleadoControlador empleadocontrolador; //
+        private Integer IdEmpleadoSeleccionado = null;
+        private Integer IdCocheSeleccionado = null;
+        private Timer timer;
+        private boolean horabd = false;
 
     /**
      * Creates new form vistaMantenimiento
      */
     public vistaMantenimiento() {
-
         initComponents();
-        this.MantenimientoControlador = new MantenimientoControlador();
-        this.Detalle_MantenimientoControlador = new Detalle_MantenimientoControlador();
-
+        this.MantenimientoControlador = new MantenimientoControlador(); //
+        this.Detalle_MantenimientoControlador = new Detalle_MantenimientoControlador(); //
+        this.cocheControlador = new CocheControlador(); //
+        this.empleadocontrolador = new EmpleadoControlador(); //
+        
         // Llama al metodo cargar datos de tabla
         cargarDatosTabla();
 
@@ -116,7 +127,7 @@ public class vistaMantenimiento extends javax.swing.JPanel {
         Frame parentFrame = JOptionPane.getFrameForComponent(this);
 
         // Crear el JDialog 
-        mantenimientoFormulario formulario = new mantenimientoFormulario(parentFrame, true, this); // Da error si agrego el this
+        mantenimientoFormulario formulario = new mantenimientoFormulario(parentFrame, true, this);
 
         // Evitar error de IllegalComponentStateException
         if (!formulario.isDisplayable()) {

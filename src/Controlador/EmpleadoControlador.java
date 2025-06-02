@@ -43,6 +43,15 @@ public class EmpleadoControlador {
             return null;
         }
     }
+    
+    public Empleado obtenerEmpleadoPorId(int Id_Empleado) {
+    try {
+        return empleadoDAO.obtenerEmpleadoPorId(Id_Empleado);
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(null, "Error al obtener el empleado: " + e.getMessage());
+        return null;
+    }
+}
 
     public void actualizarEmpleado(int id, String cedula, String nombre1,String nombre2, String apellido1,String apellido2, String direccion, String email) {
         try {
@@ -99,15 +108,6 @@ public class EmpleadoControlador {
         }
     }
     
-    public Empleado obtenerEmpleadoPorId(int Id_Empleado) {
-        try {
-            DAOEmpleado DAO = new DAOEmpleado();
-            return DAO.obtenerEmpleadoPorId(Id_Empleado);
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Error al obtener el Empleado: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-            return null;
-        }
-    }
     
 }
 

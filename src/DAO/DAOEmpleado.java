@@ -47,6 +47,31 @@ public class DAOEmpleado {
 
         return lista;
     }
+    
+        //Obtener Empleados por Id
+    public Empleado obtenerEmpleadoPorId(int idEmpleado) throws SQLException {
+        String sql = "SELECT * FROM Empleado WHERE Id_Empleado = ?";
+        Empleado empleado = null;
+
+        try (Connection c = ConexionDB.getConnection(); PreparedStatement stmt = c.prepareStatement(sql)) {
+            stmt.setInt(1, idEmpleado);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    empleado = new Empleado();
+                    empleado.setId_Empleado(rs.getInt("Id_Empleado"));
+                    empleado.setCedula(rs.getString("Cedula"));
+                    empleado.setNombre1(rs.getString("Nombre1"));
+                    empleado.setNombre2(rs.getString("Nombre2"));
+                    empleado.setApellido1(rs.getString("Apellido1"));
+                    empleado.setApellido2(rs.getString("Apellido2"));
+                    empleado.setDireccion(rs.getString("Direccion"));
+                    empleado.setEmail(rs.getString("Email"));
+                }
+            }
+        }
+
+        return empleado;
+    }
 
     public void actualizarEmpleado(Empleado empleado) throws SQLException {
         String sql = "UPDATE Empleado SET Cedula = ?, Nombre1 = ?, Nombre2 = ?, Apellido1 = ?, Apellido2 = ?, Direccion = ?, Email = ? WHERE Id_Empleado = ?";
@@ -71,31 +96,6 @@ public class DAOEmpleado {
             stmt.setInt(1, idEmpleado);
             stmt.executeUpdate();
         }
-    }
-
-    //Obtener Empleados por Id
-    public Empleado obtenerEmpleadoPorId(int idEmpleado) throws SQLException {
-        String sql = "SELECT * FROM Empleado WHERE Id_Empleado = ?";
-        Empleado empleado = null;
-
-        try (Connection c = ConexionDB.getConnection(); PreparedStatement stmt = c.prepareStatement(sql)) {
-            stmt.setInt(1, idEmpleado);
-            try (ResultSet rs = stmt.executeQuery()) {
-                if (rs.next()) {
-                    empleado = new Empleado();
-                    empleado.setId_Empleado(rs.getInt("Id_Empleado"));
-                    empleado.setCedula(rs.getString("Cedula"));
-                    empleado.setNombre1(rs.getString("Nombre1"));
-                    empleado.setNombre2(rs.getString("Nombre2"));
-                    empleado.setApellido1(rs.getString("Apellido1"));
-                    empleado.setApellido2(rs.getString("Apellido2"));
-                    empleado.setDireccion(rs.getString("Direccion"));
-                    empleado.setEmail(rs.getString("Email"));
-                }
-            }
-        }
-
-        return empleado;
     }
 
     public static void main(String[] args) {

@@ -14,7 +14,7 @@ public class mantenimientoFormulario extends java.awt.Dialog {
     /**
      * Creates new form mantenimientoFormulario
      */
-    public mantenimientoFormulario(java.awt.Frame parent, boolean modal) {
+    public mantenimientoFormulario(java.awt.Frame parent, boolean modal, vistaMantenimiento vista) {
         super(parent, modal);
         initComponents();
     }
@@ -39,18 +39,15 @@ public class mantenimientoFormulario extends java.awt.Dialog {
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jTextFieldId = new javax.swing.JTextField();
-        jTextFieldMarca = new javax.swing.JTextField();
-        jTextFieldModelo = new javax.swing.JTextField();
-        jTextFieldAnio = new javax.swing.JTextField();
-        jTextFieldColor = new javax.swing.JTextField();
-        jTextFieldPlaca = new javax.swing.JTextField();
+        jTextFieldDescripcion = new javax.swing.JTextField();
+        jTextFieldJustificacion = new javax.swing.JTextField();
+        jTextFieldObservaciones = new javax.swing.JTextField();
         jButtonGuardar = new javax.swing.JButton();
         jButtonActualizar = new javax.swing.JButton();
         jButtonEliminar = new javax.swing.JButton();
-        jComboBoxEstado = new javax.swing.JComboBox<>();
         jButtonLimpiar = new javax.swing.JButton();
-        jPanel2 = new javax.swing.JPanel();
-        jDateChooserFecha = new com.toedter.calendar.JDateChooser();
+        jTextFieldObservaciones1 = new javax.swing.JTextField();
+        jTextFieldObservaciones2 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
 
@@ -85,60 +82,53 @@ public class mantenimientoFormulario extends java.awt.Dialog {
         jLabel3.setText("ID");
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 30)); // NOI18N
-        jLabel4.setText("Marca");
+        jLabel4.setText("Descripción");
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 30)); // NOI18N
-        jLabel5.setText("Modelo");
+        jLabel5.setText("Justificación");
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 30)); // NOI18N
-        jLabel6.setText("Año");
+        jLabel6.setText("Fecha Incio");
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 30)); // NOI18N
-        jLabel7.setText("Color");
+        jLabel7.setText("Fecha Fin");
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 30)); // NOI18N
-        jLabel8.setText("Fecha Registro");
+        jLabel8.setText("Costo");
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 30)); // NOI18N
-        jLabel9.setText("Placa");
+        jLabel9.setText("Observaciones");
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 30)); // NOI18N
-        jLabel10.setText("Estado");
+        jLabel10.setText("Recomendaciones");
 
         jTextFieldId.setBackground(new java.awt.Color(244, 233, 205));
         jTextFieldId.setFont(new java.awt.Font("Segoe UI", 0, 26)); // NOI18N
         jTextFieldId.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
         jTextFieldId.setPreferredSize(new java.awt.Dimension(632, 51));
 
-        jTextFieldMarca.setBackground(new java.awt.Color(244, 233, 205));
-        jTextFieldMarca.setFont(new java.awt.Font("Segoe UI", 0, 26)); // NOI18N
-        jTextFieldMarca.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
-        jTextFieldMarca.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jTextFieldMarca.setPreferredSize(new java.awt.Dimension(632, 51));
+        jTextFieldDescripcion.setBackground(new java.awt.Color(244, 233, 205));
+        jTextFieldDescripcion.setFont(new java.awt.Font("Segoe UI", 0, 26)); // NOI18N
+        jTextFieldDescripcion.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        jTextFieldDescripcion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jTextFieldDescripcion.setPreferredSize(new java.awt.Dimension(632, 51));
 
-        jTextFieldModelo.setBackground(new java.awt.Color(244, 233, 205));
-        jTextFieldModelo.setFont(new java.awt.Font("Segoe UI", 0, 26)); // NOI18N
-        jTextFieldModelo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
-        jTextFieldModelo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jTextFieldModelo.setPreferredSize(new java.awt.Dimension(632, 51));
+        jTextFieldJustificacion.setBackground(new java.awt.Color(244, 233, 205));
+        jTextFieldJustificacion.setFont(new java.awt.Font("Segoe UI", 0, 26)); // NOI18N
+        jTextFieldJustificacion.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        jTextFieldJustificacion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jTextFieldJustificacion.setPreferredSize(new java.awt.Dimension(632, 51));
+        jTextFieldJustificacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldJustificacionActionPerformed(evt);
+            }
+        });
 
-        jTextFieldAnio.setBackground(new java.awt.Color(244, 233, 205));
-        jTextFieldAnio.setFont(new java.awt.Font("Segoe UI", 0, 26)); // NOI18N
-        jTextFieldAnio.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
-        jTextFieldAnio.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jTextFieldAnio.setPreferredSize(new java.awt.Dimension(632, 41));
-
-        jTextFieldColor.setBackground(new java.awt.Color(244, 233, 205));
-        jTextFieldColor.setFont(new java.awt.Font("Segoe UI", 0, 26)); // NOI18N
-        jTextFieldColor.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
-        jTextFieldColor.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jTextFieldColor.setPreferredSize(new java.awt.Dimension(632, 51));
-
-        jTextFieldPlaca.setBackground(new java.awt.Color(244, 233, 205));
-        jTextFieldPlaca.setFont(new java.awt.Font("Segoe UI", 0, 26)); // NOI18N
-        jTextFieldPlaca.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
-        jTextFieldPlaca.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jTextFieldPlaca.setPreferredSize(new java.awt.Dimension(632, 51));
+        jTextFieldObservaciones.setBackground(new java.awt.Color(244, 233, 205));
+        jTextFieldObservaciones.setFont(new java.awt.Font("Segoe UI", 0, 26)); // NOI18N
+        jTextFieldObservaciones.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        jTextFieldObservaciones.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jTextFieldObservaciones.setPreferredSize(new java.awt.Dimension(632, 51));
 
         jButtonGuardar.setBackground(new java.awt.Color(244, 233, 205));
         jButtonGuardar.setFont(new java.awt.Font("Segoe UI", 0, 37)); // NOI18N
@@ -176,17 +166,6 @@ public class mantenimientoFormulario extends java.awt.Dialog {
             }
         });
 
-        jComboBoxEstado.setBackground(new java.awt.Color(244, 233, 205));
-        jComboBoxEstado.setFont(new java.awt.Font("Segoe UI", 0, 26)); // NOI18N
-        jComboBoxEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar...", "Disponible", "En Mantenimiento", "En Alquiler" }));
-        jComboBoxEstado.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
-        jComboBoxEstado.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jComboBoxEstado.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxEstadoActionPerformed(evt);
-            }
-        });
-
         jButtonLimpiar.setBackground(new java.awt.Color(244, 233, 205));
         jButtonLimpiar.setFont(new java.awt.Font("Segoe UI", 0, 37)); // NOI18N
         jButtonLimpiar.setText("Limpiar");
@@ -199,68 +178,69 @@ public class mantenimientoFormulario extends java.awt.Dialog {
             }
         });
 
-        jPanel2.setBackground(new java.awt.Color(255, 118, 115));
-        jPanel2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jTextFieldObservaciones1.setBackground(new java.awt.Color(244, 233, 205));
+        jTextFieldObservaciones1.setFont(new java.awt.Font("Segoe UI", 0, 26)); // NOI18N
+        jTextFieldObservaciones1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        jTextFieldObservaciones1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jTextFieldObservaciones1.setPreferredSize(new java.awt.Dimension(632, 51));
 
-        jDateChooserFecha.setBackground(new java.awt.Color(244, 233, 205));
-        jDateChooserFecha.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
-        jDateChooserFecha.setFont(new java.awt.Font("Segoe UI", 0, 26)); // NOI18N
-        jDateChooserFecha.setPreferredSize(new java.awt.Dimension(89, 41));
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jDateChooserFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 632, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDateChooserFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-        );
+        jTextFieldObservaciones2.setBackground(new java.awt.Color(244, 233, 205));
+        jTextFieldObservaciones2.setFont(new java.awt.Font("Segoe UI", 0, 26)); // NOI18N
+        jTextFieldObservaciones2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        jTextFieldObservaciones2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jTextFieldObservaciones2.setPreferredSize(new java.awt.Dimension(632, 51));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(17, 17, 17)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(104, 104, 104)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5)
                             .addComponent(jLabel6)
+                            .addComponent(jLabel10)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(19, 19, 19)
+                                .addComponent(jButtonGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(84, 84, 84)
+                                .addComponent(jButtonActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(63, 63, 63)
+                                .addComponent(jButtonLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
+                                .addComponent(jButtonEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(jTextFieldObservaciones2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addGap(18, 18, 18)
+                                .addComponent(jTextFieldId, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addGap(18, 18, 18)
+                                .addComponent(jTextFieldDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel7)
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel9)
-                            .addComponent(jLabel10)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jButtonGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(11, 11, 11)))
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addComponent(jButtonActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(33, 33, 33)
-                        .addComponent(jButtonLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(51, 51, 51)
-                        .addComponent(jButtonEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(36, 36, 36)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextFieldModelo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jTextFieldMarca, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jTextFieldId, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jTextFieldAnio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jTextFieldColor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jTextFieldPlaca, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jComboBoxEstado, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(58, Short.MAX_VALUE))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jLabel9)
+                                .addGap(32, 32, 32)
+                                .addComponent(jTextFieldObservaciones1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel8))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jTextFieldObservaciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextFieldJustificacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addGap(50, 50, 50))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -272,38 +252,34 @@ public class mantenimientoFormulario extends java.awt.Dialog {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jTextFieldMarca, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jTextFieldModelo, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldJustificacion, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel6)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel7)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(jTextFieldAnio, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(jTextFieldColor, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldObservaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(20, 20, 20)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
-                    .addComponent(jTextFieldPlaca, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(jTextFieldObservaciones1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
-                    .addComponent(jComboBoxEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(jTextFieldObservaciones2, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addGap(372, 372, 372))
         );
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 30)); // NOI18N
@@ -333,7 +309,7 @@ public class mantenimientoFormulario extends java.awt.Dialog {
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 1142, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(10, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanelInferiorFormularioLayout.setVerticalGroup(
             jPanelInferiorFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -345,9 +321,9 @@ public class mantenimientoFormulario extends java.awt.Dialog {
                     .addGroup(jPanelInferiorFormularioLayout.createSequentialGroup()
                         .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(3, 3, 3)))
-                .addGap(8, 8, 8)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 599, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(369, 369, 369))
         );
 
         add(jPanelInferiorFormulario, java.awt.BorderLayout.CENTER);
@@ -365,12 +341,12 @@ public class mantenimientoFormulario extends java.awt.Dialog {
 
     private void jButtonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGuardarActionPerformed
         // Declara vaiables que almacenen los campos de los jTextField
-        String Marca = jTextFieldMarca.getText().trim();
-        String Modelo = jTextFieldModelo.getText().trim();
+        String Marca = jTextFieldDescripcion.getText().trim();
+        String Modelo = jTextFieldJustificacion.getText().trim();
         String AnioTexto = jTextFieldAnio.getText().trim();
         String Color = jTextFieldColor.getText().trim();
         Date Fecha = jDateChooserFecha.getDate();
-        String Placa = jTextFieldPlaca.getText().trim();
+        String Placa = jTextFieldObservaciones.getText().trim();
         String Estado = (String) jComboBoxEstado.getSelectedItem();
 
         // Validación previa si los jTextField estan vacios
@@ -435,12 +411,12 @@ public class mantenimientoFormulario extends java.awt.Dialog {
     private void jButtonActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonActualizarActionPerformed
         // Creamos variables que almacenen los campos de los jTextField
         int idCoche = Integer.parseInt(jTextFieldId.getText());
-        String marca = jTextFieldMarca.getText().trim();
-        String modelo = jTextFieldModelo.getText().trim();
+        String marca = jTextFieldDescripcion.getText().trim();
+        String modelo = jTextFieldJustificacion.getText().trim();
         int anio = Integer.parseInt(jTextFieldAnio.getText().trim());
         String color = jTextFieldColor.getText().trim();
         Date fecha = jDateChooserFecha.getDate();
-        String placa = jTextFieldPlaca.getText().trim();
+        String placa = jTextFieldObservaciones.getText().trim();
         String estado = jComboBoxEstado.getSelectedItem().toString();
 
         try {
@@ -506,10 +482,6 @@ public class mantenimientoFormulario extends java.awt.Dialog {
         }
     }//GEN-LAST:event_jButtonEliminarActionPerformed
 
-    private void jComboBoxEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxEstadoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBoxEstadoActionPerformed
-
     private void jButtonLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLimpiarActionPerformed
         // Mandamos a llamar el metodo
         limpiarCampos();
@@ -520,6 +492,10 @@ public class mantenimientoFormulario extends java.awt.Dialog {
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jTextFieldJustificacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldJustificacionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldJustificacionActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -527,8 +503,6 @@ public class mantenimientoFormulario extends java.awt.Dialog {
     protected javax.swing.JButton jButtonEliminar;
     protected javax.swing.JButton jButtonGuardar;
     protected javax.swing.JButton jButtonLimpiar;
-    private javax.swing.JComboBox<String> jComboBoxEstado;
-    private com.toedter.calendar.JDateChooser jDateChooserFecha;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -539,14 +513,13 @@ public class mantenimientoFormulario extends java.awt.Dialog {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanelInferiorFormulario;
-    protected javax.swing.JTextField jTextFieldAnio;
-    protected javax.swing.JTextField jTextFieldColor;
+    protected javax.swing.JTextField jTextFieldDescripcion;
     protected javax.swing.JTextField jTextFieldId;
-    protected javax.swing.JTextField jTextFieldMarca;
-    protected javax.swing.JTextField jTextFieldModelo;
-    protected javax.swing.JTextField jTextFieldPlaca;
+    protected javax.swing.JTextField jTextFieldJustificacion;
+    protected javax.swing.JTextField jTextFieldObservaciones;
+    protected javax.swing.JTextField jTextFieldObservaciones1;
+    protected javax.swing.JTextField jTextFieldObservaciones2;
     // End of variables declaration//GEN-END:variables
 }

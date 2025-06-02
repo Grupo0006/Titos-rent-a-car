@@ -48,16 +48,15 @@ public class CocheControlador {
             return null;
         }
     }
-    
-    public Coche obtenerCochePorId(int idCoche) {
-    try {
-        return cocheDAO.leerCochePorId(idCoche);
-    } catch (SQLException e) {
-        JOptionPane.showMessageDialog(null, "Error al obtener el coche: " + e.getMessage());
-        return null;
-    }
-}
 
+    public Coche obtenerCochePorId(int idCoche) {
+        try {
+            return cocheDAO.leerCochePorId(idCoche);
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al obtener el coche: " + e.getMessage());
+            return null;
+        }
+    }
 
     public void actualizarCoche(int id, String marca, String modelo, String placa, String color, String estado, int anio, Date fechaRegistro) {
         try {
@@ -85,5 +84,5 @@ public class CocheControlador {
             JOptionPane.showMessageDialog(null, "Error al eliminar el coche: " + e.getMessage());
         }
     }
-    
+
 }
