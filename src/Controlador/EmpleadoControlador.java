@@ -1,7 +1,7 @@
 package Controlador;
 
 import DAO.DAOEmpleado;
-import Modelo.Empleado;
+import Modelo.POJOEmpleado;
 import java.sql.SQLException;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -20,7 +20,7 @@ public class EmpleadoControlador {
 
     public void crearEmpleado(String cedula, String nombre1,String nombre2, String apellido1,String apellido2, String direccion, String email) {
         try {
-            Empleado empleado = new Empleado();
+            POJOEmpleado empleado = new POJOEmpleado();
             empleado.setCedula(cedula);
             empleado.setNombre1(nombre1);
             empleado.setNombre2(nombre2);
@@ -35,7 +35,7 @@ public class EmpleadoControlador {
         }
     }
 
-    public List<Empleado> obtenerTodosEmpleados() {
+    public List<POJOEmpleado> obtenerTodosEmpleados() {
         try {
             return empleadoDAO.leerTodosEmpleados();
         } catch (SQLException e) {
@@ -44,7 +44,7 @@ public class EmpleadoControlador {
         }
     }
     
-    public Empleado obtenerEmpleadoPorId(int Id_Empleado) {
+    public POJOEmpleado obtenerEmpleadoPorId(int Id_Empleado) {
     try {
         return empleadoDAO.obtenerEmpleadoPorId(Id_Empleado);
     } catch (SQLException e) {
@@ -55,7 +55,7 @@ public class EmpleadoControlador {
 
     public void actualizarEmpleado(int id, String cedula, String nombre1,String nombre2, String apellido1,String apellido2, String direccion, String email) {
         try {
-            Empleado empleado = new Empleado();
+            POJOEmpleado empleado = new POJOEmpleado();
             empleado.setId_Empleado(id);
             empleado.setCedula(cedula);
             empleado.setNombre1(nombre1);
@@ -93,9 +93,9 @@ public class EmpleadoControlador {
         controlador.eliminarEmpleado(3); // Asegúrate que exista el ID
 
         // Leer todos los empleados y mostrarlos en consola
-        List<Empleado> lista = controlador.obtenerTodosEmpleados();
+        List<POJOEmpleado> lista = controlador.obtenerTodosEmpleados();
         if (lista != null) {
-            for (Empleado emp : lista) {
+            for (POJOEmpleado emp : lista) {
                 System.out.println("ID: " + emp.getId_Empleado()
                         + ", Cedula: " + emp.getCedula()
                         + ", Nombre1: " + emp.getNombre1()

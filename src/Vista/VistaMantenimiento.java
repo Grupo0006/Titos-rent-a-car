@@ -4,7 +4,7 @@
  */
 package Vista;
 import Controlador.MantenimientoControlador;
-import Modelo.Mantenimiento;
+import Modelo.POJOMantenimiento;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import java.util.Date;
@@ -26,14 +26,14 @@ public class VistaMantenimiento extends javax.swing.JPanel {
     }
     
     private void cargarDatosTabla(){
-        List<Mantenimiento> mantenimientos = mantenimintoControlador.obtenerTodosMantenimientos();
+        List<POJOMantenimiento> mantenimientos = mantenimintoControlador.obtenerTodosMantenimientos();
         
         if(mantenimientos != null){
             DefaultTableModel model = (DefaultTableModel) TablaMantenimientos.getModel();
             
             model.setRowCount(0);
             
-            for (Mantenimiento man : mantenimientos){
+            for (POJOMantenimiento man : mantenimientos){
                 Object[] row = {
                     man.getId_Mantenimiento(),
                     man.getDescripcion(),

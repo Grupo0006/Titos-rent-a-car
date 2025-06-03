@@ -6,8 +6,8 @@ package Vista.Mantenimiento;
 
 import Controlador.MantenimientoControlador;          // Importa la clase del controlador que maneja la lógica de los coches
 import Controlador.Detalle_MantenimientoControlador;
-import Modelo.Mantenimiento;                          // Importa la clase del modelo que representa a un coche
-import Modelo.Detalle_Mantenimiento; 
+import Modelo.POJOMantenimiento;                          // Importa la clase del modelo que representa a un coche
+import Modelo.POJODetalle_Mantenimiento; 
 import Vista.VistaMantenimiento.*;
 import Vista.Coche.cocheFormulario;
 import java.sql.Date;                         // Importa la clase Date del paquete SQL para trabajar con fechas compatibles con bases de datos
@@ -95,7 +95,7 @@ public class vistaMantenimiento extends javax.swing.JPanel {
         // Obtener todas las categorias del controlador
         //Creamos objeto de clase Coche controlador
         MantenimientoControlador mantenimientoControlador = new MantenimientoControlador();
-        List<Mantenimiento> mantenimientos = mantenimientoControlador.obtenerTodosMantenimientos();
+        List<POJOMantenimiento> mantenimientos = mantenimientoControlador.obtenerTodosMantenimientos();
 
         if (mantenimientos != null) {
             //Obtener el modelo existentes de la tabla
@@ -105,7 +105,7 @@ public class vistaMantenimiento extends javax.swing.JPanel {
             model.setRowCount(0);
 
             //Llenar las filas con los datos de coche
-            for (Mantenimiento man : mantenimientos) {
+            for (POJOMantenimiento man : mantenimientos) {
                 Object[] row = {
                     man.getId_Mantenimiento(),
                     man.getDescripcion(),

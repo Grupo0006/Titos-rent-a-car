@@ -1,6 +1,6 @@
 package DAO;
 
-import Modelo.Mantenimiento;
+import Modelo.POJOMantenimiento;
 import Util.ConexionDB;
 import java.sql.SQLException;
 import java.sql.Connection;
@@ -11,7 +11,7 @@ import java.util.List;
 
 public class DAOMantenimiento {
 
-    public void crearMantenimiento(Mantenimiento m) throws SQLException {
+    public void crearMantenimiento(POJOMantenimiento m) throws SQLException {
         String sql = "INSERT INTO Mantenimiento (Descripcion, Justificacion, Fecha_Inicio, Fecha_Fin, Costo) VALUES (?, ?, ?, ?, ?)";
 
         try (Connection c = ConexionDB.getConnection(); PreparedStatement stmt = c.prepareStatement(sql)) {
@@ -24,13 +24,13 @@ public class DAOMantenimiento {
         }
     }
 
-    public List<Mantenimiento> leerTodosMantenimientos() throws SQLException {
-        List<Mantenimiento> lista = new ArrayList<>();
+    public List<POJOMantenimiento> leerTodosMantenimientos() throws SQLException {
+        List<POJOMantenimiento> lista = new ArrayList<>();
         String sql = "SELECT * FROM Mantenimiento";
 
         try (Connection c = ConexionDB.getConnection(); PreparedStatement stmt = c.prepareStatement(sql); ResultSet rs = stmt.executeQuery()) {
             while (rs.next()) {
-                Mantenimiento m = new Mantenimiento();
+                POJOMantenimiento m = new POJOMantenimiento();
                 m.setId_Mantenimiento(rs.getInt("id_mantenimiento"));
                 m.setDescripcion(rs.getString("descripcion"));
                 m.setJustificacion(rs.getString("justificacion"));
@@ -43,7 +43,7 @@ public class DAOMantenimiento {
         return lista;
     }
 
-    public void actualizarMantenimiento(Mantenimiento m) throws SQLException {
+    public void actualizarMantenimiento(POJOMantenimiento m) throws SQLException {
         String sql = "UPDATE Mantenimiento SET Descripcion = ?, Justificacion = ?, Fecha_Inicio = ?, Fecha_Fin = ?, Costo=? WHERE Id_Mantenimiento = ?";
 
         try (Connection c = ConexionDB.getConnection(); PreparedStatement stmt = c.prepareStatement(sql)) {

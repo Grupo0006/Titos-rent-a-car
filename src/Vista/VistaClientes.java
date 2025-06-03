@@ -4,7 +4,7 @@
  */
 package Vista;
 import Controlador.EmpleadoControlador;
-import Modelo.Empleado;
+import Modelo.POJOEmpleado;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 /**
@@ -24,12 +24,12 @@ cargarDatosTabla();
     }
 
     private void cargarDatosTabla(){
-        List<Empleado> empleados = empleadoControlador.obtenerTodosEmpleados();
+        List<POJOEmpleado> empleados = empleadoControlador.obtenerTodosEmpleados();
         if(empleados != null){
             DefaultTableModel model = (DefaultTableModel) TablaEmpleados.getModel();
             model.setRowCount(0);
             
-            for(Empleado emp : empleados){
+            for(POJOEmpleado emp : empleados){
                 Object[] row = {
                     emp.getId_Empleado(),
                     emp.getCedula(),
@@ -365,13 +365,13 @@ cargarDatosTabla();
         // TODO add your handling code here:
         
         String textBusqueda = TextBuscar.getText().trim().toLowerCase();
-        List <Empleado> empleados = empleadoControlador.obtenerTodosEmpleados();
+        List <POJOEmpleado> empleados = empleadoControlador.obtenerTodosEmpleados();
         
         DefaultTableModel modelo = (DefaultTableModel) TablaEmpleados.getModel();
         modelo.setRowCount(0);
         
         if (empleados != null){
-            for (Empleado emp : empleados){
+            for (POJOEmpleado emp : empleados){
                 if (textBusqueda.isEmpty()||
                         emp.getCedula().toLowerCase().contains(textBusqueda)||
                         emp.getNombre1().toLowerCase().contains(textBusqueda)||

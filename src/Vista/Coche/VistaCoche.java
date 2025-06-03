@@ -3,7 +3,7 @@ package Vista.Coche;
 // Creamos importaciones necesarios para el codigo
 // Importaciones necesarias para el funcionamiento de la clase
 import Controlador.CocheControlador;          // Importa la clase del controlador que maneja la lógica de los coches
-import Modelo.Coche;                          // Importa la clase del modelo que representa a un coche
+import Modelo.POJOCoche;                          // Importa la clase del modelo que representa a un coche
 import java.sql.Date;                         // Importa la clase Date del paquete SQL para trabajar con fechas compatibles con bases de datos
 import java.awt.Color;                        // Importa la clase Color para definir y manipular colores
 import java.util.List;                        // Importa la interfaz List para trabajar con listas de objetos
@@ -77,9 +77,9 @@ public class VistaCoche extends javax.swing.JPanel {
 
     public void cargarDatosTabla() {
         // Obtener todas las categorias del controlador
-        //Creamos objeto de clase Coche controlador
+        //Creamos objeto de clase POJOCoche controlador
         CocheControlador cocheControlador = new CocheControlador();
-        List<Coche> coches = cocheControlador.obtenerTodosCoches();
+        List<POJOCoche> coches = cocheControlador.obtenerTodosCoches();
 
         if (coches != null) {
             //Obtener el modelo existentes de la tabla
@@ -89,7 +89,7 @@ public class VistaCoche extends javax.swing.JPanel {
             model.setRowCount(0);
 
             //Llenar las filas con los datos de coche
-            for (Coche coc : coches) {
+            for (POJOCoche coc : coches) {
                 Object[] row = {
                     coc.getId_Coche(),
                     coc.getMarca(),
@@ -131,7 +131,7 @@ public class VistaCoche extends javax.swing.JPanel {
     }
 
     // Creamos meodo para obtener datos de la tabla selecionando una fila
-    public Coche obtenerCocheSeleccionado() {
+    public POJOCoche obtenerCocheSeleccionado() {
         // Declaramos variable para definir la condicion
         int fila = jTableCoches.getSelectedRow();
         // la codicion se ejecuta si la fila no es null es decir que hallan datos validos
@@ -139,7 +139,7 @@ public class VistaCoche extends javax.swing.JPanel {
             /*
             Crea un nuevo objecto para proceder a obtener los valores de cada fila
              */
-            Coche coche = new Coche();
+            POJOCoche coche = new POJOCoche();
             coche.setId_Coche((int) jTableCoches.getValueAt(fila, 0));
             coche.setMarca((String) jTableCoches.getValueAt(fila, 1));
             coche.setModelo((String) jTableCoches.getValueAt(fila, 2));
@@ -430,7 +430,7 @@ public class VistaCoche extends javax.swing.JPanel {
         // Nota: trim elimina los espacios al inicio y al final y toLowerCase comverte todo a minusculas
         String textoBusqueda = jTextFieldBuscar.getText().trim().toLowerCase();
         CocheControlador controlador = new CocheControlador();
-        List<Coche> coches = controlador.obtenerTodosCoches();
+        List<POJOCoche> coches = controlador.obtenerTodosCoches();
         // Obtiene los modelos de datos de la tabla coches
         DefaultTableModel modelo = (DefaultTableModel) jTableCoches.getModel();
         // Elimina las filas que no coinciden
@@ -438,7 +438,7 @@ public class VistaCoche extends javax.swing.JPanel {
 
         // Creamos condicion para verificar si coches no es null
         if (coches != null) {
-            for (Coche coc : coches) {
+            for (POJOCoche coc : coches) {
                 // Define la condicion para realizar busquedas verificando que la barra de busqyeda no quede vacia 
                 if (textoBusqueda.isEmpty() || coc.getMarca().toLowerCase().contains(textoBusqueda)
                         || coc.getModelo().toLowerCase().contains(textoBusqueda)

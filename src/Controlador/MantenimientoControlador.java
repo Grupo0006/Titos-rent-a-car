@@ -1,7 +1,7 @@
 package Controlador;
 
 import DAO.DAOMantenimiento;
-import Modelo.Mantenimiento;
+import Modelo.POJOMantenimiento;
 import java.sql.SQLException;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -20,7 +20,7 @@ public class MantenimientoControlador {
 
     public void crearMantenimiento(String descripcion, String justificacion, java.util.Date fechaInicio, java.util.Date fechaFin, double costo) {
         try {
-            Mantenimiento m = new Mantenimiento();
+            POJOMantenimiento m = new POJOMantenimiento();
             m.setDescripcion(descripcion);
             m.setJustificacion(justificacion);
             m.setFecha_Inicio(fechaInicio);
@@ -35,7 +35,7 @@ public class MantenimientoControlador {
 
     public void actualizarMantenimiento(int id, String descripcion, String justificacion, java.util.Date fechaInicio, java.util.Date fechaFin, Double costo) {
         try {
-            Mantenimiento m = new Mantenimiento();
+            POJOMantenimiento m = new POJOMantenimiento();
             m.setId_Mantenimiento(id);
             m.setDescripcion(descripcion);
             m.setJustificacion(justificacion);
@@ -58,7 +58,7 @@ public class MantenimientoControlador {
         }
     }
 
-    public List<Mantenimiento> obtenerTodosMantenimientos() {
+    public List<POJOMantenimiento> obtenerTodosMantenimientos() {
         try {
             return mantenimientoDAO.leerTodosMantenimientos();
         } catch (SQLException e) {

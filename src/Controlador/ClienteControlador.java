@@ -1,7 +1,7 @@
 
 package Controlador;
 import DAO.DAOCliente;
-import Modelo.Cliente;
+import Modelo.POJOCliente;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
@@ -20,7 +20,7 @@ public class ClienteControlador {
     public void crearCliente(String cedula, String Nombre1 ,String Nombre2 ,String Apellido1 ,String Apellido2 ,String Telefono, String Direccion,
                              String Email, String Licencia) {
         
-        Cliente cliente = new Cliente();
+        POJOCliente cliente = new POJOCliente();
         cliente.setCedula(cedula);
         cliente.setNombre1(Nombre1);
         cliente.setNombre2(Nombre2);
@@ -40,7 +40,7 @@ public class ClienteControlador {
     }
 
     // Obtener todos los clientes
-    public List<Cliente> obtenerTodosClientes() {
+    public List<POJOCliente> obtenerTodosClientes() {
         try {
             return DAOcliente.leerTodosClientes();
         } catch (SQLException e) {
@@ -53,7 +53,7 @@ public class ClienteControlador {
     public void actualizarCliente(int idCliente, String cedula, String Nombre1, String Nombre2, String Apellido1, String Apellido2,
                                   String Telefono, String Direccion, String Email, String Licencia) {
         
-        Cliente cliente = new Cliente();
+        POJOCliente cliente = new POJOCliente();
         cliente.setIdCliente(idCliente);
         cliente.setCedula(cedula);
         cliente.setNombre1(Nombre1);
@@ -93,10 +93,10 @@ public class ClienteControlador {
         controlador.crearCliente("1234567890", "Juan", "jose", "Pérez","Ruis", "0999999999", "Calle Falsa 123", "juan@example.com", "LIC123456");
 
         // Leer clientes
-        List<Cliente> clientes = controlador.obtenerTodosClientes();
+        List<POJOCliente> clientes = controlador.obtenerTodosClientes();
         if (clientes != null) {
             System.out.println("Lista de clientes:");
-            for (Cliente c : clientes) {
+            for (POJOCliente c : clientes) {
                 System.out.println("ID: " + c.getIdCliente()
                         + "Cédula" + c.getCedula()
                         + "Nombre1" + c.getNombre1() 

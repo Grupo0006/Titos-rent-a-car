@@ -10,18 +10,18 @@ import java.sql.Date;
  *
  * @author Estudiante
  */
-public class Alquiler {
+public class POJOAlquiler {
     private int Id_Alquiler;
     private Date Fecha_Inicio;
     private Date Fecha_Fin;
 
-    public Alquiler(int Id_Alquiler, Date Fecha_Inicio, Date Fecha_Fin) {
+    public POJOAlquiler(int Id_Alquiler, Date Fecha_Inicio, Date Fecha_Fin) {
         this.Id_Alquiler = Id_Alquiler;
         this.Fecha_Inicio = Fecha_Inicio;
         this.Fecha_Fin = Fecha_Fin;
     }
 
-    public Alquiler() {
+    public POJOAlquiler() {
     }
 
     public int getId_Alquiler() {

@@ -9,7 +9,7 @@ import java.sql.Date;
  * @author Ernesto José Sevilla Inglés
  */
 // Declaramos Variables
-public class Coche {
+public class POJOCoche {
     public String Marca;
     public String Modelo;
     public String Placa;
@@ -20,7 +20,7 @@ public class Coche {
     public Date Fecha_Registro;
 
     // Creamos constructor con parametros
-    public Coche(String Marca, String Modelo, String placa, String color, String Estado, int Anio, int Id_Coche, Date Fecha_Registro) {
+    public POJOCoche(String Marca, String Modelo, String placa, String color, String Estado, int Anio, int Id_Coche, Date Fecha_Registro) {
         this.Marca = Marca;
         this.Modelo = Modelo;
         this.Placa = placa;
@@ -31,7 +31,7 @@ public class Coche {
         this.Fecha_Registro = Fecha_Registro;
     }
     // Creamos constructor vacio
-    public Coche() {
+    public POJOCoche() {
     }
 
     // Cremos get y set para las variables

@@ -8,14 +8,14 @@ package Modelo;
  *
  * @author Estudiante
  */
-public class Detalle_Alquiler {
+public class POJODetalle_Alquiler {
     private int Id_DetalleAlquiler;
     private int Id_Alquiler;
     private int Id_Coche;
     private int Id_Cliente;
     private double Precio_Total;
 
-    public Detalle_Alquiler(int Id_DetalleAlquiler, int Id_Alquiler, int Id_Coche, int Id_Cliente, double Precio_Total) {
+    public POJODetalle_Alquiler(int Id_DetalleAlquiler, int Id_Alquiler, int Id_Coche, int Id_Cliente, double Precio_Total) {
         this.Id_DetalleAlquiler = Id_DetalleAlquiler;
         this.Id_Alquiler = Id_Alquiler;
         this.Id_Coche = Id_Coche;
@@ -23,7 +23,7 @@ public class Detalle_Alquiler {
         this.Precio_Total = Precio_Total;
     }
 
-    public Detalle_Alquiler() {
+    public POJODetalle_Alquiler() {
     }
 
     public int getId_DetalleAlquiler() {

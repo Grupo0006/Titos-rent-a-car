@@ -1,6 +1,6 @@
 package DAO;
 
-import Modelo.Detalle_Mantenimiento;
+import Modelo.POJODetalle_Mantenimiento;
 import Util.ConexionDB;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,7 +11,7 @@ import java.util.List;
 
 public class DAODetalle_Mantenimiento {
 
-    public void crearDetalleMantenimiento(Detalle_Mantenimiento detalle) throws SQLException {
+    public void crearDetalleMantenimiento(POJODetalle_Mantenimiento detalle) throws SQLException {
         String sql = """
         INSERT INTO Detalle_Mantenimiento (
             Mantenimiento,
@@ -34,16 +34,16 @@ public class DAODetalle_Mantenimiento {
         }
     }
 
-    public Detalle_Mantenimiento leerDetallePorId(int idDetalle) throws SQLException {
+    public POJODetalle_Mantenimiento leerDetallePorId(int idDetalle) throws SQLException {
         String sql = "SELECT * FROM Detalle_Mantenimiento WHERE DetalleMantenimiento = ?";
-        Detalle_Mantenimiento detalle = null;
+        POJODetalle_Mantenimiento detalle = null;
 
         try (Connection c = ConexionDB.getConnection(); PreparedStatement stmt = c.prepareStatement(sql)) {
             stmt.setInt(1, idDetalle);
             ResultSet rs = stmt.executeQuery();
 
             if (rs.next()) {
-                detalle = new Detalle_Mantenimiento();
+                detalle = new POJODetalle_Mantenimiento();
                 detalle.setIdDetalleMantenimiento(rs.getInt("DetalleMantenimiento"));
                 detalle.setIdMantenimiento(rs.getInt("Mantenimiento"));
                 detalle.setIdEmpleado(rs.getInt("Id_Empleado"));
@@ -57,7 +57,7 @@ public class DAODetalle_Mantenimiento {
         return detalle;
     }
 
-    public void actualizarDetalleMantenimiento(Detalle_Mantenimiento detalle) throws SQLException {
+    public void actualizarDetalleMantenimiento(POJODetalle_Mantenimiento detalle) throws SQLException {
         String sql = """
         UPDATE Detalle_Mantenimiento SET
             Mantenimiento = ?,
@@ -95,7 +95,7 @@ public class DAODetalle_Mantenimiento {
             DAODetalle_Mantenimiento dao = new DAODetalle_Mantenimiento();
 
             // Crear un nuevo detalle de mantenimiento
-            Detalle_Mantenimiento nuevo = new Detalle_Mantenimiento();
+            POJODetalle_Mantenimiento nuevo = new POJODetalle_Mantenimiento();
             nuevo.setIdMantenimiento(1);
             nuevo.setIdEmpleado(101);
             nuevo.setIdCoche(202);
@@ -106,7 +106,7 @@ public class DAODetalle_Mantenimiento {
             System.out.println("Detalle de mantenimiento creado.");
 
             // Leer detalle por ID
-            Detalle_Mantenimiento detalle = dao.leerDetallePorId(1); // ID de ejemplo
+            POJODetalle_Mantenimiento detalle = dao.leerDetallePorId(1); // ID de ejemplo
             if (detalle != null) {
                 System.out.println("\nDetalle leído:");
                 System.out.println("Empleado: " + detalle.getIdEmpleado());

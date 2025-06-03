@@ -1,43 +1,44 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package Modelo;
 
 /**
  *
  * @author Estudiante
  */
-public class Empleado {
-    private int Id_Empleado;
-    private String Cedula;
-    private String Nombre1;
-    private String Nombre2;
-    private String Apellido1;
-    private String Apellido2;
-    private String Direccion;
-    private String Email;
+public class POJOCliente {
+    public int IdCliente;
+    public String Cedula;
+    public String Nombre1;
+    public String Nombre2;
+    public String Apellido1;
+    public String Apellido2;
+    public String Telefono;
+    public String Direccion;
+    public String Email;
+    public String Licencia;
 
-    public Empleado(int Id_Empleado, String Cedula, String Nombre1, String nombre2, String Apellido1, String Apellido2, String Direccion, String Email) {
-        this.Id_Empleado = Id_Empleado;
+    public POJOCliente() {
+    }
+
+    public POJOCliente(int IdCliente, String Cedula, String Nombre1, String Nombre2, String Apellido1, String Apellido2, String Telefono, String Direccion, String Email, String Licencia) {
+        this.IdCliente = IdCliente;
         this.Cedula = Cedula;
         this.Nombre1 = Nombre1;
-        this.Nombre2 = nombre2;
+        this.Nombre2 = Nombre2;
         this.Apellido1 = Apellido1;
         this.Apellido2 = Apellido2;
+        this.Telefono = Telefono;
         this.Direccion = Direccion;
         this.Email = Email;
+        this.Licencia = Licencia;
     }
 
-    public Empleado() {
+    public int getIdCliente() {
+        return IdCliente;
     }
 
-    public int getId_Empleado() {
-        return Id_Empleado;
-    }
-
-    public void setId_Empleado(int Id_Empleado) {
-        this.Id_Empleado = Id_Empleado;
+    public void setIdCliente(int IdCliente) {
+        this.IdCliente = IdCliente;
     }
 
     public String getCedula() {
@@ -60,8 +61,8 @@ public class Empleado {
         return Nombre2;
     }
 
-    public void setNombre2(String nombre2) {
-        this.Nombre2 = nombre2;
+    public void setNombre2(String Nombre2) {
+        this.Nombre2 = Nombre2;
     }
 
     public String getApellido1() {
@@ -80,6 +81,14 @@ public class Empleado {
         this.Apellido2 = Apellido2;
     }
 
+    public String getTelefono() {
+        return Telefono;
+    }
+
+    public void setTelefono(String Telefono) {
+        this.Telefono = Telefono;
+    }
+
     public String getDireccion() {
         return Direccion;
     }
@@ -95,5 +104,14 @@ public class Empleado {
     public void setEmail(String Email) {
         this.Email = Email;
     }
+
+    public String getLicencia() {
+        return Licencia;
+    }
+
+    public void setLicencia(String Licencia) {
+        this.Licencia = Licencia;
+    }
+
     
 }

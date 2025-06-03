@@ -4,7 +4,7 @@ package Vista.Empleados;
 // Importaciones necesarias para el funcionamiento de la clase
 import Vista.Empleados.*;
 import Controlador.EmpleadoControlador;          // Importa la clase del controlador que maneja la lógica de los coches
-import Modelo.Empleado;                          // Importa la clase del modelo que representa a un coche
+import Modelo.POJOEmpleado;                          // Importa la clase del modelo que representa a un coche
 import java.sql.Date;                         // Importa la clase Date del paquete SQL para trabajar con fechas compatibles con bases de datos
 import java.awt.Color;                        // Importa la clase Color para definir y manipular colores
 import java.util.List;                        // Importa la interfaz List para trabajar con listas de objetos
@@ -83,7 +83,7 @@ public class vistaEmpleados extends javax.swing.JPanel {
         // Obtener todas las categorias del controlador
         //Creamos objeto de clase Empleados controlador
         EmpleadoControlador empleadoControlador = new EmpleadoControlador();
-        List<Empleado> empleado = empleadoControlador.obtenerTodosEmpleados();
+        List<POJOEmpleado> empleado = empleadoControlador.obtenerTodosEmpleados();
 
         if (empleado != null) {
             //Obtener el modelo existentes de la tabla
@@ -93,7 +93,7 @@ public class vistaEmpleados extends javax.swing.JPanel {
             model.setRowCount(0);
 
             //Llenar las filas con los datos de coche
-            for (Empleado emp : empleado) {
+            for (POJOEmpleado emp : empleado) {
                 Object[] row = {
                     emp.getId_Empleado(),
                     emp.getCedula(),
@@ -135,7 +135,7 @@ public class vistaEmpleados extends javax.swing.JPanel {
     }
 
     // Creamos meodo para obtener datos de la tabla selecionando una fila
-    public Empleado obtenerEmpleadosSeleccionado() {
+    public POJOEmpleado obtenerEmpleadosSeleccionado() {
         // Declaramos variable para definir la condicion
         int fila = jTableEmpleado.getSelectedRow();
         // la codicion se ejecuta si la fila no es null es decir que hallan datos validos
@@ -143,7 +143,7 @@ public class vistaEmpleados extends javax.swing.JPanel {
             /*
             Crea un nuevo objecto para proceder a obtener los valores de cada fila
              */
-            Empleado emp = new Empleado();
+            POJOEmpleado emp = new POJOEmpleado();
             emp.setId_Empleado((int) jTableEmpleado.getValueAt(fila, 0));
             emp.setCedula((String) jTableEmpleado.getValueAt(fila, 1));
             emp.setNombre1((String) jTableEmpleado.getValueAt(fila, 2));
@@ -457,14 +457,14 @@ public class vistaEmpleados extends javax.swing.JPanel {
         // Nota: trim elimina los espacios al inicio y al final y toLowerCase comverte todo a minusculas
         String textoBusqueda = jTextFieldBuscar.getText().trim().toLowerCase();
         EmpleadoControlador controlador = new EmpleadoControlador();
-        List<Empleado> empleado = controlador.obtenerTodosEmpleados();
+        List<POJOEmpleado> empleado = controlador.obtenerTodosEmpleados();
         // Obtiene los modelos de datos de la tabla coches
         DefaultTableModel modelo = (DefaultTableModel) jTableEmpleado.getModel();
         // Elimina las filas que no coinciden
         modelo.setRowCount(0);
         // Creamos condicion para verificar si coches no es null
         if (empleado != null) {
-            for (Empleado emp : empleado) {
+            for (POJOEmpleado emp : empleado) {
                 // Define la condicion para realizar busquedas verificando que la barra de busqyeda no quede vacia 
                 if (textoBusqueda.isEmpty() || emp.getCedula().toLowerCase().contains(textoBusqueda)
                         || emp.getNombre1().toLowerCase().contains(textoBusqueda)

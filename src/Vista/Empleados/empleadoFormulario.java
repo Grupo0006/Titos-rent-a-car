@@ -4,7 +4,7 @@ package Vista.Empleados;
 import Vista.Empleados.*;
 import Controlador.EmpleadoControlador;
 import java.util.Date;
-import Modelo.Empleado;
+import Modelo.POJOEmpleado;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
@@ -86,7 +86,7 @@ public class empleadoFormulario extends javax.swing.JDialog {
 
     // Metodo para comprovar si hay cambios en los jtextfield
     // Nota al final de la comparacion asignamos
-    private boolean hayCambios(String Cedula, String Nombre1, String Nombre2, String Apellido1, String Apellido2, String Direccion, String Email, Empleado original) {
+    private boolean hayCambios(String Cedula, String Nombre1, String Nombre2, String Apellido1, String Apellido2, String Direccion, String Email, POJOEmpleado original) {
         // Devuelve datos de originales de la base de datos y compara con los campos de los jtextField
         return !Cedula.equals(original.getCedula())
                 || !Nombre1.equals(original.getNombre1())
@@ -499,7 +499,7 @@ public class empleadoFormulario extends javax.swing.JDialog {
             // Obtenemos el registro de coches original desde la base de datos creando un objecto
             EmpleadoControlador controlador = new EmpleadoControlador();
             // Mandamos a llamar el metodo obtener datos por Id
-            Empleado original = controlador.obtenerEmpleadoPorId(idEmpleado);
+            POJOEmpleado original = controlador.obtenerEmpleadoPorId(idEmpleado);
 
             // Creamos condicion que compara los datos de los jTextField con los datos de la base de datos
             if (!hayCambios(Cedula, Nombre1, Nombre2, Direccion, Apellido1, Email, Apellido2, original)) {

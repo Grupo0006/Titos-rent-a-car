@@ -5,7 +5,7 @@
 package Controlador;
 
 import DAO.DAOCoche;
-import Modelo.Coche;
+import Modelo.POJOCoche;
 import java.sql.SQLException;
 import java.sql.Date;
 import java.util.List;
@@ -25,7 +25,7 @@ public class CocheControlador {
 
     public void crearCoche(String marca, String modelo, String placa, String color, String estado, int anio, Date fechaRegistro) {
         try {
-            Coche coche = new Coche();
+            POJOCoche coche = new POJOCoche();
             coche.setMarca(marca);
             coche.setModelo(modelo);
             coche.setPlaca(placa);
@@ -40,7 +40,7 @@ public class CocheControlador {
         }
     }
 
-    public List<Coche> obtenerTodosCoches() {
+    public List<POJOCoche> obtenerTodosCoches() {
         try {
             return cocheDAO.leerTodosCoches();
         } catch (SQLException e) {
@@ -49,7 +49,7 @@ public class CocheControlador {
         }
     }
 
-    public Coche obtenerCochePorId(int idCoche) {
+    public POJOCoche obtenerCochePorId(int idCoche) {
         try {
             return cocheDAO.leerCochePorId(idCoche);
         } catch (SQLException e) {
@@ -60,7 +60,7 @@ public class CocheControlador {
 
     public void actualizarCoche(int id, String marca, String modelo, String placa, String color, String estado, int anio, Date fechaRegistro) {
         try {
-            Coche coche = new Coche();
+            POJOCoche coche = new POJOCoche();
             coche.setId_Coche(id);
             coche.setMarca(marca);
             coche.setModelo(modelo);

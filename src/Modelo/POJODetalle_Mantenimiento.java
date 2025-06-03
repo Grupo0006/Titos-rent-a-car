@@ -1,7 +1,7 @@
 
 package Modelo;
 
-public class Detalle_Mantenimiento {
+public class POJODetalle_Mantenimiento {
     private int idDetalleMantenimiento;
     private int idMantenimiento;
     private int idEmpleado;
@@ -11,7 +11,7 @@ public class Detalle_Mantenimiento {
     private String partesCambiadas;
 
     
-    public Detalle_Mantenimiento(int idDetalleMantenimiento, int idMantenimiento, int idEmpleado, int idCoche, String observaciones, String recomendaciones, String partesCambiadas) {
+    public POJODetalle_Mantenimiento(int idDetalleMantenimiento, int idMantenimiento, int idEmpleado, int idCoche, String observaciones, String recomendaciones, String partesCambiadas) {
         this.idDetalleMantenimiento = idDetalleMantenimiento;
         this.idMantenimiento = idMantenimiento;
         this.idEmpleado = idEmpleado;
@@ -21,7 +21,7 @@ public class Detalle_Mantenimiento {
         this.partesCambiadas = partesCambiadas;
     }
 
-    public Detalle_Mantenimiento() {
+    public POJODetalle_Mantenimiento() {
     }
 
     

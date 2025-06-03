@@ -1,6 +1,6 @@
 package DAO;
 
-import Modelo.Cliente;
+import Modelo.POJOCliente;
 import Util.ConexionDB;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,7 +11,7 @@ import java.util.List;
 
 public class DAOCliente {
 
-    public void crearCliente(Cliente cliente) throws SQLException {
+    public void crearCliente(POJOCliente cliente) throws SQLException {
         String sql = """
         INSERT INTO Clientes (
                  Cedula,
@@ -40,7 +40,7 @@ public class DAOCliente {
         }
     }
 
-    public void actualizarCliente(Cliente cliente) throws SQLException {
+    public void actualizarCliente(POJOCliente cliente) throws SQLException {
         String sql = "UPDATE Clientes SET cedula = ?, nombre1 = ?, nombre2 = ?, apellido1 = ?, apellido2 = ?,telefono = ?, direccion = ?, email= ?, licencia = ? WHERE id_cliente = ?";
 
         try (Connection c = ConexionDB.getConnection(); PreparedStatement stmt = c.prepareStatement(sql)) {
@@ -72,7 +72,7 @@ public class DAOCliente {
             DAOCliente dao = new DAOCliente();
 
             // Crear un nuevo cliente
-            Cliente cliente = new Cliente();
+            POJOCliente cliente = new POJOCliente();
             cliente.setCedula("12345678");
             cliente.setNombre1("Juan");
             cliente.setApellido2("José");
@@ -87,9 +87,9 @@ public class DAOCliente {
             System.out.println("Cliente creado.");
 
             // Leer y mostrar todos los clientes para verificar
-            List<Cliente> clientes = dao.leerTodosClientes(); // Método para obtener todos los clientes
+            List<POJOCliente> clientes = dao.leerTodosClientes(); // Método para obtener todos los clientes
             System.out.println("Lista de clientes:");
-            for (Cliente cli : clientes) {
+            for (POJOCliente cli : clientes) {
                 System.out.println("Cédula: " + cli.getCedula()
                         + ", Nombre: " + cli.getNombre1()
                         + ", Nombre: " + cli.getNombre2()
@@ -105,14 +105,14 @@ public class DAOCliente {
         }
     }
 
-    public List<Cliente> leerTodosClientes() throws SQLException {
-        List<Cliente> clientes = new ArrayList<>();
+    public List<POJOCliente> leerTodosClientes() throws SQLException {
+        List<POJOCliente> clientes = new ArrayList<>();
         String sql = "SELECT id_cliente, cedula, nombre1,  nombre2, apellido1, apellido2, telefono, direccion, email, licencia FROM Clientes";
 
         try (Connection c = ConexionDB.getConnection(); PreparedStatement stmt = c.prepareStatement(sql); ResultSet rs = stmt.executeQuery()) {
 
             while (rs.next()) {
-                Cliente cliente = new Cliente();
+                POJOCliente cliente = new POJOCliente();
                 cliente.setIdCliente(rs.getInt("id_cliente"));
                 cliente.setCedula(rs.getString("cedula"));
                 cliente.setNombre1(rs.getString("nombre1"));

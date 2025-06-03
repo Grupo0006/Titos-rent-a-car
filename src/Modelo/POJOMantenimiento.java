@@ -2,7 +2,7 @@
 package Modelo;
 import java.util.Date;
 
-public class Mantenimiento {
+public class POJOMantenimiento {
     private int Id_Mantenimiento;
     private String Descripcion;
     private String Justificacion;
@@ -10,10 +10,10 @@ public class Mantenimiento {
     private Date Fecha_Fin;
     private double Costo;
 
-    public Mantenimiento() {
+    public POJOMantenimiento() {
     }
 
-    public Mantenimiento(int Id_Mantenimiento, String Descripcion, String Justificacion, Date Fecha_Inicio, Date Fecha_Fin, double Costo) {
+    public POJOMantenimiento(int Id_Mantenimiento, String Descripcion, String Justificacion, Date Fecha_Inicio, Date Fecha_Fin, double Costo) {
         this.Id_Mantenimiento = Id_Mantenimiento;
         this.Descripcion = Descripcion;
         this.Justificacion = Justificacion;

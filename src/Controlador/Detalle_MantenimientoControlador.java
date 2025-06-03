@@ -1,7 +1,7 @@
 package Controlador;
 
 import DAO.DAODetalle_Mantenimiento;
-import Modelo.Detalle_Mantenimiento;
+import Modelo.POJODetalle_Mantenimiento;
 import javax.swing.JOptionPane;
 import java.sql.SQLException;
 import java.util.List;
@@ -21,7 +21,7 @@ public class Detalle_MantenimientoControlador {
     // Crear un nuevo detalle
     public void crearDetalle(int idMantenimiento, int idEmpleado, int idCoche, String observaciones, String recomendaciones, String partesCambiadas) {
         try {
-            Detalle_Mantenimiento detalle = new Detalle_Mantenimiento();
+            POJODetalle_Mantenimiento detalle = new POJODetalle_Mantenimiento();
             detalle.setIdMantenimiento(idMantenimiento);
             detalle.setIdEmpleado(idEmpleado);
             detalle.setIdCoche(idCoche);
@@ -36,7 +36,7 @@ public class Detalle_MantenimientoControlador {
     }
 
     // Leer un detalle por ID
-    public Detalle_Mantenimiento obtenerDetalle(int id) {
+    public POJODetalle_Mantenimiento obtenerDetalle(int id) {
         try {
             return detalleDAO.leerDetallePorId(id);
         } catch (SQLException e) {
@@ -48,7 +48,7 @@ public class Detalle_MantenimientoControlador {
     // Actualizar un detalle
     public void actualizarDetalle(int idDetalle, int idMantenimiento, int idEmpleado, int idCoche, String observaciones, String recomendaciones, String partesCambiadas) {
         try {
-            Detalle_Mantenimiento detalle = new Detalle_Mantenimiento();
+            POJODetalle_Mantenimiento detalle = new POJODetalle_Mantenimiento();
             detalle.setIdDetalleMantenimiento(idDetalle);
             detalle.setIdMantenimiento(idMantenimiento);
             detalle.setIdEmpleado(idEmpleado);
@@ -81,7 +81,7 @@ public class Detalle_MantenimientoControlador {
         controlador.crearDetalle(1, 101, 202, "Cambio de pastillas de freno", "Revisión en 10 días", "Pastillas, aceite");
 
         // Leer
-        Detalle_Mantenimiento detalle = controlador.obtenerDetalle(1); // Asegúrate de que el ID existe
+        POJODetalle_Mantenimiento detalle = controlador.obtenerDetalle(1); // Asegúrate de que el ID existe
         if (detalle != null) {
             System.out.println("Detalle leído:");
             System.out.println("Empleado: " + detalle.getIdEmpleado());
