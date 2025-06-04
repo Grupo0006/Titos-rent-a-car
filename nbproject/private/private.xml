@@ -4,13 +4,15 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/Maryi%20Lazo/Videos/Titos-rent-a-car/src/Vista/Empleados/empleadoFormulario.java</file>
-            <file>file:/C:/Users/Maryi%20Lazo/Videos/Titos-rent-a-car/src/Vista/Coche/cocheFormulario.java</file>
+            <file>file:/C:/Users/Maryi%20Lazo/Videos/Titos-rent-a-car/src/Imagenes/Añadir.png</file>
+            <file>file:/C:/Users/Maryi%20Lazo/Videos/Titos-rent-a-car/src/Vista/VistaConsultasDinamicas.java</file>
             <file>file:/C:/Users/Maryi%20Lazo/Videos/Titos-rent-a-car/src/Vista/VistaPrincipal.java</file>
-            <file>file:/C:/Users/Maryi%20Lazo/Videos/Titos-rent-a-car/src/DAO/DAOEmpleado.java</file>
-            <file>file:/C:/Users/Maryi%20Lazo/Videos/Titos-rent-a-car/src/DAO/DAOCoche.java</file>
+            <file>file:/C:/Users/Maryi%20Lazo/Videos/Titos-rent-a-car/src/Controlador/ConsultaDinamicaControlador.java</file>
             <file>file:/C:/Users/Maryi%20Lazo/Videos/Titos-rent-a-car/src/Vista/Coche/VistaCoche.java</file>
+            <file>file:/C:/Users/Maryi%20Lazo/Videos/Titos-rent-a-car/src/Util/ConsultaGemini.java</file>
             <file>file:/C:/Users/Maryi%20Lazo/Videos/Titos-rent-a-car/src/Vista/Empleados/vistaEmpleados.java</file>
-            <file>file:/C:/Users/Maryi%20Lazo/Videos/Titos-rent-a-car/src/Controlador/EmpleadoControlador.java</file>
+            <file>file:/C:/Users/Maryi%20Lazo/Videos/Titos-rent-a-car/src/DAO/ConsultaDinamicaDAO.java</file>
+            <file>file:/C:/Users/Maryi%20Lazo/Videos/Titos-rent-a-car/src/Modelo/POJOEmpleado.java</file>
         </group>
     </open-files>
 </project-private>
