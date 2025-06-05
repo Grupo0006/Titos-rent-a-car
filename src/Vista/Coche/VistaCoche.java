@@ -4,6 +4,14 @@ package Vista.Coche;
 // Importaciones necesarias para el funcionamiento de la clase
 import Controlador.CocheControlador;          // Importa la clase del controlador que maneja la lógica de los coches
 import Modelo.POJOCoche;                          // Importa la clase del modelo que representa a un coche
+import Modelo.POJOEmpleado;
+import com.itextpdf.kernel.pdf.PdfDocument;
+import com.itextpdf.kernel.pdf.PdfWriter;
+import com.itextpdf.layout.Document;
+import com.itextpdf.layout.element.Paragraph;
+import com.itextpdf.layout.element.Table;
+import com.itextpdf.layout.property.TextAlignment;
+import com.itextpdf.layout.property.UnitValue;
 import java.sql.Date;                         // Importa la clase Date del paquete SQL para trabajar con fechas compatibles con bases de datos
 import java.awt.Color;                        // Importa la clase Color para definir y manipular colores
 import java.util.List;                        // Importa la interfaz List para trabajar con listas de objetos
@@ -12,6 +20,7 @@ import java.time.format.DateTimeFormatter;    // Importa la clase para formatear
 import javax.swing.table.TableColumn;         // Importa la clase para manipular columnas de tablas en interfaces gráficas
 import javax.swing.table.TableCellRenderer;   // Importa la interfaz para personalizar la renderización de celdas en tablas
 import java.awt.Component;                    // Importa la clase base de todos los componentes gráficos
+import java.awt.FileDialog;
 import java.awt.Frame;                        // Importa la clase Frame
 import java.text.ParseException;               // Importa la clase ParseException
 import java.text.SimpleDateFormat;            // Importa la clase para convertir fechas a cadenas de texto con formato
@@ -222,6 +231,7 @@ public class VistaCoche extends javax.swing.JPanel {
         jButtonAgregar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jTextFieldBuscar = new javax.swing.JTextField();
+        btnGenerarReporte = new javax.swing.JButton();
 
         panelInferior.setBackground(new java.awt.Color(255, 57, 54));
 
@@ -324,6 +334,17 @@ public class VistaCoche extends javax.swing.JPanel {
             }
         });
 
+        btnGenerarReporte.setBackground(new java.awt.Color(244, 233, 205));
+        btnGenerarReporte.setFont(new java.awt.Font("Segoe UI", 1, 28)); // NOI18N
+        btnGenerarReporte.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Reportes.png"))); // NOI18N
+        btnGenerarReporte.setText("Generar Reporte");
+        btnGenerarReporte.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnGenerarReporte.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGenerarReporteActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -333,7 +354,9 @@ public class VistaCoche extends javax.swing.JPanel {
                 .addComponent(jLabel2)
                 .addGap(28, 28, 28)
                 .addComponent(jTextFieldBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 510, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 593, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnGenerarReporte)
+                .addGap(18, 18, 18)
                 .addComponent(jButtonAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -344,7 +367,8 @@ public class VistaCoche extends javax.swing.JPanel {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jButtonAgregar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel2))
+                        .addComponent(jLabel2)
+                        .addComponent(btnGenerarReporte))
                     .addComponent(jTextFieldBuscar))
                 .addContainerGap())
         );
@@ -467,8 +491,91 @@ public class VistaCoche extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldBuscarActionPerformed
 
+    private void btnGenerarReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarReporteActionPerformed
+        try {
+            //Lógica para generar el reporte     
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this,
+                    "Error al generar el PDF: " + e.getMessage(),
+                    "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        FileDialog dialogoArchivo = new FileDialog((java.awt.Frame) null, "Guardar Reporte< PDF", FileDialog.SAVE);
+        dialogoArchivo.setFile("Reporte de Coche.pdf");
+        dialogoArchivo.setVisible(true);
+
+        String ruta = dialogoArchivo.getDirectory();
+        String nombreArchivo = dialogoArchivo.getFile();
+
+        if (ruta == null || nombreArchivo == null) {
+            JOptionPane.showMessageDialog(this, "Operación cancelada.", "Información", JOptionPane.INFORMATION_MESSAGE);
+            return;
+
+        }
+        String rutaCompleta = ruta + nombreArchivo;
+
+        try {
+            PdfWriter escritor = new PdfWriter(rutaCompleta);
+            PdfDocument pdf = new PdfDocument(escritor);
+            Document documento = new Document(pdf);
+
+            documento.add(new Paragraph("Reporte de Coche")
+                    .setTextAlignment(TextAlignment.CENTER)
+                    .setFontSize(20)
+                    .setBold());
+
+            documento.add(new Paragraph("Fecha: " + new java.util.Date().toString())
+                    .setTextAlignment(TextAlignment.CENTER)
+                    .setFontSize(12));
+
+            Table tabla = new Table(8);
+            tabla.setWidth(UnitValue.createPercentValue(100));
+            tabla.addHeaderCell("Marca").setBold();
+            tabla.addHeaderCell("Modelo").setBold();
+            tabla.addHeaderCell("Placa").setBold();
+            tabla.addHeaderCell("Color").setBold();
+            tabla.addHeaderCell("Estado").setBold();
+            tabla.addHeaderCell("Anio").setBold();
+            tabla.addHeaderCell("ID Coche").setBold();
+            tabla.addHeaderCell("Fecha_Registro").setBold();
+
+            List<POJOCoche> listaPOJOCoche = cocheControlador.obtenerTodosCoches();
+            if (listaPOJOCoche != null) {
+                for (POJOCoche Coche : listaPOJOCoche) {
+                    tabla.addCell(String.valueOf(Coche.getId_Coche()));
+                    tabla.addCell(Coche.getMarca());
+                    tabla.addCell(Coche.getModelo());
+                    tabla.addCell(Coche.getPlaca());
+                    tabla.addCell(Coche.getColor());
+                    tabla.addCell(Coche.getEstado());
+                    tabla.addCell(Coche.getAnio()); 
+                    tabla.addCell(String.v(Coche.getFecha_Registro());
+                    SimpleDateFormat formato = new SimpleDateFormat ("dd 'de' MMM 'de' yyyy");
+                    String fechaTexto = formato.format(date);
+                    System.out.println(fechaTexto);
+                    
+
+                }
+            }
+
+            documento.add(tabla);
+            documento.add(new Paragraph("Notas: Reporte generado automaticamente desde el sistema.")
+                    .setFontSize(10)
+                    .setMarginTop(20));
+
+            documento.close();
+            JOptionPane.showMessageDialog(this, "Reportar PDF generado con exito en:" + rutaCompleta,
+                    "Exito", JOptionPane.INFORMATION_MESSAGE);
+
+        } catch (Exception e) {
+            System.out.println("Problemas: " + e);
+
+        } 
+    }//GEN-LAST:event_btnGenerarReporteActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnGenerarReporte;
     private javax.swing.JLabel campoFecha;
     private javax.swing.JButton jButtonAgregar;
     private javax.swing.JLabel jLabel1;
