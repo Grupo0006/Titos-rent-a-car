@@ -36,19 +36,17 @@ public class AlquilerFormulario extends javax.swing.JPanel {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
         jTextFieldId = new javax.swing.JTextField();
-        jTextFieldCedula = new javax.swing.JTextField();
-        jTextFieldNombre1 = new javax.swing.JTextField();
-        jTextFieldNombre2 = new javax.swing.JTextField();
-        jTextFieldApellido1 = new javax.swing.JTextField();
-        jTextFieldDireccion = new javax.swing.JTextField();
+        textPrecioUnitario = new javax.swing.JTextField();
         jButtonGuardar = new javax.swing.JButton();
         jButtonActualizar = new javax.swing.JButton();
         jButtonEliminar = new javax.swing.JButton();
         jButtonLimpiar = new javax.swing.JButton();
-        jTextFieldApellido2 = new javax.swing.JTextField();
-        jTextFieldEmail = new javax.swing.JTextField();
+        SelectorFechaInicio = new com.toedter.calendar.JDateChooser();
+        SelectorFechaFin = new com.toedter.calendar.JDateChooser();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        ComboCoche = new javax.swing.JComboBox<>();
+        ComboCliente = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         jButtonSalir = new javax.swing.JButton();
 
@@ -83,54 +81,26 @@ public class AlquilerFormulario extends javax.swing.JPanel {
         jLabel5.setText("Fecha Fin");
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 30)); // NOI18N
-        jLabel6.setText("Nombre2");
+        jLabel6.setText("ID detalle");
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 30)); // NOI18N
-        jLabel7.setText("Apellido1");
+        jLabel7.setText("Coche");
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 30)); // NOI18N
-        jLabel8.setText("Apellido2");
+        jLabel8.setText("Cliente");
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 30)); // NOI18N
-        jLabel9.setText("Direccion");
-
-        jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 30)); // NOI18N
-        jLabel10.setText("Email");
+        jLabel9.setText("Precio Total");
 
         jTextFieldId.setBackground(new java.awt.Color(244, 233, 205));
         jTextFieldId.setFont(new java.awt.Font("Segoe UI", 0, 26)); // NOI18N
         jTextFieldId.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
         jTextFieldId.setPreferredSize(new java.awt.Dimension(632, 51));
 
-        jTextFieldCedula.setBackground(new java.awt.Color(244, 233, 205));
-        jTextFieldCedula.setFont(new java.awt.Font("Segoe UI", 0, 26)); // NOI18N
-        jTextFieldCedula.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
-        jTextFieldCedula.setPreferredSize(new java.awt.Dimension(632, 51));
-        jTextFieldCedula.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldCedulaActionPerformed(evt);
-            }
-        });
-
-        jTextFieldNombre1.setBackground(new java.awt.Color(244, 233, 205));
-        jTextFieldNombre1.setFont(new java.awt.Font("Segoe UI", 0, 26)); // NOI18N
-        jTextFieldNombre1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
-        jTextFieldNombre1.setPreferredSize(new java.awt.Dimension(632, 51));
-
-        jTextFieldNombre2.setBackground(new java.awt.Color(244, 233, 205));
-        jTextFieldNombre2.setFont(new java.awt.Font("Segoe UI", 0, 26)); // NOI18N
-        jTextFieldNombre2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
-        jTextFieldNombre2.setPreferredSize(new java.awt.Dimension(632, 41));
-
-        jTextFieldApellido1.setBackground(new java.awt.Color(244, 233, 205));
-        jTextFieldApellido1.setFont(new java.awt.Font("Segoe UI", 0, 26)); // NOI18N
-        jTextFieldApellido1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
-        jTextFieldApellido1.setPreferredSize(new java.awt.Dimension(632, 51));
-
-        jTextFieldDireccion.setBackground(new java.awt.Color(244, 233, 205));
-        jTextFieldDireccion.setFont(new java.awt.Font("Segoe UI", 0, 26)); // NOI18N
-        jTextFieldDireccion.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
-        jTextFieldDireccion.setPreferredSize(new java.awt.Dimension(632, 51));
+        textPrecioUnitario.setBackground(new java.awt.Color(244, 233, 205));
+        textPrecioUnitario.setFont(new java.awt.Font("Segoe UI", 0, 26)); // NOI18N
+        textPrecioUnitario.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        textPrecioUnitario.setPreferredSize(new java.awt.Dimension(632, 51));
 
         jButtonGuardar.setBackground(new java.awt.Color(244, 233, 205));
         jButtonGuardar.setFont(new java.awt.Font("Segoe UI", 0, 37)); // NOI18N
@@ -181,20 +151,18 @@ public class AlquilerFormulario extends javax.swing.JPanel {
             }
         });
 
-        jTextFieldApellido2.setBackground(new java.awt.Color(244, 233, 205));
-        jTextFieldApellido2.setFont(new java.awt.Font("Segoe UI", 0, 26)); // NOI18N
-        jTextFieldApellido2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
-        jTextFieldApellido2.setPreferredSize(new java.awt.Dimension(632, 51));
-        jTextFieldApellido2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldApellido2ActionPerformed(evt);
-            }
-        });
+        SelectorFechaInicio.setBackground(new java.awt.Color(244, 233, 205));
 
-        jTextFieldEmail.setBackground(new java.awt.Color(244, 233, 205));
-        jTextFieldEmail.setFont(new java.awt.Font("Segoe UI", 0, 26)); // NOI18N
-        jTextFieldEmail.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
-        jTextFieldEmail.setPreferredSize(new java.awt.Dimension(632, 51));
+        SelectorFechaFin.setBackground(new java.awt.Color(244, 233, 205));
+
+        jComboBox1.setBackground(new java.awt.Color(244, 233, 205));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        ComboCoche.setBackground(new java.awt.Color(244, 233, 205));
+        ComboCoche.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        ComboCliente.setBackground(new java.awt.Color(244, 233, 205));
+        ComboCliente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -211,7 +179,6 @@ public class AlquilerFormulario extends javax.swing.JPanel {
                             .addComponent(jLabel7)
                             .addComponent(jLabel8)
                             .addComponent(jLabel9)
-                            .addComponent(jLabel10)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGap(27, 27, 27)
                                 .addComponent(jLabel3)))
@@ -222,24 +189,23 @@ public class AlquilerFormulario extends javax.swing.JPanel {
                         .addGap(18, 18, 18)))
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextFieldNombre1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextFieldCedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextFieldId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextFieldNombre2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextFieldApellido1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextFieldDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextFieldApellido2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextFieldEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(244, Short.MAX_VALUE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(24, 24, 24)
                         .addComponent(jButtonActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
                         .addComponent(jButtonLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(36, 36, 36)
                         .addComponent(jButtonEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(56, 56, 56))))
+                        .addGap(56, 56, 56))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jTextFieldId, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(textPrecioUnitario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(SelectorFechaInicio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(SelectorFechaFin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(ComboCoche, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(ComboCliente, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -249,34 +215,33 @@ public class AlquilerFormulario extends javax.swing.JPanel {
                     .addComponent(jLabel3)
                     .addComponent(jTextFieldId, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jTextFieldCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(jTextFieldNombre1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(SelectorFechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(2, 2, 2)
+                        .addComponent(jLabel5))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(9, 9, 9)
+                        .addComponent(SelectorFechaFin, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(jTextFieldNombre2, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(jTextFieldApellido1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(ComboCoche, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ComboCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextFieldApellido2, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextFieldDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textPrecioUnitario, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextFieldEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel10))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(71, 71, 71)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButtonActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -313,7 +278,7 @@ public class AlquilerFormulario extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButtonSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanelInferiorFormularioLayout.createSequentialGroup()
-                        .addGap(0, 13, Short.MAX_VALUE)
+                        .addGap(0, 12, Short.MAX_VALUE)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
@@ -348,10 +313,6 @@ public class AlquilerFormulario extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextFieldCedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldCedulaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldCedulaActionPerformed
-
     private void jButtonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGuardarActionPerformed
         // Declara vaiables que almacenen los campos de los jTextField
         String Cedula = jTextFieldCedula.getText().trim();
@@ -359,7 +320,7 @@ public class AlquilerFormulario extends javax.swing.JPanel {
         String Nombre2 = jTextFieldNombre2.getText().trim();
         String Apellido1 = jTextFieldApellido1.getText().trim();
         String Apellido2 = jTextFieldApellido2.getText().trim();
-        String Direccion = jTextFieldDireccion.getText().trim();
+        String Direccion = textPrecioUnitario.getText().trim();
         String Email = jTextFieldEmail.getText().trim();
 
         // Validación previa si los jTextField estan vacios
@@ -411,7 +372,7 @@ public class AlquilerFormulario extends javax.swing.JPanel {
         String Nombre2 = jTextFieldNombre2.getText().trim();
         String Apellido1 = jTextFieldApellido1.getText().trim();
         String Apellido2 = jTextFieldApellido2.getText().trim();
-        String Direccion = jTextFieldDireccion.getText().trim();
+        String Direccion = textPrecioUnitario.getText().trim();
         String Email = jTextFieldEmail.getText().trim();
 
         try {
@@ -484,10 +445,6 @@ public class AlquilerFormulario extends javax.swing.JPanel {
         limpiarCampos();
     }//GEN-LAST:event_jButtonLimpiarActionPerformed
 
-    private void jTextFieldApellido2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldApellido2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldApellido2ActionPerformed
-
     private void jButtonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalirActionPerformed
         // Nota: Dispose aparte de cerrar la ventana lo limpia de archivos residuales
         this.dispose();
@@ -495,12 +452,16 @@ public class AlquilerFormulario extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> ComboCliente;
+    private javax.swing.JComboBox<String> ComboCoche;
+    private com.toedter.calendar.JDateChooser SelectorFechaFin;
+    private com.toedter.calendar.JDateChooser SelectorFechaInicio;
     protected javax.swing.JButton jButtonActualizar;
     protected javax.swing.JButton jButtonEliminar;
     protected javax.swing.JButton jButtonGuardar;
     protected javax.swing.JButton jButtonLimpiar;
     private javax.swing.JButton jButtonSalir;
-    private javax.swing.JLabel jLabel10;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -512,13 +473,7 @@ public class AlquilerFormulario extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanelInferiorFormulario;
-    protected javax.swing.JTextField jTextFieldApellido1;
-    protected javax.swing.JTextField jTextFieldApellido2;
-    protected javax.swing.JTextField jTextFieldCedula;
-    protected javax.swing.JTextField jTextFieldDireccion;
-    protected javax.swing.JTextField jTextFieldEmail;
     protected javax.swing.JTextField jTextFieldId;
-    protected javax.swing.JTextField jTextFieldNombre1;
-    protected javax.swing.JTextField jTextFieldNombre2;
+    protected javax.swing.JTextField textPrecioUnitario;
     // End of variables declaration//GEN-END:variables
 }
