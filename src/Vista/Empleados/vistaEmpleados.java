@@ -27,6 +27,7 @@ import javax.swing.table.DefaultTableModel;   // Importa el modelo de tabla por 
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
+import com.itextpdf.layout.element.Cell;
 import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.element.Table;
 import com.itextpdf.layout.property.TextAlignment;
@@ -522,14 +523,8 @@ public class vistaEmpleados extends javax.swing.JPanel {
     }//GEN-LAST:event_jTextFieldBuscarActionPerformed
 
     private void btnGenerarReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarReporteActionPerformed
-        try {
-            //Lógica para generar el reporte     
-        } catch (Exception e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(this,
-                    "Error al generar el PDF: " + e.getMessage(),
-                    "Error", JOptionPane.ERROR_MESSAGE);
-        }
+       
+    try {
         FileDialog dialogoArchivo = new FileDialog((java.awt.Frame) null, "Guardar Reporte PDF", FileDialog.SAVE);
         dialogoArchivo.setFile("Reporte de Empleado.pdf");
         dialogoArchivo.setVisible(true);
@@ -540,63 +535,67 @@ public class vistaEmpleados extends javax.swing.JPanel {
         if (ruta == null || nombreArchivo == null) {
             JOptionPane.showMessageDialog(this, "Operación cancelada.", "Información", JOptionPane.INFORMATION_MESSAGE);
             return;
-
         }
+
         String rutaCompleta = ruta + nombreArchivo;
 
-        try {
-            PdfWriter escritor = new PdfWriter(rutaCompleta);
-            PdfDocument pdf = new PdfDocument(escritor);
-            Document documento = new Document(pdf);
+        PdfWriter escritor = new PdfWriter(rutaCompleta);
+        PdfDocument pdf = new PdfDocument(escritor);
+        Document documento = new Document(pdf);
+        documento.setMargins(20, 20, 20, 20); // Márgenes
 
-            documento.add(new Paragraph("Reporte de Empleado")
-                    .setTextAlignment(TextAlignment.CENTER)
-                    .setFontSize(20)
-                    .setBold());
+        // Título
+        documento.add(new Paragraph("Reporte de Empleado")
+                .setTextAlignment(TextAlignment.CENTER)
+                .setFontSize(14)
+                .setBold());
 
-            documento.add(new Paragraph("Fecha: " + new java.util.Date().toString())
-                    .setTextAlignment(TextAlignment.CENTER)
-                    .setFontSize(12));
+        // Fecha
+        documento.add(new Paragraph("Fecha: " + new java.util.Date().toString())
+                .setTextAlignment(TextAlignment.CENTER)
+                .setFontSize(10));
 
-            Table tabla = new Table(8);
-            tabla.setWidth(UnitValue.createPercentValue(100));
-            tabla.addHeaderCell("ID Empleado").setBold();
-            tabla.addHeaderCell("Cedula").setBold();
-            tabla.addHeaderCell("Nombre1").setBold();
-            tabla.addHeaderCell("Nombre2").setBold();
-            tabla.addHeaderCell("Apellido1").setBold();
-            tabla.addHeaderCell("Apellido2").setBold();
-            tabla.addHeaderCell("Dirccion").setBold();
-            tabla.addHeaderCell("Email").setBold();
+        // Crear tabla con proporciones de columnas
+        float[] tamaniosColumnas = {1, 2, 2, 2, 2, 2, 4, 3}; // proporciones de ancho por columna
+        Table tabla = new Table(tamaniosColumnas);
+        tabla.setWidth(UnitValue.createPercentValue(100));
 
-            List<POJOEmpleado> listaPOJOEmpleado = empleadoControlador.obtenerTodosEmpleados();
-            if (listaPOJOEmpleado != null) {
-                for (POJOEmpleado Empleado : listaPOJOEmpleado) {
-                    tabla.addCell(String.valueOf(Empleado.getId_Empleado()));
-                    tabla.addCell(Empleado.getCedula());
-                    tabla.addCell(Empleado.getNombre1());
-                    tabla.addCell(Empleado.getNombre2());
-                    tabla.addCell(Empleado.getApellido1());
-                    tabla.addCell(Empleado.getApellido2());
-                    tabla.addCell(Empleado.getDireccion());
-                    tabla.addCell(Empleado.getEmail());
-
-                }
-            }
-
-            documento.add(tabla);
-            documento.add(new Paragraph("Notas: Reporte generado automaticamente desde el sistema.")
-                    .setFontSize(10)
-                    .setMarginTop(20));
-
-            documento.close();
-            JOptionPane.showMessageDialog(this, "Reportar PDF generado con exito en:" + rutaCompleta,
-                    "Exito", JOptionPane.INFORMATION_MESSAGE);
-
-        } catch (Exception e) {
-            System.out.println("Problemas: " + e);
-
+        // Estilo de cabecera
+        String[] headers = {"ID", "Cédula", "Nombre1", "Nombre2", "Apellido1", "Apellido2", "Dirección", "Email"};
+        for (String encabezado : headers) {
+            tabla.addHeaderCell(new Cell().add(new Paragraph(encabezado).setFontSize(9).setBold()));
         }
+
+        // Agregar datos
+        List<POJOEmpleado> listaPOJOEmpleado = empleadoControlador.obtenerTodosEmpleados();
+        if (listaPOJOEmpleado != null) {
+            for (POJOEmpleado empleado : listaPOJOEmpleado) {
+                tabla.addCell(new Cell().add(new Paragraph(String.valueOf(empleado.getId_Empleado())).setFontSize(8)));
+                tabla.addCell(new Cell().add(new Paragraph(empleado.getCedula()).setFontSize(8)));
+                tabla.addCell(new Cell().add(new Paragraph(empleado.getNombre1()).setFontSize(8)));
+                tabla.addCell(new Cell().add(new Paragraph(empleado.getNombre2()).setFontSize(8)));
+                tabla.addCell(new Cell().add(new Paragraph(empleado.getApellido1()).setFontSize(8)));
+                tabla.addCell(new Cell().add(new Paragraph(empleado.getApellido2()).setFontSize(8)));
+                tabla.addCell(new Cell().add(new Paragraph(empleado.getDireccion()).setFontSize(8)));
+                tabla.addCell(new Cell().add(new Paragraph(empleado.getEmail()).setFontSize(8)));
+            }
+        }
+
+        documento.add(tabla);
+
+        documento.add(new Paragraph("Notas: Reporte generado automáticamente desde el sistema.")
+                .setFontSize(9)
+                .setMarginTop(20));
+
+        documento.close();
+        JOptionPane.showMessageDialog(this, "Reporte PDF generado con éxito en: " + rutaCompleta, "Éxito", JOptionPane.INFORMATION_MESSAGE);
+
+    } catch (Exception e) {
+        e.printStackTrace();
+        JOptionPane.showMessageDialog(this,
+                "Error al generar el PDF: " + e.getMessage(),
+                "Error", JOptionPane.ERROR_MESSAGE);
+    }
 
     }//GEN-LAST:event_btnGenerarReporteActionPerformed
 

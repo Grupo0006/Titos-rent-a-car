@@ -8,6 +8,7 @@ import Modelo.POJOEmpleado;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
+import com.itextpdf.layout.element.Cell;
 import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.element.Table;
 import com.itextpdf.layout.property.TextAlignment;
@@ -492,85 +493,82 @@ public class VistaCoche extends javax.swing.JPanel {
     }//GEN-LAST:event_jTextFieldBuscarActionPerformed
 
     private void btnGenerarReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarReporteActionPerformed
-        try {
-            //Lógica para generar el reporte     
-        } catch (Exception e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(this,
-                    "Error al generar el PDF: " + e.getMessage(),
-                    "Error", JOptionPane.ERROR_MESSAGE);
+       
+    FileDialog dialogoArchivo = new FileDialog((java.awt.Frame) null, "Guardar Reporte PDF", FileDialog.SAVE);
+    dialogoArchivo.setFile("Reporte de Coche.pdf");
+    dialogoArchivo.setVisible(true);
+
+    String ruta = dialogoArchivo.getDirectory();
+    String nombreArchivo = dialogoArchivo.getFile();
+
+    if (ruta == null || nombreArchivo == null) {
+        JOptionPane.showMessageDialog(this, "Operación cancelada.", "Información", JOptionPane.INFORMATION_MESSAGE);
+        return;
+    }
+
+    String rutaCompleta = ruta + nombreArchivo;
+
+    try {
+        PdfWriter escritor = new PdfWriter(rutaCompleta);
+        PdfDocument pdf = new PdfDocument(escritor);
+        Document documento = new Document(pdf);
+        documento.setMargins(20, 20, 20, 20); // márgenes
+
+        // Título
+        documento.add(new Paragraph("Reporte de Coche")
+                .setTextAlignment(TextAlignment.CENTER)
+                .setFontSize(14)
+                .setBold());
+
+        // Fecha
+        documento.add(new Paragraph("Fecha: " + new java.util.Date().toString())
+                .setTextAlignment(TextAlignment.CENTER)
+                .setFontSize(10));
+
+        // Tamaños proporcionales para columnas
+        float[] tamaniosColumnas = {2, 2, 2, 2, 2, 1, 2, 3}; // Marca, Modelo, Placa, etc.
+        Table tabla = new Table(tamaniosColumnas);
+        tabla.setWidth(UnitValue.createPercentValue(100));
+
+        // Encabezados
+        String[] headers = {"Marca", "Modelo", "Placa", "Color", "Estado", "Año", "ID Coche", "Fecha Registro"};
+        for (String encabezado : headers) {
+            tabla.addHeaderCell(new Cell().add(new Paragraph(encabezado).setFontSize(9).setBold()));
         }
-        FileDialog dialogoArchivo = new FileDialog((java.awt.Frame) null, "Guardar Reporte< PDF", FileDialog.SAVE);
-        dialogoArchivo.setFile("Reporte de Coche.pdf");
-        dialogoArchivo.setVisible(true);
 
-        String ruta = dialogoArchivo.getDirectory();
-        String nombreArchivo = dialogoArchivo.getFile();
-
-        if (ruta == null || nombreArchivo == null) {
-            JOptionPane.showMessageDialog(this, "Operación cancelada.", "Información", JOptionPane.INFORMATION_MESSAGE);
-            return;
-
-        }
-        String rutaCompleta = ruta + nombreArchivo;
-
-        try {
-            PdfWriter escritor = new PdfWriter(rutaCompleta);
-            PdfDocument pdf = new PdfDocument(escritor);
-            Document documento = new Document(pdf);
-
-            documento.add(new Paragraph("Reporte de Coche")
-                    .setTextAlignment(TextAlignment.CENTER)
-                    .setFontSize(20)
-                    .setBold());
-
-            documento.add(new Paragraph("Fecha: " + new java.util.Date().toString())
-                    .setTextAlignment(TextAlignment.CENTER)
-                    .setFontSize(12));
-
-            Table tabla = new Table(8);
-            tabla.setWidth(UnitValue.createPercentValue(100));
-            tabla.addHeaderCell("Marca").setBold();
-            tabla.addHeaderCell("Modelo").setBold();
-            tabla.addHeaderCell("Placa").setBold();
-            tabla.addHeaderCell("Color").setBold();
-            tabla.addHeaderCell("Estado").setBold();
-            tabla.addHeaderCell("Anio").setBold();
-            tabla.addHeaderCell("ID Coche").setBold();
-            tabla.addHeaderCell("Fecha_Registro").setBold();
-
-            List<POJOCoche> listaPOJOCoche = cocheControlador.obtenerTodosCoches();
-            if (listaPOJOCoche != null) {
-                for (POJOCoche Coche : listaPOJOCoche) {
-                    tabla.addCell(String.valueOf(Coche.getId_Coche()));
-                    tabla.addCell(Coche.getMarca());
-                    tabla.addCell(Coche.getModelo());
-                    tabla.addCell(Coche.getPlaca());
-                    tabla.addCell(Coche.getColor());
-                    tabla.addCell(Coche.getEstado());
-                    tabla.addCell(Coche.getAnio()); 
-                    tabla.addCell(String.v(Coche.getFecha_Registro());
-                    SimpleDateFormat formato = new SimpleDateFormat ("dd 'de' MMM 'de' yyyy");
-                    String fechaTexto = formato.format(date);
-                    System.out.println(fechaTexto);
-                    
-
-                }
+        // Datos
+        List<POJOCoche> listaPOJOCoche = cocheControlador.obtenerTodosCoches();
+        if (listaPOJOCoche != null) {
+            for (POJOCoche coche : listaPOJOCoche) {
+                tabla.addCell(new Cell().add(new Paragraph(coche.getMarca()).setFontSize(8)));
+                tabla.addCell(new Cell().add(new Paragraph(coche.getModelo()).setFontSize(8)));
+                tabla.addCell(new Cell().add(new Paragraph(coche.getPlaca()).setFontSize(8)));
+                tabla.addCell(new Cell().add(new Paragraph(coche.getColor()).setFontSize(8)));
+                tabla.addCell(new Cell().add(new Paragraph(coche.getEstado()).setFontSize(8)));
+                tabla.addCell(new Cell().add(new Paragraph(String.valueOf(coche.getAnio())).setFontSize(8)));
+                tabla.addCell(new Cell().add(new Paragraph(String.valueOf(coche.getId_Coche())).setFontSize(8)));
+                tabla.addCell(new Cell().add(new Paragraph(coche.getFecha_Registro().toString()).setFontSize(8)));
             }
+        }
 
-            documento.add(tabla);
-            documento.add(new Paragraph("Notas: Reporte generado automaticamente desde el sistema.")
-                    .setFontSize(10)
-                    .setMarginTop(20));
+        documento.add(tabla);
 
-            documento.close();
-            JOptionPane.showMessageDialog(this, "Reportar PDF generado con exito en:" + rutaCompleta,
-                    "Exito", JOptionPane.INFORMATION_MESSAGE);
+        documento.add(new Paragraph("Notas: Reporte generado automáticamente desde el sistema.")
+                .setFontSize(9)
+                .setMarginTop(20));
 
-        } catch (Exception e) {
-            System.out.println("Problemas: " + e);
+        documento.close();
+        JOptionPane.showMessageDialog(this, "Reporte PDF generado con éxito en: " + rutaCompleta,
+                "Éxito", JOptionPane.INFORMATION_MESSAGE);
 
-        } 
+    } catch (Exception e) {
+        e.printStackTrace();
+        JOptionPane.showMessageDialog(this,
+                "Error al generar el PDF: " + e.getMessage(),
+                "Error", JOptionPane.ERROR_MESSAGE);
+    }
+
+ 
     }//GEN-LAST:event_btnGenerarReporteActionPerformed
 
 
