@@ -21,6 +21,17 @@ import javax.swing.JOptionPane;               // Importa la clase JOptionPane
 import javax.swing.SwingConstants;            // Importa constantes para alinear contenido en componentes Swing
 import javax.swing.table.DefaultTableCellRenderer; // Importa clase para personalizar celdas en tablas Swing
 import javax.swing.table.DefaultTableModel; 
+
+import com.itextpdf.kernel.pdf.PdfDocument;
+import com.itextpdf.kernel.pdf.PdfWriter;
+import com.itextpdf.layout.Document;
+import com.itextpdf.layout.element.Cell;
+import com.itextpdf.layout.element.Paragraph;
+import com.itextpdf.layout.element.Table;
+import com.itextpdf.layout.property.TextAlignment;
+import com.itextpdf.layout.property.UnitValue;
+import java.awt.FileDialog;
+import javax.swing.JOptionPane;
 /**
  *
  * @author Estudiante
@@ -204,6 +215,7 @@ public class VistaCliente extends javax.swing.JPanel {
         jPanel2 = new javax.swing.JPanel();
         jButtonAgregar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
+        btnGenerarReporte = new javax.swing.JButton();
         jTextFieldBuscar = new javax.swing.JTextField();
 
         panelInferior.setBackground(new java.awt.Color(255, 57, 54));
@@ -292,6 +304,17 @@ public class VistaCliente extends javax.swing.JPanel {
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 28)); // NOI18N
         jLabel2.setText("Buscador");
 
+        btnGenerarReporte.setBackground(new java.awt.Color(244, 233, 205));
+        btnGenerarReporte.setFont(new java.awt.Font("Segoe UI", 1, 28)); // NOI18N
+        btnGenerarReporte.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Reportes.png"))); // NOI18N
+        btnGenerarReporte.setText("Generar Reporte");
+        btnGenerarReporte.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnGenerarReporte.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGenerarReporteActionPerformed(evt);
+            }
+        });
+
         jTextFieldBuscar.setBackground(new java.awt.Color(244, 233, 205));
         jTextFieldBuscar.setFont(new java.awt.Font("Segoe UI", 0, 26)); // NOI18N
         jTextFieldBuscar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
@@ -314,9 +337,11 @@ public class VistaCliente extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2)
-                .addGap(28, 28, 28)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextFieldBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 510, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 169, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnGenerarReporte)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButtonAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -327,7 +352,8 @@ public class VistaCliente extends javax.swing.JPanel {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jButtonAgregar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel2))
+                        .addComponent(jLabel2)
+                        .addComponent(btnGenerarReporte, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(jTextFieldBuscar))
                 .addContainerGap())
         );
@@ -339,9 +365,9 @@ public class VistaCliente extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelInferiorLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelInferiorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1)
                     .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING))
                 .addContainerGap())
         );
         panelInferiorLayout.setVerticalGroup(
@@ -453,8 +479,91 @@ public class VistaCliente extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jTextFieldBuscarKeyTyped
 
+    private void btnGenerarReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarReporteActionPerformed
+
+    try {
+        FileDialog dialogoArchivo = new FileDialog((java.awt.Frame) null, "Guardar Reporte PDF", FileDialog.SAVE);
+        dialogoArchivo.setFile("Reporte de Cliente.pdf");
+        dialogoArchivo.setVisible(true);
+
+        String ruta = dialogoArchivo.getDirectory();
+        String nombreArchivo = dialogoArchivo.getFile();
+
+        if (ruta == null || nombreArchivo == null) {
+            JOptionPane.showMessageDialog(this, "Operación cancelada.", "Información", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+
+        String rutaCompleta = ruta + nombreArchivo;
+
+        PdfWriter escritor = new PdfWriter(rutaCompleta);
+        PdfDocument pdf = new PdfDocument(escritor);
+        Document documento = new Document(pdf);
+        documento.setMargins(20, 20, 20, 20); // Márgenes
+
+        // Título
+        documento.add(new Paragraph("Reporte de Cliente")
+            .setTextAlignment(TextAlignment.CENTER)
+            .setFontSize(14)
+            .setBold());
+
+        // Fecha
+        documento.add(new Paragraph("Fecha: " + new java.util.Date().toString())
+            .setTextAlignment(TextAlignment.CENTER)
+            .setFontSize(10));
+
+        // Tamaños proporcionales de columnas (10 columnas)
+        float[] tamaniosColumnas = {1, 2, 2, 2, 2, 2, 2, 3, 3, 2}; 
+        Table tabla = new Table(tamaniosColumnas);
+        tabla.setWidth(UnitValue.createPercentValue(100));
+
+        // Encabezados
+        String[] headers = {"ID", "Cédula", "Nombre1", "Nombre2", "Apellido1", "Apellido2", "Teléfono", "Dirección", "Email", "Licencia"};
+        for (String encabezado : headers) {
+            tabla.addHeaderCell(new Cell().add(new Paragraph(encabezado).setFontSize(9).setBold()));
+        }
+
+        // Datos
+        List<POJOCliente> listaPOJOCliente = clienteControlador.obtenerTodosClientes();
+        if (listaPOJOCliente != null) {
+            for (POJOCliente cliente : listaPOJOCliente) {
+                tabla.addCell(new Cell().add(new Paragraph(String.valueOf(cliente.getIdCliente())).setFontSize(8)));
+                tabla.addCell(new Cell().add(new Paragraph(cliente.getCedula()).setFontSize(8)));
+                tabla.addCell(new Cell().add(new Paragraph(cliente.getNombre1()).setFontSize(8)));
+                tabla.addCell(new Cell().add(new Paragraph(cliente.getNombre2()).setFontSize(8)));
+                tabla.addCell(new Cell().add(new Paragraph(cliente.getApellido1()).setFontSize(8)));
+                tabla.addCell(new Cell().add(new Paragraph(cliente.getApellido2()).setFontSize(8)));
+                tabla.addCell(new Cell().add(new Paragraph(cliente.getTelefono()).setFontSize(8)));
+                tabla.addCell(new Cell().add(new Paragraph(cliente.getDireccion()).setFontSize(8)));
+                tabla.addCell(new Cell().add(new Paragraph(cliente.getEmail()).setFontSize(8)));
+                tabla.addCell(new Cell().add(new Paragraph(cliente.getLicencia()).setFontSize(8)));
+            }
+        }
+
+        documento.add(tabla);
+
+        // Nota final
+        documento.add(new Paragraph("Notas: Reporte generado automáticamente desde el sistema.")
+            .setFontSize(9)
+            .setMarginTop(20));
+
+        documento.close();
+        JOptionPane.showMessageDialog(this, "Reporte PDF generado con éxito en: " + rutaCompleta,
+            "Éxito", JOptionPane.INFORMATION_MESSAGE);
+
+    } catch (Exception e) {
+        e.printStackTrace();
+        JOptionPane.showMessageDialog(this,
+            "Error al generar el PDF: " + e.getMessage(),
+            "Error", JOptionPane.ERROR_MESSAGE);
+    }
+
+
+    }//GEN-LAST:event_btnGenerarReporteActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnGenerarReporte;
     private javax.swing.JLabel campoFecha;
     private javax.swing.JButton jButtonAgregar;
     private javax.swing.JLabel jLabel1;
