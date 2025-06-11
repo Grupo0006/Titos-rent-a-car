@@ -13,7 +13,7 @@ public class DAOCliente {
 
     public void crearCliente(POJOCliente cliente) throws SQLException {
         String sql = """
-        INSERT INTO Clientes (
+        INSERT INTO Cliente (
                  Cedula,
                  Nombre1,
                  Nombre2,
@@ -23,7 +23,7 @@ public class DAOCliente {
                  Direccion,
                  Email,
                  Licencia
-        ) VALUES (?, ?, ?, ?, ?, ?, ?)""";
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)""";
 
         try (Connection c = ConexionDB.getConnection(); PreparedStatement stmt = c.prepareStatement(sql)) {
 
@@ -39,9 +39,35 @@ public class DAOCliente {
             stmt.executeUpdate();
         }
     }
+    
+    public POJOCliente obtenerClientePorId(int IdCliente) throws SQLException {
+        String sql = "SELECT * FROM Cliente WHERE Id_Cliente = ?";
+        POJOCliente cliente = null;
+
+        try (Connection c = ConexionDB.getConnection(); PreparedStatement stmt = c.prepareStatement(sql)) {
+            stmt.setInt(1, IdCliente);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    cliente = new POJOCliente();
+                    cliente.setIdCliente(rs.getInt("Id_Cliente"));
+                    cliente.setCedula(rs.getString("Cedula"));
+                    cliente.setNombre1(rs.getString("Nombre1"));
+                    cliente.setNombre2(rs.getString("Nombre2"));
+                    cliente.setApellido1(rs.getString("Apellido1"));
+                    cliente.setApellido2(rs.getString("Apellido2"));
+                    cliente.setDireccion(rs.getString("Direccion"));
+                    cliente.setTelefono(rs.getString("Telefono"));
+                    cliente.setEmail(rs.getString("Email"));
+                    cliente.setLicencia(rs.getString("Licencia"));
+                }
+            }
+        }
+
+        return cliente;
+    }
 
     public void actualizarCliente(POJOCliente cliente) throws SQLException {
-        String sql = "UPDATE Clientes SET cedula = ?, nombre1 = ?, nombre2 = ?, apellido1 = ?, apellido2 = ?,telefono = ?, direccion = ?, email= ?, licencia = ? WHERE id_cliente = ?";
+        String sql = "UPDATE Cliente SET Cedula = ?, Nombre1 = ?, Nombre2 = ?, Apellido1 = ?, Apellido2 = ?,Telefono = ?, Direccion = ?, Email= ?, Licencia = ? WHERE Id_Cliente = ?";
 
         try (Connection c = ConexionDB.getConnection(); PreparedStatement stmt = c.prepareStatement(sql)) {
 
@@ -54,12 +80,13 @@ public class DAOCliente {
             stmt.setString(7, cliente.getDireccion());
             stmt.setString(8, cliente.getEmail());
             stmt.setString(9, cliente.getLicencia());
+            stmt.setInt(10,cliente.getIdCliente());
             stmt.executeUpdate();
         }
     }
 
     public void eliminarCliente(int idCliente) throws SQLException {
-        String sql = "DELETE FROM Clientes WHERE id_cliente = ?";
+        String sql = "DELETE FROM Cliente WHERE Id_Cliente = ?";
 
         try (Connection c = ConexionDB.getConnection(); PreparedStatement stmt = c.prepareStatement(sql)) {
             stmt.setInt(1, idCliente);
@@ -71,20 +98,8 @@ public class DAOCliente {
         try {
             DAOCliente dao = new DAOCliente();
 
-            // Crear un nuevo cliente
-            POJOCliente cliente = new POJOCliente();
-            cliente.setCedula("12345678");
-            cliente.setNombre1("Juan");
-            cliente.setApellido2("José");
-            cliente.setApellido1("Mendosa");
-            cliente.setApellido2("Pérez");
-            cliente.setTelefono("1234567890");
-            cliente.setDireccion("Calle 123");
-            cliente.setEmail("juan.perez@email.com");
-            cliente.setLicencia("B123456");
-
-            dao.crearCliente(cliente); // Llamada al método para insertar el cliente en la base de datos
-            System.out.println("Cliente creado.");
+  
+  
 
             // Leer y mostrar todos los clientes para verificar
             List<POJOCliente> clientes = dao.leerTodosClientes(); // Método para obtener todos los clientes
@@ -107,7 +122,7 @@ public class DAOCliente {
 
     public List<POJOCliente> leerTodosClientes() throws SQLException {
         List<POJOCliente> clientes = new ArrayList<>();
-        String sql = "SELECT id_cliente, cedula, nombre1,  nombre2, apellido1, apellido2, telefono, direccion, email, licencia FROM Clientes";
+        String sql = "SELECT * FROM Cliente";
 
         try (Connection c = ConexionDB.getConnection(); PreparedStatement stmt = c.prepareStatement(sql); ResultSet rs = stmt.executeQuery()) {
 
@@ -126,7 +141,6 @@ public class DAOCliente {
                 clientes.add(cliente);
             }
         }
-
         return clientes;
     }
 }

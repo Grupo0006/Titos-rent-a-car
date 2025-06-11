@@ -12,8 +12,8 @@ public class ClienteControlador {
     
     private final DAOCliente DAOcliente;
 
-    public ClienteControlador(DAOCliente DAOcliente) {
-        this.DAOcliente = DAOcliente;
+    public ClienteControlador() {
+        this.DAOcliente = new DAOCliente();
     }
 
     // Crear un nuevo cliente
@@ -48,6 +48,15 @@ public class ClienteControlador {
             return null;
         }
     }
+    
+    public POJOCliente obtenerClientePorId(int Id_Cliente) {
+    try {
+        return DAOcliente.obtenerClientePorId(Id_Cliente);
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(null, "Error al obtener el empleado: " + e.getMessage());
+        return null;
+    }
+}
 
     // Actualizar cliente existente
     public void actualizarCliente(int idCliente, String cedula, String Nombre1, String Nombre2, String Apellido1, String Apellido2,
@@ -87,7 +96,7 @@ public class ClienteControlador {
     // Método main para pruebas
     public static void main(String[] args) {
         DAOCliente dao = new DAOCliente();
-        ClienteControlador controlador = new ClienteControlador(dao);
+        ClienteControlador controlador = new ClienteControlador();
 
         // Crear cliente
         controlador.crearCliente("1234567890", "Juan", "jose", "Pérez","Ruis", "0999999999", "Calle Falsa 123", "juan@example.com", "LIC123456");
